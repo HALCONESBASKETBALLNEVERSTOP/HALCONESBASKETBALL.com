@@ -1,4 +1,153 @@
-<div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscripción Skills Camp</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: white;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      text-align: center;
+      padding: 20px 0;
+    }
+    header img {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    nav {
+      background-color: #1f1f1f;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-button {
+      padding: 12px 20px;
+      background: none;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .nav-button:hover {
+      color: #007bff;
+    }
+    .nav-button.active {
+      color: #007bff;
+    }
+    main {
+      padding: 30px 15px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section {
+      display: none;
+      position: relative;
+      width: 100%;
+      color: white;
+    }
+    section.active {
+      display: block;
+    }
+    section img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    h2, h3 {
+      color: white;
+      margin-bottom: 10px;
+    }
+    a.button {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a.button:hover {
+      background: #0056b3;
+    }
+    footer {
+      background-color: #1a1a1a;
+      text-align: center;
+      padding: 15px;
+      color: white;
+      margin-top: 30px;
+    }
+    .social-icons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-size: 28px;
+    }
+    .social-icons a {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+    .social-icons a i {
+      color: inherit;
+      font-size: 24px;
+    }
+    .social-icons a[title="Facebook"] i {
+      color: #1877f2;
+    }
+    .social-icons a[title="Instagram"] i {
+      color: #e4405f;
+    }
+    .social-icons a[title="TikTok"] i {
+      color: #000000;
+    }
+    .social-icons a[title*="WhatsApp"] i {
+      color: #25d366;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491726146_122125520882739061_802729931895096651_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=NhwsD5fZTtcQ7kNvwFOilgm&_nc_oc=AdkkQQtKA3lZbf9cIJiziHQAb1N8nZujeY28mcQTflKW5vrWIY2vAorqkDpLYhKdOhU&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=kPr8U8nT0IMkTXKSvGC46Q&oh=00_AfGqIUHCOngXQPfcPEMXb1Xt9ja_xiOU97HkZQ3DAe4N5Q&oe=680B1C29" alt="Banner" alt="Banner" alt="Banner">
+  </header>
+  <nav>
+    <div class="nav-buttons">
+      <button class="nav-button active" onclick="mostrarSeccion('inicio', this)">INICIO</button>
+      <button class="nav-button" onclick="mostrarSeccion('camp', this)">INSCRIPCIÓN</button>
+      <button class="nav-button" onclick="mostrarSeccion('formatos', this)">FORMATOS</button>
+      <button class="nav-button" onclick="mostrarSeccion('galeria', this)">CONTACTO</button>
+    </div>
+  </nav>
+  <main>
+    <section id="inicio" class="active">
+      <h2>Bienvenido a HALCONES BASKETBALL</h2>
+      <p>Conoce nuestras categorías y revive los mejores momentos de nuestros equipos.</p>
+      <div>
         <h3>2005 y más</h3>
         <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491754218_122125561238739061_1157001937341618474_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=4qSHqzDUjAUQ7kNvwFVtqek&_nc_oc=AdnvmjbAvsLUmIuaqbZfd9FKLKe7NjJvco_orpjtEp5WafHO8MDBwoA6ioUaq-WSP44&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=SRJksuARiIW-ByIU10KYdQ&oh=00_AfEfMlFxxWbIkXBCRLPYgWOVUgCm1woKxv0g4sqw-BbhtQ&oe=680F1D10" alt="Banner" alt="Banner"  style="max-width: 100%; border-radius: 10px;">
       </div>
@@ -33,3 +182,47 @@
       </div>
       <div>
 
+
+    </section>
+
+    <section id="camp">
+      <h2>Inscripción Skills Camp 2025</h2>
+      <p>Da clic en el botón para realizar tu inscripción al evento:</p>
+      <a href="https://forms.gle/QvkeGQZ4L2XkGePx9" target="_blank" class="button">INSCRIBIRSE AHORA</a>
+    </section>
+
+    <section id="formatos">
+      <h2>Formatos de Inscripción</h2>
+      <p>Descarga los documentos necesarios para tu participación:</p>
+      <a href="https://drive.google.com/uc?export=download&id=1FwISN90C3sWgcNjxoZid94Rw-tEMo37S" class="button" target="_blank" style="background:#28a745;">Descargar PDF</a>
+    </section>
+
+    <section id="galeria">
+      <h2>Contacto</h2>
+      <p>Encuéntranos en redes sociales:</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/profile.php?id=100088847336794&locale=es_LA" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/halcones.basketball" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@halcones.basketball" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://wa.me/525635782679" target="_blank" title="WhatsApp 1"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://wa.me/525532614194" target="_blank" title="WhatsApp 2"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; HALCONES BASKETBALL 2025
+  </footer>
+  <script>
+    function mostrarSeccion(id, boton) {
+      document.querySelectorAll('main section').forEach(seccion => {
+        seccion.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.nav-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      boton.classList.add('active');
+    }
+  </script>
+</body>
+</html>
