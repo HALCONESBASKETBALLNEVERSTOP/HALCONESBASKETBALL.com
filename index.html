@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inscripción Skills Camp</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     * {
       box-sizing: border-box;
@@ -13,23 +13,24 @@
     }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: white;
+      background-color: white;
+      color: black;
       line-height: 1.6;
     }
     header {
       background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       text-align: center;
-      padding: 20px 0;
+      padding: 0px 0;
+      color: white;
     }
     header img {
       width: 100%;
-      max-width: 700px;
-      border-radius: 12px;
+      max-width: 800px;
+      border-radius: 1px;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
     nav {
-      background-color: #1f1f1f;
+      background-color: #0033cc;
       padding: 15px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
@@ -47,12 +48,14 @@
       border-radius: 10px;
       font-weight: bold;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
     .nav-button:hover {
-      color: #007bff;
+      color: #aad4ff;
     }
     .nav-button.active {
-      color: #007bff;
+      color: white;
+      transform: scale(1.1);
     }
     main {
       padding: 30px 15px;
@@ -63,7 +66,7 @@
       display: none;
       position: relative;
       width: 100%;
-      color: white;
+      color: black;
     }
     section.active {
       display: block;
@@ -74,26 +77,40 @@
       margin-top: 10px;
     }
     h2, h3 {
-      color: white;
+      color: black;
       margin-bottom: 10px;
     }
-    a.button {
+    a {
+      color: #0033cc;
+      text-decoration: none;
+      transition: all 0.3s ease;
       display: inline-block;
-      background: #007bff;
+    }
+    a:hover {
+      color: #002699;
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      text-decoration: underline;
+    }
+    a.button {
+      background: #0033cc;
       color: white;
       padding: 12px 25px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
+      transition: all 0.3s ease;
     }
     a.button:hover {
-      background: #0056b3;
+      background: #002699;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
     footer {
-      background-color: #1a1a1a;
+      background-color: #f2f2f2;
       text-align: center;
-      padding: 15px;
-      color: white;
+      padding: 20px;
+      color: black;
       margin-top: 30px;
     }
     .social-icons {
@@ -112,28 +129,68 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .social-icons a:hover {
+      transform: scale(1.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
     .social-icons a i {
       color: inherit;
       font-size: 24px;
     }
-    .social-icons a[title="Facebook"] i {
-      color: #1877f2;
+    .social-icons a[title="Facebook"] i { color: #1877f2; }
+    .social-icons a[title="Instagram"] i { color: #e4405f; }
+    .social-icons a[title="TikTok"] i { color: #000000; }
+    .social-icons a[title*="WhatsApp"] i { color: #25d366; }
+    #inicio img.hidden {
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 1s ease, transform 1s ease;
     }
-    .social-icons a[title="Instagram"] i {
-      color: #e4405f;
+    #inicio img.fade-in {
+      opacity: 1;
+      transform: scale(1);
     }
-    .social-icons a[title="TikTok"] i {
-      color: #000000;
-    }
-    .social-icons a[title*="WhatsApp"] i {
-      color: #25d366;
+    @media (max-width: 600px) {
+      .nav-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .nav-button {
+        width: 100%;
+        font-size: 16px;
+      }
+      main {
+        padding: 20px 10px;
+      }
+      section img {
+        border-radius: 8px;
+      }
+      a.button {
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+      }
+      h2 { font-size: 22px; }
+      h3 { font-size: 18px; }
+      .social-icons {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .social-icons a {
+        width: 40px;
+        height: 40px;
+      }
+      .social-icons a i {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="">
+    <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491726146_122125520882739061_802729931895096651_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=dVYBLAOX_TUQ7kNvwGiL8f3&_nc_oc=AdnduCNK7ABaPBeL8WA4baKa2YKVMndz5Jf1pKhd5xWskm4Lul8HgjzJDGG9SE8qTE0&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=ZBdDh7so1N9DUItE3ACLMQ&oh=00_AfH9ehvazPq8V_FQ0YVf7AKUw3oAV4kJQGKnGVZpAgj0qg&oe=68133D69" alt="Banner">
   </header>
   <nav>
     <div class="nav-buttons">
@@ -147,56 +204,52 @@
     <section id="inicio" class="active">
       <h2>Bienvenido a HALCONES BASKETBALL</h2>
       <p>Conoce nuestras categorías y revive los mejores momentos de nuestros equipos.</p>
-      <div>
+ <div>
         <h3>2005 y más</h3>
-        <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491754218_122125561238739061_1157001937341618474_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=4qSHqzDUjAUQ7kNvwFVtqek&_nc_oc=AdnvmjbAvsLUmIuaqbZfd9FKLKe7NjJvco_orpjtEp5WafHO8MDBwoA6ioUaq-WSP44&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=SRJksuARiIW-ByIU10KYdQ&oh=00_AfEfMlFxxWbIkXBCRLPYgWOVUgCm1woKxv0g4sqw-BbhtQ&oe=680F1D10" alt="Banner" alt="Banner"  style="max-width: 100%; border-radius: 10px;">
+        <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491754218_122125561238739061_1157001937341618474_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Z2jnAFlVXssQ7kNvwE9dW-_&_nc_oc=Adl9l_BHHOAo2Nlij2m9K3amopHdx7L1rA9yavzIdtaSdmGdi12dkr0emkjXRDYNuuU&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=s7BeU9iHgjfvEOL9UhkaJQ&oh=00_AfHpH71CqfHL92bMxYR0TFzjbCnXtE12_9BSDsqrkRMqHg&oe=681349D0"  style="max-width: 100%; border-radius: 10px;">
       </div>
       <div>
         <h3>2006-2007</h3>
-        <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491311831_122125561262739061_4228637683292344760_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=u05l1G8jRyAQ7kNvwEcr0iJ&_nc_oc=Adm00O_YMduMiBBjCPym9sQ8QmoNKYzk3-eKdmxZBs5TkALL_yQQu07NVnWhnNNKltE&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=36FAE8tJiq1r_Ee5yg2ITg&oh=00_AfFA2hNeOxp3pFZI0SXPpUP9Vx8hhWarhx2ge1QVwAMUww&oe=680B1462" style="max-width: 100%; border-radius: 10px;">
+        <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491311831_122125561262739061_4228637683292344760_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=g9I-tkEFzqcQ7kNvwHjSi9K&_nc_oc=AdkaJKr97CDo1v_1w65qqk7usc2_31fH-PR8PocFFn6OyFL3PRHL3zxQGabLlKvC7k4&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=1N4qJEUwj99hh9kThQjPDA&oh=00_AfFEEpK5lzPYOE4jLUSJ2NtL2IktrLcBgZmK7hGPptRxWg&oe=681335A2" style="max-width: 100%; border-radius: 10px;">
       </div>
       <div>
         <h3>2008-2009 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491902519_122125561364739061_3450262074385071825_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=jG7qGxKy844Q7kNvwFeBPJb&_nc_oc=Adk5buDgbEOaZnlFWZlBlflgHMoxV-ZjyldFjveHvRC7QbWJEjhfrDeDwLuTF9WOvrQ&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=GnbwdYx27V_W27akPrDxLw&oh=00_AfEkENp_LVBgXiY3aanwCmWz4eyEKIohCJalRkwZx5SC8A&oe=680B24B4" style="max-width: 100%; border-radius: 10px;">
+      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491902519_122125561364739061_3450262074385071825_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Xj8yPQsetO4Q7kNvwGoiJL_&_nc_oc=Adns1YW1maHYTlBly2udd2lMEbhe0jKwlUFqoEwzqH6WairqqwG_CZhsCx1pedoCP9M&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=GH-cnrFD5QSLkrI6g9_yNw&oh=00_AfEMmtxAjqP2snR_AKC7ccmk8dfRPVAQs2DcEEvHOyS88Q&oe=681345F4" style="max-width: 100%; border-radius: 10px;">
       </div>
       <div>
         <h3>2010-2011 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490823822_122125561340739061_9209404971866197278_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=0C20Xt1VXQYQ7kNvwESlwOf&_nc_oc=AdmDBA_Ba12qivH3-jaLwjIC3tr6IYsw_P61HtSMeuwaV5ao0VmxcbPcuVxn59rpb_w&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=fwMmKkTzjknbvpBxJnC-ZQ&oh=00_AfGO-ZNRviqfadVvQn7DMnxexPrppfkmJfBV59sPrPM89g&oe=680B2313" style="max-width: 100%; border-radius: 10px;">
+      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490823822_122125561340739061_9209404971866197278_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pLIb063vNFgQ7kNvwGaiJwF&_nc_oc=AdlMPWPC4Q7Z7t07suDGDJkOJCI2dJ9CtOz5ZShv-0EF-spCx82BcljicGH8Vzu_1_8&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=_1CzeQKPU330TMHjI_UEag&oh=00_AfHuFsCPQthzOVS00vtXaFy-7JFNZOEz6hWoQvCSUpYtoQ&oe=68134453" style="max-width: 100%; border-radius: 10px;">
       </div>
       <div>
         <h3>2012-2013 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490783528_122125561310739061_4872495710091249778_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=bHpCokepV24Q7kNvwHbCdx_&_nc_oc=AdlrwNaEK6OoF6kQXUdJGV_9aiZ7uolbDAyfGEuye52O_QaE5xS4eaK9RvV57lUUy0Q&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=tzhQHWT2JhcfjIsAcl87KA&oh=00_AfHD6h6Jc5lLkEt8kBKciJkqUCrKs-wVJiqs1pjnn2P7qg&oe=680B2545" style="max-width: 100%; border-radius: 10px;">
+      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490783528_122125561310739061_4872495710091249778_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=QGFWIDgQU-sQ7kNvwFfOhYN&_nc_oc=AdmK78kiZcF1Jonq9lnc1diK0nGhpQU4iXtKqCZkBDBGCEdezV5jN_hKTzr3imFFJ60&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=W0d880XBGBD9W91tFfDf0w&oh=00_AfFXNVRLOZ-M5jusOKhx3XabWnHIZ5aMEG0nHIqYASFlMA&oe=68134685" style="max-width: 100%; border-radius: 10px;">
       </div>
       <div>
         <h3>2015-2014 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491420315_122125561352739061_9155126140290872877_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=qTYJFG-QsygQ7kNvwEt2Ksl&_nc_oc=Adlkm42F6MBGm1eHvPFM4ocx6qIaU54aUeb2eAQhkDdtwg__s-r4QV6kxN-ToBDLHMg&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=JhotS6px0b8u_NFpqYX10w&oh=00_AfHe1WBXiGk-ule6dfKZ9HMpdL27HFJxyq0JZrLvmWQNaQ&oe=680B3D0E" style="max-width: 100%; border-radius: 10px;">
+      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491420315_122125561352739061_9155126140290872877_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=GlxN8Nvh_yAQ7kNvwECAtrd&_nc_oc=AdkabokA8EwWD86nj69c8B2j-nFpIIN7n6ENzbyI4uWFlAwN-6beC-PBCnw1nLZ6iQc&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=QFA23ENVRp9Dn17A1C76MQ&oh=00_AfHVMRmZhCDixkEI5YemPrw8W10C_8VCNQev7Frq9lXBxw&oe=6813260E" style="max-width: 100%; border-radius: 10px;">
       </div>
       <div>
         <h3>2016-2017 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490857277_122125561376739061_1973681102815958238_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=xSFMcMR27E4Q7kNvwFH0qkz&_nc_oc=Admaz8Z_pG9AaRmjxkSquBnjcvcPd8y8qHP_WJFE9wYoQnN8vU4mh75HSHMf5icJRTY&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=9Isap8b49V6LOwVMn69OGg&oh=00_AfELU9crSzZhUyMzRntyX0ROVLWKIbcM_hVY3jHYZMrPgw&oe=680B2201" style="max-width: 100%; border-radius: 10px;">
+      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490857277_122125561376739061_1973681102815958238_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=sDUXYwDsHcMQ7kNvwE2nSwz&_nc_oc=AdkhwyRMPv6SuCqBfA6v-p7btCSKau1bAwgGmVIzXr4hvy_M_opSFLrraQSESlVRuc0&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=CebGxHA-212EJBUO_xFOZw&oh=00_AfFzccNAmZ9lsAVKjIi_FTayWPDTf6k1a1Ae9B_7O49ZTQ&oe=68134341" style="max-width: 100%; border-radius: 10px;">
       </div>
       <div>
         <h3>2018-2019
  </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491744892_122125561322739061_6343408218398372239_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=iBRwGlV1f8QQ7kNvwGH5SEN&_nc_oc=AdlfWEM3ridbc5SWQtbQLQNUXQs3QbLHWJqtNwu0CUKtK7gyvC6Yiqmfa1YNaL4UTKU&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=F9kaEfgRLECMYcJq58J44A&oh=00_AfG_raHWFsryxy5lNWKlIJ83vqAnZIIhpyeNedtIPd-16g&oe=680B2930" style="max-width: 100%; border-radius: 10px;">
+      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491744892_122125561322739061_6343408218398372239_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=RC5kRPKSVgoQ7kNvwFrB9pZ&_nc_oc=AdmpEyk-ygsWrm-E_e1_KyyDBsr1b3IgfoNgfy_eyzGFIIOhJWQUf12Vxr36hTaBeZE&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=n7ifftR0hTCKPKfOhSu4lQ&oh=00_AfEX6cqMYyAmG7JtIMU94pdWT6S4v__S-Ew4KX_d0Mi6Aw&oe=68134A70" style="max-width: 100%; border-radius: 10px;">
       </div>
       <div>
 
-
     </section>
-
     <section id="camp">
       <h2>Inscripción Skills Camp 2025</h2>
       <p>Da clic en el botón para realizar tu inscripción al evento:</p>
       <a href="https://forms.gle/QvkeGQZ4L2XkGePx9" target="_blank" class="button">INSCRIBIRSE AHORA</a>
     </section>
-
     <section id="formatos">
       <h2>Formatos de Inscripción</h2>
       <p>Descarga los documentos necesarios para tu participación:</p>
       <a href="https://drive.google.com/uc?export=download&id=1FwISN90C3sWgcNjxoZid94Rw-tEMo37S" class="button" target="_blank" style="background:#28a745;">Descargar PDF</a>
     </section>
-
     <section id="galeria">
       <h2>Contacto</h2>
       <p>Encuéntranos en redes sociales:</p>
@@ -211,6 +264,9 @@
   </main>
   <footer>
     &copy; HALCONES BASKETBALL 2025
+    <div style="margin-top: 20px;">
+      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/493503227_122156625128502023_6548389813438782374_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=t2vJNd7lS7YQ7kNvwEtCeos&_nc_oc=AdkxYKynpTVLRIM-5C_bKex_45tqJKY3MCuWGt_vwe9tQUmuaCh7D30fu9KD96YMhtM&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=tp-nZcxnFD8PBpC2pS7iAw&oh=00_AfHNG37MIYkS1remJjDTh_pmeMVTSC5Fg_EomBoBP40ucw&oe=68134C7A" alt="Logo Halcones Basketball" style="max-width: 50px; margin-top: 1px;">
+    </div>
   </footer>
   <script>
     function mostrarSeccion(id, boton) {
@@ -223,6 +279,20 @@
       });
       boton.classList.add('active');
     }
+    document.addEventListener("DOMContentLoaded", () => {
+      const images = document.querySelectorAll('#inicio img');
+      images.forEach(img => img.classList.add('hidden'));
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+            entry.target.classList.remove('hidden');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      images.forEach(img => observer.observe(img));
+    });
   </script>
 </body>
 </html>
