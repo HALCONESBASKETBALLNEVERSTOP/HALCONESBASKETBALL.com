@@ -1,213 +1,292 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inscripción Skills Camp</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: white;
-      color: black;
-      line-height: 1.6;
-    }
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-    .fade-page {
-      animation: fadeInPage 1s ease-in-out;
-    }
-    @keyframes fadeInPage {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+  html, body {
+    scroll-behavior: smooth;
+  }
 
-    header {
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      text-align: center;
-      padding: 0;
-      color: white;
-    }
-    header img {
-      width: 100%;
-      max-width: 800px;
-      border-radius: 5px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
 
-    nav {
-      background-color: #0033cc;
-      padding: 15px 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
+  .fade-page {
+    animation: fadeInPage 1s ease-in-out;
+  }
+
+  @keyframes fadeInPage {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  header {
+    background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    text-align: center;
+    color: white;
+    padding: 2px 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  header img {
+    width: 100%;
+    max-width: 1000px;
+    border-radius: 0px;
+    margin: 0px auto;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    transition: transform 0.5s ease;
+  }
+
+  header img:hover {
+    transform: scale(1.02);
+  }
+
+  nav {
+    background-color: rgba(0, 51, 204, 0.95);
+    padding: 15px 0;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+
+  .nav-button {
+    background: none;
+    color: white;
+    padding: 12px 25px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-button::after {
+    content: "";
+    background: rgba(255,255,255,0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+    border-radius: 50%;
+  }
+
+  .nav-button:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .nav-button:hover {
+    color: #aad4ff;
+    transform: scale(1.15);
+  }
+
+  .nav-button.active {
+    transform: scale(1.2);
+    text-shadow: 0 2px 8px rgba(255,255,255,0.6);
+  }
+
+  main {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  section {
+    display: none;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 40px 30px;
+    margin-bottom: 50px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+  }
+
+  section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  section img {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.5s ease, opacity 0.8s ease;
+  }
+
+  section img:hover {
+    transform: scale(1.03);
+  }
+
+  h2, h3 {
+    color: #203a43;
+    margin-bottom: 20px;
+  }
+
+  a {
+    color: #0033cc;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    display: inline-block;
+  }
+
+  a:hover {
+    color: #005ce6;
+    transform: scale(1.05);
+    text-decoration: underline;
+  }
+
+  a.button {
+    background: #0033cc;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    transition: all 0.4s ease;
+    display: inline-block;
+    margin-top: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+
+  a.button:hover {
+    background: #002699;
+    transform: scale(1.08);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  }
+
+  footer {
+    background: linear-gradient(to right, #e0e0e0, #f7f7f7);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    color: #333;
+    margin-top: 60px;
+    box-shadow: 0 -3px 15px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+  }
+
+  footer img {
+    max-width: 90px;
+    height: auto;
+    margin-left: 20px;
+  }
+
+  .social-icons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 32px;
+  }
+
+  .social-icons a {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  }
+
+  .social-icons a:hover {
+    transform: scale(1.25);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+
+  .social-icons a i {
+    font-size: 28px;
+  }
+
+  /* Efecto reveal al hacer scroll */
+  .hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
     .nav-buttons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      max-width: 800px;
-      margin: 0 auto;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
     }
 
     .nav-button {
-      background: none; /* Sin fondo */
-      color: white; /* Letras blancas */
-      padding: 10px 15px;
-      border: none;
-      font-weight: bold;
-      font-size: 18px;
-      cursor: pointer;
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
-    .nav-button:hover {
-      transform: scale(1.2); /* Zoom suave */
-    }
-    .nav-button.active {
-      transform: scale(1.3); /* Zoom más grande cuando está activo */
+      font-size: 16px;
     }
 
     main {
       padding: 30px 15px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    section {
-      display: none;
-      width: 100%;
-    }
-    section.active {
-      display: block;
-    }
-    section img {
-      width: 100%;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-
-    h2, h3 {
-      color: black;
-      margin-bottom: 10px;
-    }
-
-    a {
-      color: white;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-    a:hover {
-      color: #aad4ff;
-      transform: scale(1.1);
-      text-decoration: underline;
-    }
-
-    a.button {
-      background: #0033cc;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    a.button:hover {
-      background: #002699;
-      transform: scale(1.05);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
     footer {
-      background: linear-gradient(to right, #e0e0e0, #f7f7f7);
+      flex-direction: column;
       text-align: center;
-      padding: 25px 15px;
-      color: black;
-      margin-top: 30px;
-      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
     }
+
     footer img {
-      margin-top: 15px;
-      max-width: 120px;
+      margin: 15px 0 0 0;
     }
+  }
+</style>
 
-    .social-icons {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      font-size: 28px;
-    }
-    .social-icons a {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    .social-icons a:hover {
-      transform: scale(1.2);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .social-icons a i {
-      font-size: 26px;
-    }
 
-    #inicio img.hidden {
-      opacity: 0;
-      transform: scale(0.85);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-    #inicio img.fade-in {
-      opacity: 1;
-      transform: scale(1);
-    }
 
-    @media (max-width: 600px) {
-      .nav-buttons {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        max-width: 100%;
-      }
-      .nav-button {
-        font-size: 16px;
-        padding: 8px 10px;
-      }
-      main {
-        padding: 20px 10px;
-      }
-      section img {
-        border-radius: 8px;
-      }
-      a.button {
-        width: 100%;
-        text-align: center;
-        font-size: 16px;
-      }
-      h2 { font-size: 22px; }
-      h3 { font-size: 18px; }
-      .social-icons {
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .social-icons a {
-        width: 45px;
-        height: 45px;
-      }
-      .social-icons a i {
-        font-size: 22px;
-      }
-    }
-  </style>
 </head>
 
 <body class="fade-page">
@@ -291,40 +370,56 @@
       </div>
     </section>
   </main>
-
-  <footer>
-    &copy; HALCONES BASKETBALL 2025
-    <div>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/493503227_122156625128502023_6548389813438782374_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=t2vJNd7lS7YQ7kNvwEtCeos&_nc_oc=AdkxYKynpTVLRIM-5C_bKex_45tqJKY3MCuWGt_vwe9tQUmuaCh7D30fu9KD96YMhtM&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=tp-nZcxnFD8PBpC2pS7iAw&oh=00_AfHNG37MIYkS1remJjDTh_pmeMVTSC5Fg_EomBoBP40ucw&oe=68134C7A" alt="Logo Halcones">
-    </div>
+<footer style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+  <span>&copy; HALCONES BASKETBALL 2025</span>
+  <div style="margin-top: 10px;">
+    <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/493503227_122156625128502023_6548389813438782374_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=t2vJNd7lS7YQ7kNvwEtCeos&_nc_oc=AdkxYKynpTVLRIM-5C_bKex_45tqJKY3MCuWGt_vwe9tQUmuaCh7D30fu9KD96YMhtM&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=tp-nZcxnFD8PBpC2pS7iAw&oh=00_AfHNG37MIYkS1remJjDTh_pmeMVTSC5Fg_EomBoBP40ucw&oe=68134C7A" 
+         alt="Logo Halcones" 
+         style="max-width: 80px; height: auto;">
+  </div>
+</footer>
   </footer>
 
-  <script>
-    function mostrarSeccion(id, boton) {
-      document.querySelectorAll('main section').forEach(seccion => {
-        seccion.classList.remove('active');
-      });
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('.nav-button').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      boton.classList.add('active');
-    }
+<script>
+  function mostrarSeccion(id, boton) {
+    const secciones = document.querySelectorAll('main section');
+    const botones = document.querySelectorAll('.nav-button');
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const images = document.querySelectorAll('#inicio img');
-      images.forEach(img => img.classList.add('hidden'));
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            entry.target.classList.remove('hidden');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      images.forEach(img => observer.observe(img));
+    secciones.forEach(seccion => {
+      seccion.classList.remove('active', 'section-transition', 'show');
     });
-  </script>
+
+    botones.forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    const seccion = document.getElementById(id);
+    seccion.classList.add('active', 'section-transition');
+
+    setTimeout(() => {
+      seccion.classList.add('show');
+    }, 50);
+
+    boton.classList.add('active');
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section img, section').forEach(el => {
+      el.classList.add('hidden');
+      observer.observe(el);
+    });
+  });
+</script>
+
+
 </body>
 </html>
