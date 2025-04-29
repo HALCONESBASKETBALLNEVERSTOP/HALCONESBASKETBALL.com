@@ -1,426 +1,367 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inscripción Skills Camp</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscripción Skills Camp</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html, body {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f4f6f8;
-    color: #333;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  .fade-page {
-    animation: fadeInPage 1s ease-in-out;
-  }
-
-  @keyframes fadeInPage {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  header {
-    background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
-    background-size: 400% 400%;
-    animation: gradientMove 15s ease infinite;
-    text-align: center;
-    color: white;
-    padding: 2px 0;
-    position: relative;
-    z-index: 10;
-  }
-
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  header img {
-    width: 100%;
-    max-width: 1000px;
-    border-radius: 0px;
-    margin: 0px auto;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-    transition: transform 0.5s ease;
-  }
-
-  header img:hover {
-    transform: scale(1.02);
-  }
-
-  nav {
-    background-color: rgba(0, 51, 204, 0.95);
-    padding: 15px 0;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(8px);
-  }
-
-  .nav-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    max-width: 1000px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-  }
-
-  .nav-button {
-    background: none;
-    color: white;
-    padding: 12px 25px;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .nav-button::after {
-    content: "";
-    background: rgba(255,255,255,0.2);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    transform: translate(-50%, -50%);
-    transition: all 0.4s ease;
-    border-radius: 50%;
-  }
-
-  .nav-button:hover::after {
-    width: 300px;
-    height: 300px;
-  }
-
-  .nav-button:hover {
-    color: #aad4ff;
-    transform: scale(1.15);
-  }
-
-  .nav-button.active {
-    transform: scale(1.2);
-    text-shadow: 0 2px 8px rgba(255,255,255,0.6);
-  }
-
-  main {
-    padding: 50px 20px;
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  section {
-    display: none;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    padding: 40px 30px;
-    margin-bottom: 50px;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease;
-  }
-
-  section.active {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  section img {
-    width: 100%;
-    border-radius: 12px;
-    margin-top: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    transition: transform 0.5s ease, opacity 0.8s ease;
-  }
-
-  section img:hover {
-    transform: scale(1.03);
-  }
-
-  h2, h3 {
-    color: #203a43;
-    margin-bottom: 20px;
-  }
-
-  a {
-    color: #0033cc;
-    text-decoration: none;
-    transition: all 0.4s ease;
-    display: inline-block;
-  }
-
-  a:hover {
-    color: #005ce6;
-    transform: scale(1.05);
-    text-decoration: underline;
-  }
-
-  a.button {
-    background: #0033cc;
-    color: white;
-    padding: 14px 35px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 20px;
-    transition: all 0.4s ease;
-    display: inline-block;
-    margin-top: 20px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-  }
-
-  a.button:hover {
-    background: #002699;
-    transform: scale(1.08);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  }
-
-  footer {
-    background: linear-gradient(to right, #e0e0e0, #f7f7f7);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 30px;
-    color: #333;
-    margin-top: 60px;
-    box-shadow: 0 -3px 15px rgba(0,0,0,0.1);
-    flex-wrap: wrap;
-  }
-
-  footer img {
-    max-width: 90px;
-    height: auto;
-    margin-left: 20px;
-  }
-
-  .social-icons {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    font-size: 32px;
-  }
-
-  .social-icons a {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: all 0.4s ease;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-  }
-
-  .social-icons a:hover {
-    transform: scale(1.25);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  }
-
-  .social-icons a i {
-    font-size: 28px;
-  }
-
-  /* Efecto reveal al hacer scroll */
-  .hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
-  }
-
-  .fade-in {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 768px) {
-    .nav-buttons {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .nav-button {
-      font-size: 16px;
-    }
-
-    main {
-      padding: 30px 15px;
-    }
-
-    footer {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    footer img {
-      margin: 15px 0 0 0;
-    }
-  }
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+html, body {
+scroll-behavior: smooth;
+}
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: #f4f6f8;
+color: #333;
+line-height: 1.6;
+overflow-x: hidden;
+}
+.fade-page {
+animation: fadeInPage 1s ease-in-out;
+}
+@keyframes fadeInPage {
+0% { opacity: 0; transform: translateY(10px); }
+100% { opacity: 1; transform: translateY(0); }
+}
+header {
+background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+background-size: 400% 400%;
+animation: gradientMove 15s ease infinite;
+text-align: center;
+color: white;
+padding: 2px 0;
+position: relative;
+z-index: 10;
+}
+@keyframes gradientMove {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+header img {
+width: 100%;
+max-width: 1000px;
+border-radius: 0px;
+margin: 0px auto;
+box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+transition: transform 0.5s ease;
+}
+header img:hover {
+transform: scale(1.02);
+}
+nav {
+background-color: rgba(0, 51, 204, 0.95);
+padding: 15px 0;
+box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+position: sticky;
+top: 0;
+z-index: 100;
+backdrop-filter: blur(8px);
+}
+.nav-buttons {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 25px;
+max-width: 1000px;
+margin: 0 auto;
+flex-wrap: wrap;
+}
+.nav-button {
+background: none;
+color: white;
+padding: 12px 25px;
+border: 2px solid transparent;
+border-radius: 8px;
+font-weight: bold;
+font-size: 18px;
+cursor: pointer;
+transition: all 0.2s ease;
+position: relative;
+overflow: hidden;
+}
+.nav-button::after {
+content: "";
+background: rgba(255,255,255,0.2);
+position: absolute;
+top: 50%;
+left: 50%;
+width: 0;
+height: 0;
+transform: translate(-50%, -50%);
+transition: all 0.2s ease;
+border-radius: 50%;
+}
+.nav-button:hover::after {
+width: 300px;
+height: 300px;
+}
+.nav-button:hover {
+color: #aad4ff;
+transform: scale(1.2);
+}
+.nav-button.active {
+transform: scale(1.2);
+text-shadow: 0 2px 8px rgba(255,255,255,0.6);
+}
+main {
+padding: 50px 20px;
+max-width: 1200px;
+margin: auto;
+}
+section {
+display: none;
+background: white;
+border-radius: 16px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+padding: 40px 30px;
+margin-bottom: 50px;
+opacity: 0;
+transform: translateY(50px);
+transition: all 0.8s ease;
+}
+section.active {
+display: block;
+opacity: 1;
+transform: translateY(0);
+}
+section img {
+width: 100%;
+border-radius: 12px;
+margin-top: 20px;
+box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+transition: transform 0.5s ease, opacity 0.8s ease;
+}
+section img:hover {
+transform: scale(1.2);
+}
+h2, h3 {
+color: #203a43;
+margin-bottom: 20px;
+}
+a {
+color: #0033cc;
+text-decoration: none;
+transition: all 0.4s ease;
+display: inline-block;
+}
+a:hover {
+color: #005ce6;
+transform: scale(1.05);
+text-decoration: underline;
+}
+a.button {
+background: #0033cc;
+color: white;
+padding: 14px 35px;
+border-radius: 12px;
+text-decoration: none;
+font-weight: bold;
+font-size: 20px;
+transition: all 0.4s ease;
+display: inline-block;
+margin-top: 20px;
+box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+a.button:hover {
+background: #002699;
+transform: scale(1.08);
+box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+footer {
+background: linear-gradient(to right, #e0e0e0, #f7f7f7);
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 25px 30px;
+color: #333;
+margin-top: 60px;
+box-shadow: 0 -3px 15px rgba(0,0,0,0.1);
+flex-wrap: wrap;
+}
+footer img {
+max-width: 90px;
+height: auto;
+margin-left: 20px;
+}
+.social-icons {
+margin-top: 30px;
+display: flex;
+justify-content: center;
+gap: 20px;
+font-size: 32px;
+}
+.social-icons a {
+width: 60px;
+height: 60px;
+border-radius: 50%;
+background-color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+text-decoration: none;
+transition: all 0.4s ease;
+box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+.social-icons a:hover {
+transform: scale(1.5);
+box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+.social-icons a i {
+font-size: 28px;
+}
+/* SCROLL */
+.hidden {
+opacity: 0;
+transform: translateY(50px);
+transition: opacity 1s ease, transform 1s ease;
+}
+.fade-in {
+opacity: 1;
+transform: translateY(0);
+}
+@media (max-width: 768px) {
+.nav-buttons {
+flex-wrap: wrap;
+justify-content: center;
+gap: 15px;
+}
+.nav-button {
+font-size: 16px;
+}
+main {
+padding: 30px 15px;
+}
+footer {
+flex-direction: column;
+text-align: center;
+}
+footer img {
+margin: 15px 0 0 0;
+}
+}
 </style>
-
-
-
 </head>
-
 <body class="fade-page">
-  <header>
-    <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491726146_122125520882739061_802729931895096651_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=dVYBLAOX_TUQ7kNvwGiL8f3&_nc_oc=AdnduCNK7ABaPBeL8WA4baKa2YKVMndz5Jf1pKhd5xWskm4Lul8HgjzJDGG9SE8qTE0&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=ZBdDh7so1N9DUItE3ACLMQ&oh=00_AfH9ehvazPq8V_FQ0YVf7AKUw3oAV4kJQGKnGVZpAgj0qg&oe=68133D69" alt="Banner">
-  </header>
-
-  <nav>
-    <div class="nav-buttons">
-      <button class="nav-button active" onclick="mostrarSeccion('inicio', this)">INICIO</button>
-      <button class="nav-button" onclick="mostrarSeccion('camp', this)">INSCRIPCIÓN</button>
-      <button class="nav-button" onclick="mostrarSeccion('formatos', this)">FORMATOS</button>
-      <button class="nav-button" onclick="mostrarSeccion('galeria', this)">CONTACTO</button>
-    </div>
-  </nav>
-
-  <main>
-    <section id="inicio" class="active">
-      <h2>Bienvenido a HALCONES BASKETBALL</h2>
-      <p>Conoce nuestras categorías </p>
-    <div>
-        <h3>2005 y más</h3>
-        <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491754218_122125561238739061_1157001937341618474_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Z2jnAFlVXssQ7kNvwE9dW-_&_nc_oc=Adl9l_BHHOAo2Nlij2m9K3amopHdx7L1rA9yavzIdtaSdmGdi12dkr0emkjXRDYNuuU&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=s7BeU9iHgjfvEOL9UhkaJQ&oh=00_AfHpH71CqfHL92bMxYR0TFzjbCnXtE12_9BSDsqrkRMqHg&oe=681349D0"  style="max-width: 100%; border-radius: 10px;">
-      </div>
-      <div>
-        <h3>2006-2007</h3>
-        <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491311831_122125561262739061_4228637683292344760_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=g9I-tkEFzqcQ7kNvwHjSi9K&_nc_oc=AdkaJKr97CDo1v_1w65qqk7usc2_31fH-PR8PocFFn6OyFL3PRHL3zxQGabLlKvC7k4&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=1N4qJEUwj99hh9kThQjPDA&oh=00_AfFEEpK5lzPYOE4jLUSJ2NtL2IktrLcBgZmK7hGPptRxWg&oe=681335A2" style="max-width: 100%; border-radius: 10px;">
-      </div>
-      <div>
-        <h3>2008-2009 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491902519_122125561364739061_3450262074385071825_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Xj8yPQsetO4Q7kNvwGoiJL_&_nc_oc=Adns1YW1maHYTlBly2udd2lMEbhe0jKwlUFqoEwzqH6WairqqwG_CZhsCx1pedoCP9M&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=GH-cnrFD5QSLkrI6g9_yNw&oh=00_AfEMmtxAjqP2snR_AKC7ccmk8dfRPVAQs2DcEEvHOyS88Q&oe=681345F4" style="max-width: 100%; border-radius: 10px;">
-      </div>
-      <div>
-        <h3>2010-2011 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490823822_122125561340739061_9209404971866197278_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pLIb063vNFgQ7kNvwGaiJwF&_nc_oc=AdlMPWPC4Q7Z7t07suDGDJkOJCI2dJ9CtOz5ZShv-0EF-spCx82BcljicGH8Vzu_1_8&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=_1CzeQKPU330TMHjI_UEag&oh=00_AfHuFsCPQthzOVS00vtXaFy-7JFNZOEz6hWoQvCSUpYtoQ&oe=68134453" style="max-width: 100%; border-radius: 10px;">
-      </div>
-      <div>
-        <h3>2012-2013 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490783528_122125561310739061_4872495710091249778_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=QGFWIDgQU-sQ7kNvwFfOhYN&_nc_oc=AdmK78kiZcF1Jonq9lnc1diK0nGhpQU4iXtKqCZkBDBGCEdezV5jN_hKTzr3imFFJ60&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=W0d880XBGBD9W91tFfDf0w&oh=00_AfFXNVRLOZ-M5jusOKhx3XabWnHIZ5aMEG0nHIqYASFlMA&oe=68134685" style="max-width: 100%; border-radius: 10px;">
-      </div>
-      <div>
-        <h3>2015-2014 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491420315_122125561352739061_9155126140290872877_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=GlxN8Nvh_yAQ7kNvwECAtrd&_nc_oc=AdkabokA8EwWD86nj69c8B2j-nFpIIN7n6ENzbyI4uWFlAwN-6beC-PBCnw1nLZ6iQc&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=QFA23ENVRp9Dn17A1C76MQ&oh=00_AfHVMRmZhCDixkEI5YemPrw8W10C_8VCNQev7Frq9lXBxw&oe=6813260E" style="max-width: 100%; border-radius: 10px;">
-      </div>
-      <div>
-        <h3>2016-2017 </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490857277_122125561376739061_1973681102815958238_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=sDUXYwDsHcMQ7kNvwE2nSwz&_nc_oc=AdkhwyRMPv6SuCqBfA6v-p7btCSKau1bAwgGmVIzXr4hvy_M_opSFLrraQSESlVRuc0&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=CebGxHA-212EJBUO_xFOZw&oh=00_AfFzccNAmZ9lsAVKjIi_FTayWPDTf6k1a1Ae9B_7O49ZTQ&oe=68134341" style="max-width: 100%; border-radius: 10px;">
-      </div>
-      <div>
-        <h3>2018-2019
- </h3>
-      <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491744892_122125561322739061_6343408218398372239_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=RC5kRPKSVgoQ7kNvwFrB9pZ&_nc_oc=AdmpEyk-ygsWrm-E_e1_KyyDBsr1b3IgfoNgfy_eyzGFIIOhJWQUf12Vxr36hTaBeZE&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=n7ifftR0hTCKPKfOhSu4lQ&oh=00_AfEX6cqMYyAmG7JtIMU94pdWT6S4v__S-Ew4KX_d0Mi6Aw&oe=68134A70" style="max-width: 100%; border-radius: 10px;">
-      </div>
-      <div>
-
-    </section>
-    
-
-    <section id="camp">
-      <h2>Inscripción Skills Camp 2025</h2>
-      <p>Haz clic para inscribirte:</p>
-      <a href="https://forms.gle/QvkeGQZ4L2XkGePx9" target="_blank" class="button">INSCRIBIRSE</a>
-    </section>
-
-    <section id="formatos">
-      <h2>FORMATO CARTA RESPONSIVA</h2>
-      <p>Descarga aquí:</p>
-      <a href="https://drive.google.com/uc?export=download&id=1FwISN90C3sWgcNjxoZid94Rw-tEMo37S" target="_blank" class="button" style="background:#28a745;">Descargar PDF</a>
-    </section>
-
-    <section id="galeria">
-      <h2>Contacto</h2>
-      <div class="social-icons">
-        <a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank" title="Facebook"><i class="fab fa-facebook-f" style="color:#1877f2;"></i></a>
-        <a href="https://www.instagram.com/halcones.basketball/" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color:#e4405f;"></i></a>
-        <a href="https://www.tiktok.com/@halcones.basketball" target="_blank" title="TikTok"><i class="fab fa-tiktok" style="color:#000000;"></i></a>
-        <a href="https://wa.me/5532614194" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
-                <a href="https://wa.me/5635782679" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
-      </div>
-    </section>
-      </div>
-    </section>
-  </main>
+<header>
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491726146_122125520882739061_802729931895096651_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=dVYBLAOX_TUQ7kNvwGiL8f3&_nc_oc=AdnduCNK7ABaPBeL8WA4baKa2YKVMndz5Jf1pKhd5xWskm4Lul8HgjzJDGG9SE8qTE0&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=ZBdDh7so1N9DUItE3ACLMQ&oh=00_AfH9ehvazPq8V_FQ0YVf7AKUw3oAV4kJQGKnGVZpAgj0qg&oe=68133D69" alt="Banner">
+</header>
+<nav>
+<div class="nav-buttons">
+<button class="nav-button active" onclick="mostrarSeccion('inicio', this)">INICIO</button>
+<button class="nav-button" onclick="mostrarSeccion('camp', this)">INSCRIPCIÓN</button>
+<button class="nav-button" onclick="mostrarSeccion('formatos', this)">FORMATOS</button>
+<button class="nav-button" onclick="mostrarSeccion('galeria', this)">CONTACTO</button>
+</div>
+</nav>
+<main>
+<section id="inicio" class="active">
+<h2>Bienvenido a HALCONES BASKETBALL</h2>
+<p>Conoce nuestras categorías </p>
+<div>
+<h3>2005 y más</h3>
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491754218_122125561238739061_1157001937341618474_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Z2jnAFlVXssQ7kNvwE9dW-_&_nc_oc=Adl9l_BHHOAo2Nlij2m9K3amopHdx7L1rA9yavzIdtaSdmGdi12dkr0emkjXRDYNuuU&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=s7BeU9iHgjfvEOL9UhkaJQ&oh=00_AfHpH71CqfHL92bMxYR0TFzjbCnXtE12_9BSDsqrkRMqHg&oe=681349D0"  style="max-width: 100%; border-radius: 10px;">
+</div>
+<div>
+<h3>2006-2007</h3>
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491311831_122125561262739061_4228637683292344760_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_ohc=g9I-tkEFzqcQ7kNvwHjSi9K&_nc_oc=AdkaJKr97CDo1v_1w65qqk7usc2_31fH-PR8PocFFn6OyFL3PRHL3zxQGabLlKvC7k4&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=1N4qJEUwj99hh9kThQjPDA&oh=00_AfFEEpK5lzPYOE4jLUSJ2NtL2IktrLcBgZmK7hGPptRxWg&oe=681335A2" style="max-width: 100%; border-radius: 10px;">
+</div>
+<div>
+<h3>2008-2009 </h3>
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491902519_122125561364739061_3450262074385071825_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Xj8yPQsetO4Q7kNvwGoiJL_&_nc_oc=Adns1YW1maHYTlBly2udd2lMEbhe0jKwlUFqoEwzqH6WairqqwG_CZhsCx1pedoCP9M&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=GH-cnrFD5QSLkrI6g9_yNw&oh=00_AfEMmtxAjqP2snR_AKC7ccmk8dfRPVAQs2DcEEvHOyS88Q&oe=681345F4" style="max-width: 100%; border-radius: 10px;">
+</div>
+<div>
+<h3>2010-2011 </h3>
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490823822_122125561340739061_9209404971866197278_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=pLIb063vNFgQ7kNvwGaiJwF&_nc_oc=AdlMPWPC4Q7Z7t07suDGDJkOJCI2dJ9CtOz5ZShv-0EF-spCx82BcljicGH8Vzu_1_8&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=_1CzeQKPU330TMHjI_UEag&oh=00_AfHuFsCPQthzOVS00vtXaFy-7JFNZOEz6hWoQvCSUpYtoQ&oe=68134453" style="max-width: 100%; border-radius: 10px;">
+</div>
+<div>
+<h3>2012-2013 </h3>
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490783528_122125561310739061_4872495710091249778_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=QGFWIDgQU-sQ7kNvwFfOhYN&_nc_oc=AdmK78kiZcF1Jonq9lnc1diK0nGhpQU4iXtKqCZkBDBGCEdezV5jN_hKTzr3imFFJ60&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=W0d880XBGBD9W91tFfDf0w&oh=00_AfFXNVRLOZ-M5jusOKhx3XabWnHIZ5aMEG0nHIqYASFlMA&oe=68134685" style="max-width: 100%; border-radius: 10px;">
+</div>
+<div>
+<h3>2015-2014 </h3>
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491420315_122125561352739061_9155126140290872877_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=GlxN8Nvh_yAQ7kNvwECAtrd&_nc_oc=AdkabokA8EwWD86nj69c8B2j-nFpIIN7n6ENzbyI4uWFlAwN-6beC-PBCnw1nLZ6iQc&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=QFA23ENVRp9Dn17A1C76MQ&oh=00_AfHVMRmZhCDixkEI5YemPrw8W10C_8VCNQev7Frq9lXBxw&oe=6813260E" style="max-width: 100%; border-radius: 10px;">
+</div>
+<div>
+<h3>2016-2017 </h3>
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/490857277_122125561376739061_1973681102815958238_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=sDUXYwDsHcMQ7kNvwE2nSwz&_nc_oc=AdkhwyRMPv6SuCqBfA6v-p7btCSKau1bAwgGmVIzXr4hvy_M_opSFLrraQSESlVRuc0&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=CebGxHA-212EJBUO_xFOZw&oh=00_AfFzccNAmZ9lsAVKjIi_FTayWPDTf6k1a1Ae9B_7O49ZTQ&oe=68134341" style="max-width: 100%; border-radius: 10px;">
+</div>
+<div>
+<h3>2018-2019
+</h3>
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/491744892_122125561322739061_6343408218398372239_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=RC5kRPKSVgoQ7kNvwFrB9pZ&_nc_oc=AdmpEyk-ygsWrm-E_e1_KyyDBsr1b3IgfoNgfy_eyzGFIIOhJWQUf12Vxr36hTaBeZE&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=n7ifftR0hTCKPKfOhSu4lQ&oh=00_AfEX6cqMYyAmG7JtIMU94pdWT6S4v__S-Ew4KX_d0Mi6Aw&oe=68134A70" style="max-width: 100%; border-radius: 10px;">
+</div>
+<div>
+</section>   
+<section id="camp">
+<h2>Inscripción Skills Camp 2025</h2>
+<p>Haz clic para inscribirte:</p>
+<a href="https://forms.gle/QvkeGQZ4L2XkGePx9" target="_blank" class="button">INSCRIBIRSE</a>
+</section>
+<section id="formatos">
+<h2>FORMATO CARTA RESPONSIVA</h2>
+<p>Descarga aquí:</p>
+<a href="https://drive.google.com/uc?export=download&id=1FwISN90C3sWgcNjxoZid94Rw-tEMo37S" target="_blank" class="button" style="background:#28a745;">Descargar PDF</a>
+</section>
+<section id="galeria">
+<h2>Contacto</h2>
+<div class="social-icons">
+<a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank" title="Facebook"><i class="fab fa-facebook-f" style="color:#1877f2;"></i></a>
+<a href="https://www.instagram.com/halcones.basketball/" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color:#e4405f;"></i></a>
+<a href="https://www.tiktok.com/@halcones.basketball" target="_blank" title="TikTok"><i class="fab fa-tiktok" style="color:#000000;"></i></a>
+<a href="https://wa.me/5532614194" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
+<a href="https://wa.me/5635782679" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
+</div>
+</section>
+</div>
+</section>
+</main>
 <footer style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-  <span>&copy; HALCONES BASKETBALL 2025</span>
-  <div style="margin-top: 10px;">
-    <img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/493503227_122156625128502023_6548389813438782374_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=t2vJNd7lS7YQ7kNvwEtCeos&_nc_oc=AdkxYKynpTVLRIM-5C_bKex_45tqJKY3MCuWGt_vwe9tQUmuaCh7D30fu9KD96YMhtM&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=tp-nZcxnFD8PBpC2pS7iAw&oh=00_AfHNG37MIYkS1remJjDTh_pmeMVTSC5Fg_EomBoBP40ucw&oe=68134C7A" 
-         alt="Logo Halcones" 
-         style="max-width: 80px; height: auto;">
-  </div>
+<span>&copy; HALCONES BASKETBALL 2025</span>
+<div style="margin-top: 10px;">
+<img src="https://scontent.fmex34-1.fna.fbcdn.net/v/t39.30808-6/493503227_122156625128502023_6548389813438782374_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=t2vJNd7lS7YQ7kNvwEtCeos&_nc_oc=AdkxYKynpTVLRIM-5C_bKex_45tqJKY3MCuWGt_vwe9tQUmuaCh7D30fu9KD96YMhtM&_nc_zt=23&_nc_ht=scontent.fmex34-1.fna&_nc_gid=tp-nZcxnFD8PBpC2pS7iAw&oh=00_AfHNG37MIYkS1remJjDTh_pmeMVTSC5Fg_EomBoBP40ucw&oe=68134C7A" 
+alt="Logo Halcones" 
+style="max-width: 80px; height: auto;">
+</div>
 </footer>
-  </footer>
-
+</footer>
 <script>
-  function mostrarSeccion(id, boton) {
-    const secciones = document.querySelectorAll('main section');
-    const botones = document.querySelectorAll('.nav-button');
-
-    secciones.forEach(seccion => {
-      seccion.classList.remove('active', 'section-transition', 'show');
-    });
-
-    botones.forEach(btn => {
-      btn.classList.remove('active');
-    });
-
-    const seccion = document.getElementById(id);
-    seccion.classList.add('active', 'section-transition');
-
-    setTimeout(() => {
-      seccion.classList.add('show');
-    }, 50);
-
-    boton.classList.add('active');
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('section img, section').forEach(el => {
-      el.classList.add('hidden');
-      observer.observe(el);
-    });
-  });
+function mostrarSeccion(id, boton) {
+const secciones = document.querySelectorAll('main section');
+const botones = document.querySelectorAll('.nav-button');
+secciones.forEach(seccion => {
+seccion.classList.remove('active', 'section-transition', 'show');
+});
+botones.forEach(btn => {
+btn.classList.remove('active');
+});
+const seccion = document.getElementById(id);
+seccion.classList.add('active', 'section-transition');
+setTimeout(() => {
+seccion.classList.add('show');
+}, 50);
+boton.classList.add('active');
+}
+document.addEventListener("DOMContentLoaded", () => {
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('fade-in');
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.1 });
+document.querySelectorAll('section img, section').forEach(el => {
+el.classList.add('hidden');
+observer.observe(el);
+});
+});
 </script>
-
-
 </body>
 </html>
 
