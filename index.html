@@ -1,269 +1,271 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>HALCONES BASKETBALL</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <style>
 * {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 html, body {
-scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background: #f4f6f8;
-color: #333;
-line-height: 1.6;
-overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #CCC;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 .fade-page {
-animation: fadeInPage 1s ease-in-out;
+  animation: fadeInPage 1s ease-in-out;
 }
 @keyframes fadeInPage {
-0% { opacity: 0; transform: translateY(10px); }
-100% { opacity: 1; transform: translateY(0); }
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 header {
-background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
-background-size: 400% 400%;
-animation: gradientMove 15s ease infinite;
-text-align: center;
-color: white;
-padding: 2px 0;
-position: relative;
-z-index: 10;
+  background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  text-align: center;
+  color: white;
+  padding: 2px 0;
+  position: relative;
+  z-index: 10;
 }
 @keyframes gradientMove {
-0% { background-position: 0% 50%; }
-50% { background-position: 100% 50%; }
-100% { background-position: 0% 50%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 header img {
-width: 100%;
-max-width: 1000px;
-border-radius: 0px;
-margin: 0px auto;
-box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-transition: transform 0.5s ease;
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 0px;
+  margin: 0px auto;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+  transition: transform 0.5s ease;
 }
 header img:hover {
-transform: scale(1.02);
+  transform: scale(1);
 }
 nav {
-background-color: rgba(0, 51, 204, 0.95);
-padding: 15px 0;
-box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-position: sticky;
-top: 0;
-z-index: 100;
-backdrop-filter: blur(8px);
+  background-color: #666 ;
+  padding: 15px 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
 }
 .nav-buttons {
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 25px;
-max-width: 1000px;
-margin: 0 auto;
-flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 .nav-button {
-background: none;
-color: white;
-padding: 12px 25px;
-border: 2px solid transparent;
-border-radius: 8px;
-font-weight: bold;
-font-size: 18px;
-cursor: pointer;
-transition: all 0.2s ease;
-position: relative;
-overflow: hidden;
+  background: #333;
+  color: WHITE;
+  padding: 12px 25px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 .nav-button::after {
-content: "";
-background: rgba(255,255,255,0.2);
-position: absolute;
-top: 50%;
-left: 50%;
-width: 0;
-height: 0;
-transform: translate(-50%, -50%);
-transition: all 0.2s ease;
-border-radius: 50%;
+  content: "";
+  background: ;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+  border-radius: 50%;
 }
 .nav-button:hover::after {
-width: 300px;
-height: 300px;
+  width: 300px;
+  height: 300px;
 }
 .nav-button:hover {
-color: #aad4ff;
-transform: scale(1.2);
+  color: #111;
+  transform: scale(1);
 }
 .nav-button.active {
-transform: scale(1.2);
-text-shadow: 0 2px 8px rgba(255,255,255,0.6);
+  transform: scale(1);
+  text-shadow: 0 2px 8px rgba(255,255,255,0.6);
 }
 main {
-padding: 50px 20px;
-max-width: 1200px;
-margin: auto;
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 section {
-display: none;
-background: white;
-border-radius: 16px;
-box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-padding: 40px 30px;
-margin-bottom: 50px;
-opacity: 0;
-transform: translateY(50px);
-transition: all 0.8s ease;
+  display: none;
+  background: WHITE;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 40px 30px;
+  margin-bottom: 50px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
 }
 section.active {
-display: block;
-opacity: 1;
-transform: translateY(0);
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 section img {
-width: 100%;
-border-radius: 12px;
-margin-top: 20px;
-box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-transition: transform 0.5s ease, opacity 0.8s ease;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.5s ease, opacity 0.8s ease;
 }
 section img:hover {
-transform: scale(1.2);
+  transform: scale(1.2);
 }
 h2, h3 {
-color: #203a43;
-margin-bottom: 20px;
+  color: #203a43;
+  margin-bottom: 20px;
 }
 a {
-color: #0033cc;
-text-decoration: none;
-transition: all 0.4s ease;
-display: inline-block;
+  color: #0033cc;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  display: inline-block;
 }
 a:hover {
-color: #005ce6;
-transform: scale(1.05);
-text-decoration: underline;
+  color: #005ce6;
+  transform: scale(1.05);
+  text-decoration: underline;
 }
 a.button {
-background: #0033cc;
-color: white;
-padding: 14px 35px;
-border-radius: 12px;
-text-decoration: none;
-font-weight: bold;
-font-size: 20px;
-transition: all 0.4s ease;
-display: inline-block;
-margin-top: 20px;
-box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  background: #0033cc;
+  color: white;
+  padding: 14px 35px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  transition: all 0.4s ease;
+  display: inline-block;
+  margin-top: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 a.button:hover {
-background: #002699;
-transform: scale(1.08);
-box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  background: #002699;
+  transform: scale(1.08);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
-footer {
-background: linear-gradient(to right, #e0e0e0, #f7f7f7);
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 25px 30px;
-color: #333;
-margin-top: 60px;
-box-shadow: 0 -3px 15px rgba(0,0,0,0.1);
-flex-wrap: wrap;
+/* Nueva barra fija de iconos abajo */
+.social-icons-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px 0;
+  box-shadow: 0 -3px 15px rgba(0,0,0,0.1);
+  z-index: 200;
 }
-footer img {
-max-width: 90px;
-height: auto;
-margin-left: 20px;
+.social-icons-fixed a {
+  width: 50px;
+  height: 50px;
+  border-radius: 55%;
+  background-color: WHITE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
-.social-icons {
-margin-top: 30px;
-display: flex;
-justify-content: center;
-gap: 20px;
-font-size: 32px;
+.social-icons-fixed a:hover {
+  transform: scale(1.5);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
-.social-icons a {
-width: 60px;
-height: 60px;
-border-radius: 50%;
-background-color: white;
-display: flex;
-align-items: center;
-justify-content: center;
-text-decoration: none;
-transition: all 0.4s ease;
-box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-}
-.social-icons a:hover {
-transform: scale(1.5);
-box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-}
-.social-icons a i {
-font-size: 28px;
-}
-/* SCROLL */
-.hidden {
-opacity: 0;
-transform: translateY(50px);
-transition: opacity 1s ease, transform 1s ease;
-}
-.fade-in {
-opacity: 1;
-transform: translateY(0);
+.social-icons-fixed a i {
+  font-size: 20px;
 }
 @media (max-width: 768px) {
-.nav-buttons {
-flex-wrap: wrap;
-justify-content: center;
-gap: 15px;
+  .nav-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  .nav-button {
+    font-size: 16px;
+  }
+  main {
+    padding: 30px 15px;
+  }
 }
-.nav-button {
-font-size: 16px;
+  .categoria-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
 }
-main {
-padding: 30px 15px;
+
+.categoria-botones a.button {
+  background: #333;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-footer {
-flex-direction: column;
-text-align: center;
+.categoria-botones a.button:hover {
+  background: #111;
+  transform: scale(1.1);
 }
-footer img {
-margin: 15px 0 0 0;
-}
-}
+
 </style>
 </head>
 <body class="fade-page">
-<header>
-<img src="https://imgur.com/7vRA7g5.jpg" alt="Banner HALCONES">
 
+<header>
+  <img src="https://imgur.com/7vRA7g5.jpg" alt="Banner HALCONES">
 </header>
+
 <nav>
-<div class="nav-buttons">
-<button class="nav-button active" onclick="mostrarSeccion('inicio', this)">INICIO</button>
-<button class="nav-button" onclick="mostrarSeccion('camp', this)">INSCRIPCIÓNES</button>
-<button class="nav-button" onclick="mostrarSeccion('formatos', this)">FORMATOS</button>
-<button class="nav-button" onclick="mostrarSeccion('galeria', this)">CONTACTO</button>
-</div>
+  <div class="nav-buttons">
+    <button class="nav-button active" onclick="mostrarSeccion('inicio', this)">INICIO</button>
+    <button class="nav-button" onclick="mostrarSeccion('camp',
+
+this)">INSCRIPCIÓNES</button>
+    <button class="nav-button" onclick="mostrarSeccion('formatos', this)">FORMATOS</button>
+    <button class="nav-button" onclick="mostrarSeccion('galeria', this)">GALERIA</button>
+  </div>
 </nav>
+
 <main>
 <section id="inicio" class="active">
-<h2>Bienvenido a HALCONES BASKETBALL</h2>
-<p>Conoce nuestras categorías </p>
+  <h2>Bienvenido a HALCONES BASKETBALL</h2>
+  <p>Conoce nuestras categorías </p>
 <div>
   <h3>2005 y más</h3>
 <img src="https://imgur.com/Tj0afiB.jpg" 
@@ -313,110 +315,60 @@ margin: 15px 0 0 0;
   </div>
 
 <div>
-</section>   
+</section>
+
 <section id="camp">
   <h2>Inscripción Al Club</h2>
   <p>Haz clic para inscribirte:</p>
   <a href="#" onclick="mostrarAviso('https://forms.gle/YtLdvwDKC9hn4Xd27')" class="button">INSCRIBIRSE</a>
-
-  <h2>Inscripción Skills Camp 2025</h2>
-  <p> ¡ULTIMOS DIAS DE INSCRIPCIÓN! Haz clic para inscribirte:</p>
-  <a href="#" onclick="mostrarAviso('https://forms.gle/QvkeGQZ4L2XkGePx9')" class="button">INSCRIPCIÓN SKILLS CAMP</a>
-</section>
-
-<!-- Modal con estilo oscuro -->
-<div id="modalPrivacidad" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.7); z-index:1000;">
-  <div style="background:#1f1f1f; color:white; padding:25px; max-width:400px; margin:120px auto; border-radius:12px; text-align:center; box-shadow:0 0 20px rgba(255,255,255,0.2);">
-    <h3 style="margin-bottom:10px;">Aviso de Privacidad</h3>
-    <p style="font-size:15px;">Al continuar, aceptas que tus datos serán utilizados únicamente para fines administrativos del club.</p>
-    <button onclick="aceptarAviso()" style="margin-top:20px; padding:10px 25px; background-color:#28a745; color:white; border:none; border-radius:5px;">Aceptar</button>
-    <button onclick="cerrarModal()" style="margin-top:20px; padding:10px 25px; background-color:#555; color:white; border:none; border-radius:5px; margin-left:10px;">Cancelar</button>
-  </div>
-</div>
-
-<script>
-  let urlDestino = "";
-
-  function mostrarAviso(url) {
-    urlDestino = url;
-    document.getElementById('modalPrivacidad').style.display = 'block';
-  }
-
-  function aceptarAviso() {
-    document.getElementById('modalPrivacidad').style.display = 'none';
-
-   
-    const a = document.createElement('a');
-    a.href = urlDestino;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-
-  function cerrarModal() {
-    document.getElementById('modalPrivacidad').style.display = 'none';
-  }
-</script>
-
-</section>
+ </section>
 <section id="formatos">
-<h2>FORMATO CARTA RESPONSIVA</h2>
-<p>Descarga aquí:</p>
-<a href="https://drive.google.com/file/d/1tBSf1xK5p2IpnvLdGYxWC-V893-OZvIv/view?usp=sharing" target="_blank" class="button" style="background:#28a745;">Descargar PDF</a>
+  <h2>FORMATO CARTA RESPONSIVA</h2>
+  <p>Descarga aquí:</p>
+  <a href="https://drive.google.com/file/d/1tBSf1xK5p2IpnvLdGYxWC-V893-OZvIv/view?usp=sharing" target="_blank" class="button" style="background:#28a745;">Descargar PDF</a>
 </section>
 <section id="galeria">
-<h2>Contacto</h2>
-<div class="social-icons">
-<a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank" title="Facebook"><i class="fab fa-facebook-f" style="color:#1877f2;"></i></a>
-<a href="https://www.instagram.com/halcones.basketball/" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color:#e4405f;"></i></a>
-<a href="https://www.tiktok.com/@halcones.basketball" target="_blank" title="TikTok"><i class="fab fa-tiktok" style="color:#000000;"></i></a>
-<a href="https://wa.me/5532614194" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
-<a href="https://wa.me/5635782679" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
+  <h2>Descarga aquí tus imágenes</h2>
+  <div class="categoria-botones">
+    <a href="https://drive.google.com/drive/folders/1HOGk49nTTLkQxWqgYXCHC3TlXlWgBEbq?usp=drive_link" target="_blank" class="button">Categoría 2005 Y MÁS</a>
+    <a href="https://drive.google.com/drive/folders/1Fv9OVr0J5-Rya2m-zN92onwYUJoptbKr?usp=sharing" target="_blank" class="button">Categoría 2006-2007</a>
+    <a href="https://tusitio.com/categoria3" target="_blank" class="button">Categoría 2008-2009</a>
+    <a href="https://tusitio.com/categoria4" target="_blank" class="button">Categoría 2010-2011</a>
+    <a href="https://tusitio.com/categoria5" target="_blank" class="button">Categoría 2012-2013</a>
+    <a href="https://tusitio.com/categoria6" target="_blank" class="button">Categoría 2014-2015</a>
+    <a href="https://tusitio.com/categoria7" target="_blank" class="button">Categoría 2016-2017</a>
+    <a href="https://tusitio.com/categoria8" target="_blank" class="button">Categoría 2018-2019</a>
 </div>
 </section>
-</div>
-</section>
+
 </main>
-<footer style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-<span>&copy; HALCONES BASKETBALL 2025</span>
-<div style="margin-top: 10px;">
+
+<!-- Barra fija con iconos -->
+<div class="social-icons-fixed">
+  <a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank"><i class="fab fa-facebook-f" style="color:#1877f2;"></i></a>
+  <a href="https://www.instagram.com/halcones.basketball/" target="_blank"><i class="fab fa-instagram" style="color:#e4405f;"></i></a>
+  <a href="https://www.tiktok.com/@halcones.basketball" target="_blank"><i class="fab fa-tiktok" style="color:#000000;"></i></a>
+  <a href="https://wa.me/5532614194" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
+  <a href="https://wa.me/5635782679" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
 </div>
-</footer>
-</footer>
+
 <script>
 function mostrarSeccion(id, boton) {
-const secciones = document.querySelectorAll('main section');
-const botones = document.querySelectorAll('.nav-button');
-secciones.forEach(seccion => {
-seccion.classList.remove('active', 'section-transition', 'show');
-});
-botones.forEach(btn => {
-btn.classList.remove('active');
-});
-const seccion = document.getElementById(id);
-seccion.classList.add('active', 'section-transition');
-setTimeout(() => {
-seccion.classList.add('show');
-}, 50);
-boton.classList.add('active');
+  const secciones = document.querySelectorAll('main section');
+  const botones = document.querySelectorAll('.nav-button');
+  secciones.forEach(s => s.classList.remove('active'));
+  botones.forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  boton.classList.add('active');
 }
-document.addEventListener("DOMContentLoaded", () => {
-const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('fade-in');
-observer.unobserve(entry.target);
+
+let urlDestino = "";
+function mostrarAviso(url) {
+  urlDestino = url;
+  if (confirm("Al continuar aceptas que tus datos serán usados solo para fines administrativos del club.")) {
+    window.open(urlDestino, "_blank");
+  }
 }
-});
-}, { threshold: 0.1 });
-document.querySelectorAll('section img, section').forEach(el => {
-el.classList.add('hidden');
-observer.observe(el);
-});
-});
 </script>
 </body>
 </html>
