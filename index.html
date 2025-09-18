@@ -1,374 +1,483 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>HALCONES BASKETBALL</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html, body {
-  scroll-behavior: smooth;
-}
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #CCC;
-  color: #333;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-.fade-page {
-  animation: fadeInPage 1s ease-in-out;
-}
-@keyframes fadeInPage {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-header {
-  background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
-  background-size: 400% 400%;
-  animation: gradientMove 15s ease infinite;
-  text-align: center;
-  color: white;
-  padding: 2px 0;
-  position: relative;
-  z-index: 10;
-}
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-header img {
-  width: 100%;
-  max-width: 1000px;
-  border-radius: 0px;
-  margin: 0px auto;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-  transition: transform 0.5s ease;
-}
-header img:hover {
-  transform: scale(1);
-}
-nav {
-  background-color: #666 ;
-  padding: 15px 0;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(8px);
-}
-.nav-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-  max-width: 1000px;
-  margin: 0 auto;
-  flex-wrap: wrap;
-}
-.nav-button {
-  background: #333;
-  color: WHITE;
-  padding: 12px 25px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-}
-.nav-button::after {
-  content: "";
-  background: ;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  transform: translate(-50%, -50%);
-  transition: all 0.2s ease;
-  border-radius: 50%;
-}
-.nav-button:hover::after {
-  width: 300px;
-  height: 300px;
-}
-.nav-button:hover {
-  color: #111;
-  transform: scale(1);
-}
-.nav-button.active {
-  transform: scale(1);
-  text-shadow: 0 2px 8px rgba(255,255,255,0.6);
-}
-main {
-  padding: 50px 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-section {
-  display: none;
-  background: WHITE;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  padding: 40px 30px;
-  margin-bottom: 50px;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s ease;
-}
-section.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-section img {
-  width: 100%;
-  border-radius: 12px;
-  margin-top: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  transition: transform 0.5s ease, opacity 0.8s ease;
-}
-section img:hover {
-  transform: scale(1.2);
-}
-h2, h3 {
-  color: #203a43;
-  margin-bottom: 20px;
-}
-a {
-  color: #0033cc;
-  text-decoration: none;
-  transition: all 0.4s ease;
-  display: inline-block;
-}
-a:hover {
-  color: #005ce6;
-  transform: scale(1.05);
-  text-decoration: underline;
-}
-a.button {
-  background: #0033cc;
-  color: white;
-  padding: 14px 35px;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 20px;
-  transition: all 0.4s ease;
-  display: inline-block;
-  margin-top: 20px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-}
-a.button:hover {
-  background: #002699;
-  transform: scale(1.08);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
-/* Nueva barra fija de iconos abajo */
-.social-icons-fixed {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(255,255,255,0.9);
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 15px 0;
-  box-shadow: 0 -3px 15px rgba(0,0,0,0.1);
-  z-index: 200;
-}
-.social-icons-fixed a {
-  width: 50px;
-  height: 50px;
-  border-radius: 55%;
-  background-color: WHITE;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: all 0.4s ease;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-}
-.social-icons-fixed a:hover {
-  transform: scale(1.5);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-}
-.social-icons-fixed a i {
-  font-size: 20px;
-}
-@media (max-width: 768px) {
-  .nav-buttons {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-  }
-  .nav-button {
-    font-size: 16px;
-  }
-  main {
-    padding: 30px 15px;
-  }
-}
-  .categoria-botones {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 30px;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halcones Basketball Club</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-.categoria-botones a.button {
-  background: #333;
-  color: white;
-  padding: 15px 30px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-.categoria-botones a.button:hover {
-  background: #111;
-  transform: scale(1.1);
-}
+    <style>
+        :root {
+            --color-azul: #0D47A1;
+            --color-negro: #1a1a1a;
+            --color-blanco: #FFFFFF;
+            --color-gris-claro: #f4f4f4;
+            --font-titulos: 'Oswald', sans-serif;
+            --font-texto: 'Roboto', sans-serif;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-</style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-texto); color: var(--color-negro); background-color: var(--color-blanco); }
+        .container { width: 90%; max-width: 1200px; margin: auto; padding: 60px 0; }
+        h1, h2, h3 { font-family: var(--font-titulos); color: var(--color-azul); text-transform: uppercase; margin-bottom: 20px; text-align: center; }
+        h2 { font-size: 2.5rem; }
+        h3 { color: var(--color-negro); font-size: 1.8rem; }
+        p { line-height: 1.6; margin-bottom: 15px; text-align: center; }
+        .hidden { display: none !important; }
+        
+        /* --- Barra de Navegación --- */
+        .navbar { 
+            background-color: var(--color-negro); 
+            padding: 0.5rem 5%; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            display: flex; 
+            justify-content: center;
+            align-items: center; 
+        }
+        .nav-links { list-style: none; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 0; padding: 0; }
+        .nav-links a { 
+            color: var(--color-blanco); 
+            text-decoration: none; 
+            font-weight: 700; 
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        .nav-links a:hover, .nav-links a.active { 
+            background-color: var(--color-azul);
+            color: var(--color-blanco);
+        }
+
+        /* --- Imagen de Inicio --- */
+        .hero { 
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://imgur.com/7vRA7g5.jpg'); 
+            background-size: cover;
+            background-position: center; 
+            height: 100vh;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center; 
+        }
+
+        #equipo, #galeria, #category-view, #membresia-view, #partidos-view, #eventos-view { 
+            background-color: var(--color-gris-claro); 
+        }
+        
+        #category-view, #membresia-view, #partidos-view, #eventos-view {
+             min-height: 100vh;
+        }
+
+        .category-selection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
+        .btn-category { display: block; background-color: var(--color-azul); color: var(--color-blanco); padding: 25px 20px; text-decoration: none; font-family: var(--font-titulos); font-size: 1.5rem; text-align: center; border-radius: 8px; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
+        .btn-category:hover { background-color: var(--color-negro); transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
+        
+        .galeria-grid { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+        .galeria-item { text-align: center; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background-color: var(--color-blanco); width: 90%; max-width: 600px; }
+        .galeria-item h3 { padding-top: 15px; font-size: 1.5rem; margin-bottom: 10px; }
+        .galeria-item img { max-width: 100%; display: block; transition: transform 0.3s ease; }
+        .galeria-item:hover img { transform: scale(1.05); }
+        
+        /* --- Botones y Pestañas --- */
+        .btn-back { background-color: var(--color-negro); color: var(--color-blanco); padding: 10px 25px; text-decoration: none; font-family: var(--font-titulos); border-radius: 5px; margin-bottom: 40px; cursor: pointer; border: none; font-size: 1rem; display: inline-block; }
+        .btn-back:hover { opacity: 0.9; }
+
+        .gender-tabs, .partidos-category-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .gender-button, .partido-category-button {
+            padding: 12px 30px;
+            font-family: var(--font-titulos);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            border: 2px solid var(--color-azul);
+            background-color: var(--color-blanco);
+            color: var(--color-azul);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        .partido-category-button { /* Ajuste para botones más pequeños */
+             font-size: 1rem;
+             padding: 10px 20px;
+        }
+        .gender-button:hover, .gender-button.active,
+        .partido-category-button:hover, .partido-category-button.active {
+            background-color: var(--color-azul);
+            color: var(--color-blanco);
+        }
+
+        /* --- Contenido de Vistas --- */
+        .gender-content { display: none; }
+        .gender-content.active { display: block; }
+
+        .equipo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .jugador-card { background-color: var(--color-blanco); text-align: center; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .jugador-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .jugador-card .info { padding: 15px; }
+        .jugador-card img { width: 100%; height: 220px; object-fit: cover; }
+        .jugador-card h4 { font-family: var(--font-titulos); font-size: 1.5rem; margin-bottom: 5px; }
+        .jugador-card p { margin: 0; font-size: 1rem; color: #555; }
+        
+        .partidos-tabla-container { overflow-x: auto; }
+        .partidos-tabla { width: 100%; border-collapse: collapse; margin-top: 30px; background-color: var(--color-blanco); min-width: 600px; }
+        .partidos-tabla th, .partidos-tabla td { padding: 15px; text-align: center; border-bottom: 1px solid #ddd; white-space: nowrap;}
+        .partidos-tabla th { background-color: var(--color-negro); color: var(--color-blanco); font-family: var(--font-titulos); letter-spacing: 1px; }
+        
+        .membresia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        .membresia-card { background-color: var(--color-blanco); padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        
+        /* --- NUEVO: Estilos para botones de Membresías --- */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background-color: var(--color-azul);
+            color: var(--color-blanco);
+            text-decoration: none;
+            font-family: var(--font-titulos);
+            border-radius: 5px;
+            transition: opacity 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-action.secondary {
+            background-color: var(--color-negro);
+        }
+        .btn-action:hover {
+            opacity: 0.85;
+        }
+
+        /* --- Animaciones --- */
+        .container > h2, .container > p, .category-selection-grid, .galeria-grid, .membresia-grid, .equipo-grid, .partidos-tabla-container, .gender-tabs, .partidos-category-tabs {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        footer { background-color: var(--color-negro); color: var(--color-blanco); text-align: center; padding: 40px 20px; }
+        .social-links a { color: var(--color-blanco); margin: 0 15px; font-size: 1.5rem; transition: color 0.3s ease; }
+        .social-links a:hover { color: var(--color-azul); }
+        .copyright { margin-top: 20px; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .container { padding: 40px 0; }
+            h2 { font-size: 2rem; }
+            .nav-links { gap: 5px; }
+            .nav-links a { padding: 6px 12px; }
+        }
+
+        .social-icons-fixed {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background-color: #ffffff; /* Color de fondo de la barra, puedes cambiarlo */
+          padding: 15px 0;
+          text-align: center;
+          box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Sombra superior opcional */
+          z-index: 1000; /* Asegura que la barra esté por encima de todo */
+        }
+
+        .social-icons-fixed a {
+          margin: 0 15px; /* Espacio entre los iconos */
+          font-size: 28px; /* Tamaño de los iconos, ajústalo si es necesario */
+        }
+    </style>
 </head>
-<body class="fade-page">
+<body>
 
-<header>
-  <img src="https://imgur.com/7vRA7g5.jpg" alt="Banner HALCONES">
-</header>
+    <div id="main-view">
+        <header class="navbar">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#equipo">El Equipo</a></li>
+                    <li><a id="nav-partidos-link">Partidos</a></li>
+                    <li><a id="nav-membresia-link">Membresías</a></li>
+                    <li><a href="#galeria">Galería</a></li>
+                    <li><a id="nav-eventos-link">Eventos Destacados</a></li>
+                </ul>
+            </nav>
+        </header>
 
-<nav>
-  <div class="nav-buttons">
-    <button class="nav-button active" onclick="mostrarSeccion('inicio', this)">INICIO</button>
-    <button class="nav-button" onclick="mostrarSeccion('camp',
+        <main>
+            <section id="inicio" class="hero"></section>
 
-this)">INSCRIPCIÓNES</button>
-    <button class="nav-button" onclick="mostrarSeccion('formatos', this)">FORMATOS</button>
-    <button class="nav-button" onclick="mostrarSeccion('galeria', this)">GALERIA</button>
-  </div>
-</nav>
+            <section id="equipo" class="container">
+                <h2>Nuestros Equipos</h2>
+                <p>Selecciona una categoría para conocer a nuestros jugadores y jugadoras.</p>
+                <div class="category-selection-grid">
+                    <div class="btn-category" data-category="2018-2019">2018-2019</div>
+                    <div class="btn-category" data-category="2016-2017">2016-2017</div>
+                    <div class="btn-category" data-category="2014-2015">2014-2015</div>
+                    <div class="btn-category" data-category="2012-2013">2012-2013</div>
+                    <div class="btn-category" data-category="2010-2011">2010-2011</div>
+                    <div class="btn-category" data-category="2008-2009">2008-2009</div>
+                    <div class="btn-category" data-category="2006-2007">2006-2007</div>
+                    <div class="btn-category" data-category="2005 y más">2005 y más</div>
+                </div>
+            </section>
+            
+            <section id="galeria" class="container">
+                <h2>Galería</h2>
+                <div class="galeria-grid">
+                    <div class="galeria-item"><h3>2005 y más</h3><img src="https://imgur.com/Tj0afiB.jpg" alt="2005 y más"></div>
+                    <div class="galeria-item"><h3>2006-2007</h3><img src="https://imgur.com/01ZFIqT.jpg" alt="2006-2007"></div>
+                    <div class="galeria-item"><h3>2008-2009</h3><img src="https://imgur.com/A0jDfml.jpg" alt="2008-2009"></div>
+                    <div class="galeria-item"><h3>2010-2011</h3><img src="https://imgur.com/U1ZL4QN.jpg" alt="2010-2011"></div>
+                    <div class="galeria-item"><h3>2012-2013</h3><img src="https://imgur.com/malNEdk.jpg" alt="2012-2013"></div>
+                    <div class="galeria-item"><h3>2014-2015</h3><img src="https://imgur.com/VWxXwsP.jpg" alt="2014-2015"></div>
+                    <div class="galeria-item"><h3>2016-2017</h3><img src="https://imgur.com/cBRclgP.jpg" alt="2016-2017"></div>
+                    <div class="galeria-item"><h3>2018-2019</h3><img src="https://imgur.com/Wk25F9R.jpg" alt="2018-2019"></div>
+                </div>
+            </section>
+        </main>
+    </div>
 
-<main>
-<section id="inicio" class="active">
-  <h2>Bienvenido a HALCONES BASKETBALL</h2>
-  <p>Conoce nuestras categorías </p>
-<div>
-  <h3>2005 y más</h3>
-<img src="https://imgur.com/Tj0afiB.jpg" 
-       alt="2005 y más" style="max-width: 100%; border-radius: 10px;">
-</div>
+    <div id="category-view" class="hidden">
+        <main>
+            <section class="container">
+                <button class="btn-back">&larr; Regresar a la página principal</button>
+                <h2 id="category-title"></h2>
+                <div class="gender-tabs">
+                    <button class="gender-button active" data-gender="varonil">Varonil</button>
+                    <button class="gender-button" data-gender="femenil">Femenil</button>
+                </div>
+                <div id="varonil" class="gender-content active"><div id="varonil-grid" class="equipo-grid"></div></div>
+                <div id="femenil" class="gender-content"><div id="femenil-grid" class="equipo-grid"></div></div>
+            </section>
+        </main>
+    </div>
 
-<div>
-  <h3>2006-2007</h3>
-  <img src="https://imgur.com/01ZFIqT.jpg" 
-       alt="2006-2007" style="max-width: 100%; border-radius: 10px;">
-</div>
+    <div id="partidos-view" class="hidden">
+        <main>
+            <section class="container">
+                <button class="btn-back">&larr; Regresar a la página principal</button>
+                <h2>Calendario y Resultados</h2>
+                <p>Selecciona una categoría para ver su calendario de partidos y resultados.</p>
+                <div class="partidos-category-tabs">
+                   <button class="partido-category-button active" data-category="2018-2019">2018-2019</button>
+                   <button class="partido-category-button" data-category="2016-2017">2016-2017</button>
+                   <button class="partido-category-button" data-category="2014-2015">2014-2015</button>
+                   <button class="partido-category-button" data-category="2012-2013">2012-2013</button>
+                   <button class="partido-category-button" data-category="2010-2011">2010-2011</button>
+                   <button class="partido-category-button" data-category="2008-2009">2008-2009</button>
+                   <button class="partido-category-button" data-category="2006-2007">2006-2007</button>
+                   <button class="partido-category-button" data-category="2005 y más">2005 y más</button>
+                </div>
+                <div class="partidos-tabla-container">
+                   <table class="partidos-tabla" data-category="2018-2019"><thead><tr><th>Jornada</th><th>Fecha</th><th>Rival</th><th>Lugar</th><th>Resultado</th></tr></thead><tbody><tr><td colspan="5">No hay partidos programados.</td></tr></tbody></table>
+                   <table class="partidos-tabla hidden" data-category="2016-2017"><thead><tr><th>Jornada</th><th>Fecha</th><th>Rival</th><th>Lugar</th><th>Resultado</th></tr></thead><tbody><tr><td colspan="5">No hay partidos programados.</td></tr></tbody></table>
+                   <table class="partidos-tabla hidden" data-category="2014-2015"><thead><tr><th>Jornada</th><th>Fecha</th><th>Rival</th><th>Lugar</th><th>Resultado</th></tr></thead><tbody><tr><td colspan="5">No hay partidos programados.</td></tr></tbody></table>
+                   <table class="partidos-tabla hidden" data-category="2012-2013"><thead><tr><th>Jornada</th><th>Fecha</th><th>Rival</th><th>Lugar</th><th>Resultado</th></tr></thead><tbody><tr><td>1</td><td>06/09/2025</td><td>Jaguares</td><td>Gimnasio Local</td><td>55 - 48</td></tr><tr><td>2</td><td>13/09/2025</td><td>Celtas Jr.</td><td>Arena Sur</td><td>62 - 65</td></tr><tr><td>3</td><td>20/09/2025</td><td>Lobos Plateados</td><td>Gimnasio Local</td><td>- vs -</td></tr></tbody></table>
+                   <table class="partidos-tabla hidden" data-category="2010-2011"><thead><tr><th>Jornada</th><th>Fecha</th><th>Rival</th><th>Lugar</th><th>Resultado</th></tr></thead><tbody><tr><td>1</td><td>07/09/2025</td><td>Titanes</td><td>Cancha Municipal</td><td>78 - 70</td></tr><tr><td>2</td><td>14/09/2025</td><td>Rayos de Luz</td><td>Deportivo Central</td><td>- vs -</td></tr></tbody></table>
+                   <table class="partidos-tabla hidden" data-category="2008-2009"><thead><tr><th>Jornada</th><th>Fecha</th><th>Rival</th><th>Lugar</th><th>Resultado</th></tr></thead><tbody><tr><td colspan="5">No hay partidos programados.</td></tr></tbody></table>
+                   <table class="partidos-tabla hidden" data-category="2006-2007"><thead><tr><th>Jornada</th><th>Fecha</th><th>Rival</th><th>Lugar</th><th>Resultado</th></tr></thead><tbody><tr><td colspan="5">No hay partidos programados.</td></tr></tbody></table>
+                   <table class="partidos-tabla hidden" data-category="2005 y más"><thead><tr><th>Jornada</th><th>Fecha</th><th>Rival</th><th>Lugar</th><th>Resultado</th></tr></thead><tbody><tr><td colspan="5">No hay partidos programados.</td></tr></tbody></table>
+                </div>
+           </section>
+        </main>
+    </div>
 
-<div>
-  <h3>2008-2009</h3>
-  <img src="https://imgur.com/A0jDfml.jpg" 
-       alt="2008-2009" style="max-width: 100%; border-radius: 10px;">
-</div>
+    <div id="membresia-view" class="hidden">
+        <main>
+            <section class="container">
+                <button class="btn-back">&larr; Regresar a la página principal</button>
+                <h2>Membresías e Inscripciones</h2>
+                <p>Aquí puedes realizar los pagos de inscripción y mensualidades, así como llenar los formularios de datos.</p>
+                <div class="membresia-grid">
+                    <div class="membresia-card">
+                        <h3>Inscripción</h3>
+                        <p>Realiza el pago único de inscripción y completa el formulario con los datos del jugador(a).</p>
+                        <div class="button-group">
+                            <a href="#" class="btn-action" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-dollar-sign"></i> Pagar Inscripción</a>
+                            <a href="#" class="btn-action secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines"></i> Llenar Formulario</a>
+                        </div>
+                    </div>
+                    <div class="membresia-card">
+                        <h3>Pago de Mensualidades</h3>
+                        <p>Realiza el pago de la mensualidad correspondiente al periodo actual.</p>
+                        <div class="button-group">
+                            <a href="#" class="btn-action" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-calendar-days"></i> Pagar Mensualidad</a>
+                            <a href="#" class="btn-action secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-question"></i> ¿Dudas sobre tu pago?</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <div id="eventos-view" class="hidden">
+        <main>
+            <section class="container">
+                <button class="btn-back">&larr; Regresar a la página principal</button>
+                <h2>Eventos Destacados</h2>
+                <div class="membresia-card" style="text-align: left; max-width: 800px; margin: auto;">
+                    <h3 style="text-align: center; margin-bottom: 25px;">Próximo Gran Evento: Copa Telmex Telcel</h3>
+                    <p style="text-align: left;">¡Prepárense para la acción! Nuestro club se enorgullece en anunciar la participación de nuestra <strong>selección de LIDEBA</strong> en la prestigiosa <strong>Copa Telmex Telcel</strong>.</p>
+                    <p style="text-align: left;">Nuestros jugadores han entrenado arduamente y están listos para demostrar su talento y competir al más alto nivel. ¡No te pierdas la oportunidad de apoyar a los Halcones en este importante torneo!</p>
+                    <p style="text-align: left; margin-top: 20px;"><em>Próximamente publicaremos fechas, horarios y sedes. ¡Mantente atento!</em></p>
+                </div>
+            </section>
+        </main>
+    </div>
 
-<div>
-  <h3>2010-2011</h3>
-<img src="https://imgur.com/U1ZL4QN.jpg" 
-       alt="2010-2011" style="max-width: 100%; border-radius: 10px;">
-</div>
+    <footer>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p class="copyright">&copy; 2025 Halcones Basketball Club. Todos los derechos reservados.</p>
+    </footer>
 
-<div>
-  <h3>2012-2013</h3>
-<img src="https://imgur.com/malNEdk.jpg" 
-       alt="2012-2013" style="max-width: 100%; border-radius: 10px;">
-</div>
+    <script>
+        const playerData = {
+            "2018-2019": { varonil: [], femenil: [] }, "2016-2017": { varonil: [], femenil: [] }, "2014-2015": { varonil: [], femenil: [] },
+            "2012-2013": {
+                varonil: [{ img: 'https://i.imgur.com/gDaC3a0.jpeg', name: 'J. PÉREZ', position: 'Alero', number: '#23' },{ img: 'https://i.imgur.com/gDaC3a0.jpeg', name: 'M. GONZÁLEZ', position: 'Base', number: '#10' },{ img: 'https://i.imgur.com/gDaC3a0.jpeg', name: 'A. RAMÍREZ', position: 'Pívot', number: '#55' },{ img: 'https://i.imgur.com/gDaC3a0.jpeg', name: 'L. HERNÁNDEZ', position: 'Escolta', number: '#7' }],
+                femenil: [{ img: 'https://i.imgur.com/gDaC3a0.jpeg', name: 'S. LÓPEZ', position: 'Escolta', number: '#5' },{ img: 'https://i.imgur.com/gDaC3a0.jpeg', name: 'V. DÍAZ', position: 'Base', number: '#12' }]
+            },
+            "2010-2011": {
+                varonil: [{ img: 'https://i.imgur.com/gDaC3a0.jpeg', name: 'C. RUIZ', position: 'Base', number: '#1' },{ img: 'https://i.imgur.com/gDaC3a0.jpeg', name: 'E. SÁNCHEZ', position: 'Pívot', number: '#44' }],
+                femenil: []
+            },
+            "2008-2009": { varonil: [], femenil: [] }, "2006-2007": { varonil: [], femenil: [] }, "2005 y más": { varonil: [], femenil: [] }
+        };
 
-<div>
-  <h3>2014-2015</h3>
-  <img src="https://imgur.com/VWxXwsP.jpg" 
-    alt="2012-2013" style="max-width: 100%; border-radius: 10px;">
-</div>
+        document.addEventListener('DOMContentLoaded', () => {
+            const views = {
+                main: document.getElementById('main-view'),
+                category: document.getElementById('category-view'),
+                partidos: document.getElementById('partidos-view'),
+                membresia: document.getElementById('membresia-view'),
+                eventos: document.getElementById('eventos-view')
+            };
+            const navLinks = {
+                partidos: document.getElementById('nav-partidos-link'),
+                membresia: document.getElementById('nav-membresia-link'),
+                eventos: document.getElementById('nav-eventos-link')
+            };
+            
+            const categoryButtons = document.querySelectorAll('.btn-category');
+            const backButtons = document.querySelectorAll('.btn-back');
+            const genderButtons = document.querySelectorAll('.gender-button');
+            const genderContents = document.querySelectorAll('.gender-content');
+            const varonilGrid = document.getElementById('varonil-grid');
+            const femenilGrid = document.getElementById('femenil-grid');
+            const categoryTitle = document.getElementById('category-title');
+            const partidoCategoryButtons = document.querySelectorAll('.partido-category-button');
+            const partidosTables = document.querySelectorAll('.partidos-tabla');
 
-<div>
-  <h3>2016-2017</h3>
-  <img src="https://imgur.com/cBRclgP.jpg" 
-       alt="2016-2017" style="max-width: 100%; border-radius: 10px;">
-</div>
+            function showView(viewToShow) {
+                window.scrollTo(0, 0);
+                Object.values(views).forEach(view => {
+                    if (view) view.classList.add('hidden');
+                });
+                if (views[viewToShow]) {
+                    views[viewToShow].classList.remove('hidden');
+                }
+            }
+            
+            Object.keys(navLinks).forEach(key => {
+                const link = navLinks[key];
+                if (link) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showView(key);
+                    });
+                }
+            });
 
-<div>
-  <h3>2018-2019</h3>
-  <img src="https://imgur.com/Wk25F9R.jpg" 
-    alt="2016-2017" style="max-width: 100%; border-radius: 10px;">
-  </div>
+            backButtons.forEach(button => {
+                button.addEventListener('click', () => showView('main'));
+            });
 
-<div>
-</section>
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const category = button.dataset.category;
+                    populateCategoryView(category);
+                    showView('category');
+                });
+            });
 
-<section id="camp">
-  <h2>Inscripción Al Club</h2>
-  <p>Haz clic para inscribirte:</p>
-  <a href="#" onclick="mostrarAviso('https://forms.gle/YtLdvwDKC9hn4Xd27')" class="button">INSCRIBIRSE</a>
- </section>
-<section id="formatos">
-  <h2>FORMATO CARTA RESPONSIVA</h2>
-  <p>Descarga aquí:</p>
-  <a href="https://drive.google.com/file/d/1tBSf1xK5p2IpnvLdGYxWC-V893-OZvIv/view?usp=sharing" target="_blank" class="button" style="background:#28a745;">Descargar PDF</a>
-</section>
-<section id="galeria">
-  <h2>Descarga aquí tus imágenes</h2>
-  <div class="categoria-botones">
-    <a href="https://drive.google.com/drive/folders/1HOGk49nTTLkQxWqgYXCHC3TlXlWgBEbq?usp=drive_link" target="_blank" class="button">Categoría 2005 Y MÁS</a>
-    <a href="https://drive.google.com/drive/folders/1Fv9OVr0J5-Rya2m-zN92onwYUJoptbKr?usp=sharing" target="_blank" class="button">Categoría 2006-2007</a>
-    <a href="https://tusitio.com/categoria3" target="_blank" class="button">Categoría 2008-2009</a>
-    <a href="https://tusitio.com/categoria4" target="_blank" class="button">Categoría 2010-2011</a>
-    <a href="https://tusitio.com/categoria5" target="_blank" class="button">Categoría 2012-2013</a>
-    <a href="https://tusitio.com/categoria6" target="_blank" class="button">Categoría 2014-2015</a>
-    <a href="https://tusitio.com/categoria7" target="_blank" class="button">Categoría 2016-2017</a>
-    <a href="https://tusitio.com/categoria8" target="_blank" class="button">Categoría 2018-2019</a>
-</div>
-</section>
+            function createPlayerCard(player) {
+                return `
+                    <div class="jugador-card">
+                        <img src="${player.img}" alt="Foto de ${player.name}">
+                        <div class="info">
+                            <h4>${player.name}</h4>
+                            <p>${player.position}</p>
+                            <p><strong>${player.number}</strong></p>
+                        </div>
+                    </div>`;
+            }
 
-</main>
+            function populateCategoryView(category) {
+                if (!playerData[category] || !varonilGrid || !femenilGrid || !categoryTitle) return;
+                categoryTitle.textContent = `Categoría ${category}`;
+                const data = playerData[category];
+                varonilGrid.innerHTML = data.varonil.length > 0 ? data.varonil.map(createPlayerCard).join('') : '<p>No hay jugadores en esta rama.</p>';
+                femenilGrid.innerHTML = data.femenil.length > 0 ? data.femenil.map(createPlayerCard).join('') : '<p>No hay jugadoras en esta rama.</p>';
+                const firstGenderButton = document.querySelector('#category-view .gender-button[data-gender="varonil"]');
+                if (firstGenderButton) firstGenderButton.click();
+            }
 
-<!-- Barra fija con iconos -->
-<div class="social-icons-fixed">
-  <a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank"><i class="fab fa-facebook-f" style="color:#1877f2;"></i></a>
-  <a href="https://www.instagram.com/halcones.basketball/" target="_blank"><i class="fab fa-instagram" style="color:#e4405f;"></i></a>
-  <a href="https://www.tiktok.com/@halcones.basketball" target="_blank"><i class="fab fa-tiktok" style="color:#000000;"></i></a>
-  <a href="https://wa.me/5532614194" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
-  <a href="https://wa.me/5635782679" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
-</div>
+            genderButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    genderButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    genderContents.forEach(content => content.classList.remove('active'));
+                    const activeContent = document.getElementById(button.dataset.gender);
+                    if(activeContent) activeContent.classList.add('active');
+                });
+            });
 
-<script>
-function mostrarSeccion(id, boton) {
-  const secciones = document.querySelectorAll('main section');
-  const botones = document.querySelectorAll('.nav-button');
-  secciones.forEach(s => s.classList.remove('active'));
-  botones.forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  boton.classList.add('active');
-}
+            partidoCategoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    partidoCategoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const category = button.dataset.category;
+                    partidosTables.forEach(table => {
+                        if (table) table.classList.toggle('hidden', table.dataset.category !== category);
+                    });
+                });
+            });
+        });
+    </script>
+    
+    <div class="social-icons-fixed">
+      <a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank"><i class="fab fa-facebook-f" style="color:#1877f2;"></i></a>
+      <a href="https://www.instagram.com/halcones.basketball/" target="_blank"><i class="fab fa-instagram" style="color:#e4405f;"></i></a>
+      <a href="https://www.tiktok.com/@halcones.basketball" target="_blank"><i class="fab fa-tiktok" style="color:#000000;"></i></a>
+      <a href="https://wa.me/5532614194" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
+      <a href="https://wa.me/5635782679" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i></a>
+    </div>
 
-let urlDestino = "";
-function mostrarAviso(url) {
-  urlDestino = url;
-  if (confirm("Al continuar aceptas que tus datos serán usados solo para fines administrativos del club.")) {
-    window.open(urlDestino, "_blank");
-  }
-}
-</script>
 </body>
 </html>
