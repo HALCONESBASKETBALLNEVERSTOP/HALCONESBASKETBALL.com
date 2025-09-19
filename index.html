@@ -491,8 +491,6 @@
             slideGaleria.style.transform = `translateX(-${indexGaleria * 100}%)`;
         }
 
-        setInterval(() => moveSlideGaleria(1), 5000);
-
         // Swipe táctil
         let startXGaleria = 0;
         if (slideGaleria) {
@@ -533,8 +531,6 @@
             indexSkills = (indexSkills + dir + totalSkills) % totalSkills;
             slideSkills.style.transform = `translateX(-${indexSkills * 100}%)`;
         }
-
-        setInterval(() => moveSlideSkills(1), 5000);
 
         // Swipe táctil
         let startXSkills = 0;
