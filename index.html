@@ -87,17 +87,33 @@ color: var(--color-blanco);
 
 /* --- Imagen de Inicio --- */
 .hero {
-background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://imgur.com/7vRA7g5.jpg');
+background-image: url('https://imgur.com/7vRA7g5.jpg'); /* Solo la imagen */
 background-size: cover;
 background-position: center;
-height: 100vh;
-display: flex;
-flex-direction: column;
+height: 60vh; /* Altura ajustada para que el texto quede fuera */
+display: flex; /* Asegura que la imagen ocupe el espacio */
 justify-content: center;
 align-items: center;
 text-align: center;
 }
 /* Estilos de la sección principal (hero): imagen de fondo, tamaño, posición */
+
+.hero-text-container {
+background-color: var(--color-azul); /* Fondo azul para el texto */
+padding: 40px 20px; /* Espaciado interno */
+margin-top: -5px; /* Ajusta este valor si necesitas que el texto se "meta" un poco en la imagen */
+border-bottom: 5px solid var(--color-negro); /* Borde inferior para separar */
+}
+
+.hero-text-container h2,
+.hero-text-container p,
+.hero-text-container a {
+color: var(--color-blanco);
+}
+
+.hero-text-container a {
+text-decoration: underline;
+}
 
 #equipo, #galeria, #category-view, #membresia-view, #partidos-view, #eventos-view {
 background-color: var(--color-gris-claro);
@@ -386,6 +402,7 @@ footer { background-color: var(--color-negro); color: var(--color-blanco); text-
 h2 { font-size: 2rem; }
 .nav-links { gap: 5px; }
 .nav-links a { padding: 6px 12px; }
+.hero { height: 40vh; } /* Ajusta la altura del hero en móviles */
 }
 
 .social-icons-fixed {
@@ -460,7 +477,22 @@ bottom: 80px;
 </header>
 
 <main>
-<section id="inicio" class="hero"></section>
+<section id="inicio">
+<div class="hero">
+</div>
+<div class="hero-text-container">
+<div class="container" style="padding: 20px 0;">
+<h2 style="color: var(--color-blanco);">¡El Momento es Ahora! La Copa Telmex nos Espera</h2>
+<p style="color: var(--color-blanco);">¡El corazón del club late más fuerte que nunca! La espera ha terminado y el día ha llegado: nuestra <strong>selección femenil de LIDEBA Chalco</strong> está lista para hacer historia en la prestigiosa <strong>Copa Telmex</strong>. Meses de dedicación, sudor y esfuerzo culminan en este gran evento, y nuestras jugadoras están preparadas para demostrar su talento y llevar el nombre de Chalco a lo más alto.</p>
+
+<p style="color: var(--color-blanco);">Este no es solo un torneo; es una oportunidad para que los Halcones vuelen. Es la hora de la verdad, y tu presencia en las gradas es el aliento que necesitan. ¡Vamos a llenar el <strong>Deportivo Soraya Jiménez</strong> para hacer sentir a las rivales el poder de nuestra afición!</p>
+
+<p style="color: var(--color-blanco);">Ubicación en el mapa: <a href="https://maps.google.com/?cid=4174856733698484945&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" style="color: var(--color-blanco);">Deportivo Soraya Jiménez</a></p>
+<p style="color: var(--color-blanco);">¡No te quedes en casa! Ven y sé parte de esta historia. <strong>¡Juntos somos más fuertes, juntos somos Halcones!</strong></p>
+</div>
+</div>
+</section>
+
 <section id="equipo" class="container">
 <h2>Nuestros Equipos</h2>
 <p>Selecciona una categoría para conocer a nuestros jugadores y jugadoras.</p>
@@ -610,16 +642,6 @@ bottom: 80px;
 <button class="nav-button prev" onclick="moveSlideSkills(-1)">❮</button>
 <button class="nav-button next" onclick="moveSlideSkills(1)">❯</button>
 </div>
-
-<h3 style="text-align: center; margin-bottom: 25px;">¡El Momento es Ahora! La Copa Telmex nos Espera</h3>
-<p style="text-align: left;">¡El corazón del club late más fuerte que nunca! La espera ha terminado y el día ha llegado: nuestra <strong>selección femenil de LIDEBA Chalco</strong> está lista para hacer historia en la prestigiosa <strong>Copa Telmex</strong>. Meses de dedicación, sudor y esfuerzo culminan en este gran evento, y nuestras jugadoras están preparadas para demostrar su talento y llevar el nombre de Chalco a lo más alto.</p>
-
-<p style="text-align: left;">Este no es solo un torneo; es una oportunidad para que los Halcones vuelen. Es la hora de la verdad, y tu presencia en las gradas es el aliento que necesitan. ¡Vamos a llenar el **Deportivo Soraya Jiménez** para hacer sentir a las rivales el poder de nuestra afición!</p>
-
-
-
-<p style="text-align: left;">Ubicación en el mapa: <a href="https://maps.google.com/?cid=4174856733698484945&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ">Deportivo Soraya Jiménez</a></p>
-<p style="text-align: left; margin-top: 20px;">¡No te quedes en casa! Ven y sé parte de esta historia. **¡Juntos somos más fuertes, juntos somos Halcones!**</p>
 </div>
 </section>
 </main>
@@ -666,150 +688,150 @@ const playerData = {
 
 const partidoData = {
 // Objeto de datos que almacena la información de los partidos por categoría y género
-"2018-2019": { varonil: [],  
-               
-              
-               femenil: [] },
+"2018-2019": { varonil: [],  
+              
+                
+                femenil: [] },
 
-    
-    
-    
-    
-"2016-2017": { varonil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: " Centro regional San Buenaventura (IXTAPALUCA)", 
-                           resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" }], 
-               
-              
-               femenil: [] },
+    
+    
+    
+    
+"2016-2017": { varonil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: " Centro regional San Buenaventura (IXTAPALUCA)", 
+                          resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" }], 
+                
+                
+                femenil: [] },
 
-    
-    
-    
-    
-"2014-2015": { varonil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: " Centro regional San Buenaventura (IXTAPALUCA)", 
-                           resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" }],
-               
-              
-               femenil: [] },
+    
+    
+    
+    
+"2014-2015": { varonil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: " Centro regional San Buenaventura (IXTAPALUCA)", 
+                          resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" }],
+                
+                
+                femenil: [] },
 
-    
-    
-    
-    
-"2012-2013": { varonil: [], 
-               
-              
-               femenil :[] },
+    
+    
+    
+    
+"2012-2013": { varonil: [], 
+                
+                
+                femenil :[] },
 
-    
-    
-    
-    
-"2010-2011": { varonil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: " Gimnasio Gelipe Angeles (IXTAPALUCA)", 
-                           resultado: "Derrota", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" },
-                         { torneo: "x", fecha: "27/09/2025", hora: "x", lugar: "x", 
-                          resultado: "Pendiente", lugarLink: "" }], 
-               
-              
-               femenil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: " Gimnasio Gelipe Angeles (IXTAPALUCA)", 
-                           resultado: "Victoria", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" }, 
-                         { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "9:00       am", lugar: "Deportivo Soraya Jiménez", 
-                           resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" }, { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "11:00 am", lugar: "Deportivo Soraya Jiménez", 
-                           resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" }] },
-                         
-    
-    
-    
-    
-"2008-2009": { varonil: [], 
-               
-              
-               femenil: [] },
+    
+    
+    
+    
+"2010-2011": { varonil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: " Gimnasio Gelipe Angeles (IXTAPALUCA)", 
+                          resultado: "Derrota", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" },
+                          { torneo: "x", fecha: "27/09/2025", hora: "x", lugar: "x", 
+                          resultado: "Pendiente", lugarLink: "" }], 
+                
+                
+                femenil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: " Gimnasio Gelipe Angeles (IXTAPALUCA)", 
+                          resultado: "Victoria", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" }, 
+                          { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "9:00       am", lugar: "Deportivo Soraya Jiménez", 
+                          resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" }, { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "11:00 am", lugar: "Deportivo Soraya Jiménez", 
+                          resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" }] },
+                          
+    
+    
+    
+    
+"2008-2009": { varonil: [], 
+                
+                
+                femenil: [] },
 
-    
-    
-    
-    
-"2006-2007": { varonil: [], 
-               
-              
-               femenil: [] },
+    
+    
+    
+    
+"2006-2007": { varonil: [], 
+                
+                
+                femenil: [] },
 
-    
-    
-    
-    
-"2005 y más":{ varonil: [], 
-               
-              
-               femenil: [] }
+    
+    
+    
+    
+"2005 y más":{ varonil: [], 
+                
+                
+                femenil: [] }
 };
 const convocadosData = {
 // Objeto de datos para los convocados por categoría y género
-"2018-2019": { varonil: [], 
-              
-              
-              femenil: [] },
+"2018-2019": { varonil: [], 
+              
+              
+              femenil: [] },
 
 
 
 
-    
-"2016-2017": { varonil: ['Yanara 2017', 'Melissa 2017', 'Iker 2017', 'Román 2017', 'Sara 2016', 'Haziel 2016', 'Liam 2017', 'Julieta 2017', 'Michelle 2017', 'Jesús 2017', 'Caleb 2016', 'Gael 2019', 'Sofía 2016', 'Jesús 2019'], 
-              
-              
-              femenil: [] },
+    
+"2016-2017": { varonil: ['Yanara 2017', 'Melissa 2017', 'Iker 2017', 'Román 2017', 'Sara 2016', 'Haziel 2016', 'Liam 2017', 'Julieta 2017', 'Michelle 2017', 'Jesús 2017', 'Caleb 2016', 'Gael 2019', 'Sofía 2016', 'Jesús 2019'], 
+              
+              
+              femenil: [] },
 
 
 
 
-    
-"2014-2015": { varonil: ['Evan', 'Diego', 'Gerardo', 'Tonanci', 'Yarleni', 'Yoltik', 'Abdom 2014', 'Zahid15 (za', 'Janna15(za', 'Rodrigo15(za', 'Fernanda15(za'], 
-              
-              
-              femenil: [] },
+    
+"2014-2015": { varonil: ['Evan', 'Diego', 'Gerardo', 'Tonanci', 'Yarleni', 'Yoltik', 'Abdom 2014', 'Zahid15 (za', 'Janna15(za', 'Rodrigo15(za', 'Fernanda15(za'], 
+              
+              
+              femenil: [] },
 
 
 
 
-    
-"2012-2013": { varonil: [], 
-              
-              
-              femenil: [] },
+    
+"2012-2013": { varonil: [], 
+              
+              
+              femenil: [] },
 
 
 
 
-    
-"2010-2011": { varonil: ['Gonzalo', 'Donovan', 'Leonel', 'Diego Hernández', 'Cedrick', 'Mauricio', 'Manolo', 'Alan', 'Elías 11(za', 'Brayan 11(za', 'Noel(za', 'Santiago A.(za'], 
-              femenil: ['Selección copa telmex'] },
+    
+"2010-2011": { varonil: ['Gonzalo', 'Donovan', 'Leonel', 'Diego Hernández', 'Cedrick', 'Mauricio', 'Manolo', 'Alan', 'Elías 11(za', 'Brayan 11(za', 'Noel(za', 'Santiago A.(za'], 
+              femenil: ['Selección copa telmex'] },
 
 
 
 
-    
-"2008-2009": { varonil: [], 
-              
-              
-              femenil: [] },
+    
+"2008-2009": { varonil: [], 
+              
+              
+              femenil: [] },
 
 
 
 
-    
-"2006-2007": { varonil: [], 
-              
-              
-              femenil: [] },
+    
+"2006-2007": { varonil: [], 
+              
+              
+              femenil: [] },
 
 
 
 
-    
-"2005 y más":{ varonil: [], 
-              
-              
-              femenil: [] }
+    
+"2005 y más":{ varonil: [], 
+              
+              
+              femenil: [] }
 };
 
 // Función reutilizable para manejar el carrusel
