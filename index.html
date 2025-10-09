@@ -69,40 +69,44 @@ align-items: center;
 /* Estilos de la barra de navegación: color de fondo, espaciado, posición fija */
 .nav-links { list-style: none; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 0; padding: 0; }
 /* Estilos para la lista de enlaces de navegación */
+
+/* ESTILOS MODIFICADOS PARA LOS BOTONES */
 .nav-links a {
 color: var(--color-blanco);
 text-decoration: none;
 font-weight: 700;
 cursor: pointer;
-padding: 8px 16px;
-border-radius: 20px;
-transition: color 0.3s ease, background-color 0.3s ease;
+padding: 5px 10px;
+border-radius: 5px;
+background-color: #333; /* Color de fondo */
+box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); /* Sombra delgada y permanente */
+transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
-/* Estilos de los enlaces de navegación */
 .nav-links a:hover, .nav-links a.active {
 background-color: var(--color-azul);
-color: var(--color-blanco);
+transform: translateY(-2px);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada al pasar el cursor */
 }
-/* Estilos para los enlaces al pasar el cursor o cuando están activos */
+/* FIN DE ESTILOS MODIFICADOS */
+
 
 /* --- Imagen de Inicio --- */
 .hero {
-background-image: url('https://imgur.com/7vRA7g5.jpg'); /* Solo la imagen */
+background-image: url('https://imgur.com/7vRA7g5.jpg');
 background-size: cover;
 background-position: center;
-height: 60vh; /* Altura ajustada para que el texto quede fuera */
-display: flex; /* Asegura que la imagen ocupe el espacio */
+height: 60vh;
+display: flex;
 justify-content: center;
 align-items: center;
 text-align: center;
 }
-/* Estilos de la sección principal (hero): imagen de fondo, tamaño, posición */
 
 .hero-text-container {
-background-color: var(--color-azul); /* Fondo azul para el texto */
-padding: 40px 20px; /* Espaciado interno */
-margin-top: -5px; /* Ajusta este valor si necesitas que el texto se "meta" un poco en la imagen */
-border-bottom: 5px solid var(--color-negro); /* Borde inferior para separar */
+background-color: var(--color-azul);
+padding: 40px 20px;
+margin-top: -5px;
+border-bottom: 5px solid var(--color-negro);
 }
 
 .hero-text-container h2,
@@ -118,30 +122,20 @@ text-decoration: underline;
 #equipo, #galeria, #category-view, #membresia-view, #partidos-view, #eventos-view {
 background-color: var(--color-gris-claro);
 }
-/* Color de fondo para las diferentes secciones */
 
 #category-view, #membresia-view, #partidos-view, #eventos-view {
 min-height: 100vh;
 }
-/* Asegura que estas vistas ocupen al menos la altura de la pantalla */
 
 .category-selection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
-/* Estilos para la cuadrícula de botones de categorías de equipo */
 .btn-category { display: block; background-color: var(--color-azul); color: var(--color-blanco); padding: 25px 20px; text-decoration: none; font-family: var(--font-titulos); font-size: 1.5rem; text-align: center; border-radius: 8px; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; }
-/* Estilos de los botones de categoría */
 .btn-category:hover { background-color: var(--color-negro); transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
-/* Efecto al pasar el mouse sobre los botones de categoría */
 
 .galeria-grid { display: flex; flex-direction: column; align-items: center; gap: 30px; }
-/* Estilos para la cuadrícula de la galería */
 .galeria-item { text-align: center; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background-color: var(--color-blanco); width: 90%; max-width: 600px; }
-/* Estilos de los elementos de la galería */
 .galeria-item h3 { padding-top: 15px; font-size: 1.5rem; }
-/* Estilos del título del elemento de galería */
 .galeria-item img { max-width: 100%; display: block; transition: transform 0.3s ease; }
-/* Estilos de la imagen de galería */
 .galeria-item:hover img { transform: scale(1.2); }
-/* Efecto de zoom al pasar el mouse sobre la imagen de galería */
 
 /* --- Botón de Regreso fijo --- */
 .btn-back {
@@ -161,12 +155,9 @@ left: 20px;
 z-index: 100;
 box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-/* Estilos para el botón de regresar fijo */
 .btn-back:hover { opacity: 0.9; }
-/* Efecto de opacidad al pasar el mouse sobre el botón de regresar */
 
 .gender-tabs, .partidos-category-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-/* Estilos para los menús de pestañas de género y categoría */
 .gender-button, .partido-category-button {
 padding: 12px 30px;
 font-family: var(--font-titulos);
@@ -179,152 +170,63 @@ cursor: pointer;
 transition: all 0.3s ease;
 border-radius: 5px;
 }
-/* Estilos de los botones de género y categoría */
 .partido-category-button {
 font-size: 1rem;
 padding: 10px 20px;
 }
-/* Estilos específicos para los botones de categoría de partidos */
 .gender-button:hover, .gender-button.active,
 .partido-category-button:hover, .partido-category-button.active {
 background-color: var(--color-azul);
 color: var(--color-blanco);
 }
-/* Efecto al pasar el mouse y para el botón activo */
 
 /* --- Contenido de Vistas --- */
 .gender-content { display: none; }
-/* Oculta el contenido de las pestañas por defecto */
 .gender-content.active { display: block; }
-/* Muestra el contenido de la pestaña activa */
 
 .equipo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-/* Estilos para la cuadrícula de tarjetas de jugadores */
 .jugador-card { background-color: var(--color-blanco); text-align: center; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-/* Estilos de las tarjetas de jugador */
 .jugador-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-/* Efecto al pasar el mouse sobre la tarjeta de jugador */
 .jugador-card .info { padding: 15px; }
-/* Espaciado del área de información de la tarjeta */
 .jugador-card img { width: 100%; height: 280px; object-fit: cover; }
-/* Estilos de la imagen del jugador */
 .jugador-card h4 { font-family: var(--font-titulos); font-size: 1.5rem; margin-bottom: 5px; }
-/* Estilos del nombre del jugador */
 .jugador-card p { margin: 0; font-size: 1rem; color: #555; }
-/* Estilos de la posición/número del jugador */
 
 /* Estilos de la tabla de partidos */
 .partidos-tabla-container {
 overflow-x: auto;
--webkit-overflow-scrolling: touch; /* Habilita el desplazamiento suave en iOS */
+-webkit-overflow-scrolling: touch;
 }
-/* Estilos para permitir el desplazamiento horizontal en la tabla en pantallas pequeñas */
 .partidos-tabla { width: 100%; border-collapse: collapse; margin-top: 30px; background-color: var(--color-blanco); min-width: 600px; }
-/* Estilos de la tabla de partidos */
 .partidos-tabla th, .partidos-tabla td { padding: 15px; text-align: center; border-bottom: 1px solid #ddd; white-space: nowrap;}
-/* Estilos de las celdas de la tabla */
 .partidos-tabla th { background-color: var(--color-negro); color: var(--color-blanco); font-family: var(--font-titulos); letter-spacing: 1px; }
-/* Estilos de los encabezados de la tabla */
 
 /* Estilos de filas para partidos */
 .partido-victoria { background-color: var(--color-victoria); color: var(--color-blanco); font-weight: bold; }
-/* Estilo para fila de victoria */
 .partido-derrota { background-color: var(--color-derrota); color: var(--color-blanco); font-weight: bold; }
-/* Estilo para fila de derrota */
 .partido-pendiente { background-color: var(--color-pendiente); color: var(--color-negro); font-weight: bold; }
-/* Estilo para fila de partido pendiente */
 
-/* Contador de victorias/derrotas */
-.record-stats {
-text-align: center;
-margin-top: 20px;
-font-size: 1.2rem;
-font-family: var(--font-titulos);
-display: flex;
-justify-content: center;
-gap: 20px;
-}
-/* Estilos para el contenedor del récord de partidos */
-.record-stats span {
-padding: 8px 16px;
-border-radius: 5px;
-color: var(--color-blanco);
-}
-/* Estilos de los contadores individuales */
+.record-stats { text-align: center; margin-top: 20px; font-size: 1.2rem; font-family: var(--font-titulos); display: flex; justify-content: center; gap: 20px; }
+.record-stats span { padding: 8px 16px; border-radius: 5px; color: var(--color-blanco); }
 .stat-victorias { background-color: var(--color-victoria); }
-/* Color de fondo para el contador de victorias */
 .stat-derrotas { background-color: var(--color-derrota); }
-/* Color de fondo para el contador de derrotas */
 
-/* Leyenda de colores */
-.leyenda-partidos {
-display: flex;
-justify-content: center;
-gap: 20px;
-margin-top: 20px;
-font-size: 0.9rem;
-font-weight: bold;
-flex-wrap: wrap;
-}
-/* Estilos para el contenedor de la leyenda de colores de partidos */
-.leyenda-item {
-display: flex;
-align-items: center;
-gap: 8px;
-}
-/* Estilos de cada ítem de la leyenda */
-.leyenda-circulo {
-width: 15px;
-height: 15px;
-border-radius: 50%;
-}
-/* Estilos del círculo de color en la leyenda */
+.leyenda-partidos { display: flex; justify-content: center; gap: 20px; margin-top: 20px; font-size: 0.9rem; font-weight: bold; flex-wrap: wrap; }
+.leyenda-item { display: flex; align-items: center; gap: 8px; }
+.leyenda-circulo { width: 15px; height: 15px; border-radius: 50%; }
 .leyenda-circulo.victoria { background-color: var(--color-victoria); }
-/* Color del círculo de victoria */
 .leyenda-circulo.derrota { background-color: var(--color-derrota); }
-/* Color del círculo de derrota */
 .leyenda-circulo.pendiente { background-color: var(--color-pendiente); }
-/* Color del círculo de pendiente */
 
 .membresia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
-/* Estilos para la cuadrícula de tarjetas de membresía */
 .membresia-card { background-color: var(--color-blanco); padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
-/* Estilos de las tarjetas de membresía */
 
-.button-group {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 15px;
-margin-top: 25px;
-}
-/* Estilos para el grupo de botones de membresía */
-.btn-action {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 10px;
-padding: 15px 25px;
-background-color: var(--color-azul);
-color: var(--color-blanco);
-text-decoration: none;
-font-family: var(--font-titulos);
-border-radius: 5px;
-transition: opacity 0.3s ease;
-border: none;
-cursor: pointer;
-}
-/* Estilos de los botones de acción */
-.btn-action.secondary {
-background-color: var(--color-negro);
-}
-/* Estilo para los botones secundarios */
-.btn-action:hover {
-opacity: 0.85;
-}
-/* Efecto de opacidad al pasar el mouse sobre el botón de acción */
+.button-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 25px; }
+.btn-action { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 25px; background-color: var(--color-azul); color: var(--color-blanco); text-decoration: none; font-family: var(--font-titulos); border-radius: 5px; transition: opacity 0.3s ease; border: none; cursor: pointer; }
+.btn-action.secondary { background-color: var(--color-negro); }
+.btn-action:hover { opacity: 0.85; }
 
-/* --- Carrusel para Galeria Principal y Skills Camp --- */
+/* --- Carrusel --- */
 .carousel-container {
 width: 90%;
 max-width: 700px;
@@ -338,7 +240,15 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
-/* Estilos para el contenedor del carrusel */
+/* NUEVO ESTILO PARA EL TEXTO DE INSTRUCCIÓN */
+.carousel-instruction {
+text-align: center;
+color: #666;
+font-style: italic;
+margin-top: -10px;
+margin-bottom: 20px;
+font-size: 0.9rem;
+}
 
 .carousel-slide {
 display: flex;
@@ -346,18 +256,14 @@ transition: transform 0.4s ease-in-out;
 touch-action: pan-y;
 height: 100%;
 }
-/* Estilos para la tira de imágenes del carrusel */
-
 .carousel-slide img {
 width: 100%;
 height: 100%;
 flex-shrink: 0;
 border-radius: 10px;
-cursor: default;
+cursor: pointer;
 object-fit: contain;
 }
-/* Estilos para las imágenes dentro del carrusel */
-
 .nav-button {
 position: absolute;
 top: 50%;
@@ -372,93 +278,102 @@ border-radius: 50%;
 z-index: 10;
 transition: background-color 0.3s ease;
 }
-/* Estilos para los botones de navegación del carrusel */
-
 .prev { left: 10px; }
-/* Posición del botón "anterior" */
 .next { right: 10px; }
-/* Posición del botón "siguiente" */
 .nav-button:hover { background-color: rgba(0, 0, 0, 0.8); }
-/* Efecto al pasar el mouse sobre los botones del carrusel */
 
 /* --- Animaciones --- */
 .container > h2, .container > p, .category-selection-grid, .galeria-grid, .membresia-grid, .equipo-grid, .partidos-tabla-container, .gender-tabs, .partidos-category-tabs {
 animation: fadeIn 0.8s ease-out forwards;
 }
-/* Aplica la animación 'fadeIn' a varios elementos al cargar */
 
 footer { background-color: var(--color-negro); color: var(--color-blanco); text-align: center; padding: 40px 20px; }
-/* Estilos del pie de página */
 .social-links a { color: var(--color-blanco); margin: 0 15px; font-size: 1.5rem; transition: color 0.3s ease; }
-/* Estilos de los enlaces de redes sociales en el pie de página */
 .social-links a:hover { color: var(--color-azul); }
-/* Efecto al pasar el mouse sobre los enlaces de redes sociales */
 .copyright { margin-top: 20px; font-size: 0.9rem; }
-/* Estilos del texto de derechos de autor */
 
 @media (max-width: 768px) {
-/* Reglas CSS que se aplican solo en pantallas de 768px o menos (móviles) */
 .container { padding: 40px 0; }
 h2 { font-size: 2rem; }
-.nav-links { gap: 5px; }
-.nav-links a { padding: 6px 12px; }
-.hero { height: 40vh; } /* Ajusta la altura del hero en móviles */
+.nav-links { gap: 8px; }
+.nav-links a { padding: 4px 8px; font-size: 0.8rem; }
+.hero { height: 40vh; }
 }
 
-.social-icons-fixed {
+.social-icons-fixed { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffffff; padding: 15px 0; text-align: center; box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 1000; }
+.social-icons-fixed a { margin: 0 15px; font-size: 28px; }
+
+.whatsapp-float { position: fixed; bottom: 80px; right: 20px; background-color: #25D366; color: white; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 999; transition: transform 0.3s ease; text-decoration: none; }
+.whatsapp-float:hover { animation: bounce 0.8s; }
+.whatsapp-float i { color: white; }
+
+@media (max-width: 768px) {
+.whatsapp-float { bottom: 80px; }
+}
+
+/* --- ESTILOS DEL LIGHTBOX MODIFICADOS --- */
+#lightbox {
 position: fixed;
-bottom: 0;
+z-index: 10001;
 left: 0;
+top: 0;
 width: 100%;
-background-color: #ffffff;
-padding: 15px 0;
-text-align: center;
-box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-z-index: 1000;
-}
-/* Estilos para el contenedor fijo de iconos de redes sociales en la parte inferior */
-
-.social-icons-fixed a {
-margin: 0 15px;
-font-size: 28px;
-}
-/* Estilos de los enlaces de redes sociales fijos */
-
-.whatsapp-float {
-position: fixed;
-bottom: 80px;
-right: 20px;
-background-color: #25D366;
-color: white;
-border-radius: 50%;
-width: 60px;
-height: 60px;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.95);
 display: flex;
 align-items: center;
 justify-content: center;
-font-size: 30px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-z-index: 999;
-transition: transform 0.3s ease;
-text-decoration: none;
 }
-/* Estilos para el botón flotante de WhatsApp */
-.whatsapp-float:hover {
-animation: bounce 0.8s;
+#lightbox.hidden {
+display: none;
 }
-/* Aplica la animación 'bounce' al pasar el mouse sobre el botón de WhatsApp */
-.whatsapp-float i {
+#lightbox-img {
+max-width: 90vw;
+max-height: 85vh;
+display: block;
+margin: auto;
+border-radius: 8px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+touch-action: none; /* Para controlar el swipe manualmente */
+}
+#lightbox-close {
+position: absolute;
+top: 15px;
+right: 30px;
+color: #fff;
+font-size: 40px;
+font-weight: bold;
+cursor: pointer;
+transition: 0.3s;
+}
+#lightbox-close:hover { color: #bbb; }
+
+/* Botones de navegación del lightbox */
+.lightbox-nav {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background-color: rgba(0, 0, 0, 0.4);
 color: white;
+border: none;
+font-size: 2.5rem;
+cursor: pointer;
+padding: 0 15px;
+border-radius: 5px;
+z-index: 10002;
+transition: background-color 0.3s ease;
+user-select: none; /* Evita que el texto se seleccione */
 }
-/* Color del icono de WhatsApp */
-
-@media (max-width: 768px) {
-.whatsapp-float {
-bottom: 80px;
+.lightbox-nav:hover {
+background-color: rgba(0, 0, 0, 0.7);
 }
+.lightbox-prev {
+left: 10px;
 }
-/* Ajusta la posición del botón de WhatsApp en pantallas pequeñas */
-
+.lightbox-next {
+right: 10px;
+}
 </style>
 </head>
 <body>
@@ -479,17 +394,6 @@ bottom: 80px;
 <main>
 <section id="inicio">
 <div class="hero">
-</div>
-<div class="hero-text-container">
-<div class="container" style="padding: 20px 0;">
-<h2 style="color: var(--color-blanco);">¡El Momento es Ahora! La Copa Telmex nos Espera</h2>
-<p style="color: var(--color-blanco);">¡El corazón del club late más fuerte que nunca! La espera ha terminado y el día ha llegado: nuestra <strong>selección femenil de LIDEBA Chalco</strong> está lista para hacer historia en la prestigiosa <strong>Copa Telmex</strong>. Meses de dedicación, sudor y esfuerzo culminan en este gran evento, y nuestras jugadoras están preparadas para demostrar su talento y llevar el nombre de Chalco a lo más alto.</p>
-
-<p style="color: var(--color-blanco);">Este no es solo un torneo; es una oportunidad para que los Halcones vuelen. Es la hora de la verdad, y tu presencia en las gradas es el aliento que necesitan. ¡Vamos a llenar el <strong>Deportivo Soraya Jiménez</strong> para hacer sentir a las rivales el poder de nuestra afición!</p>
-
-<p style="color: var(--color-blanco);">Ubicación en el mapa: <a href="https://maps.google.com/?cid=4174856733698484945&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" style="color: var(--color-blanco);">Deportivo Soraya Jiménez</a></p>
-<p style="color: var(--color-blanco);">¡No te quedes en casa! Ven y sé parte de esta historia. <strong>¡Juntos somos más fuertes, juntos somos Halcones!</strong></p>
-</div>
 </div>
 </section>
 
@@ -524,6 +428,7 @@ bottom: 80px;
 <button class="nav-button prev" onclick="moveSlideGaleria(-1)">❮</button>
 <button class="nav-button next" onclick="moveSlideGaleria(1)">❯</button>
 </div>
+<p class="carousel-instruction">Da clic y desliza para ver más</p>
 
 </section>
 </main>
@@ -566,18 +471,9 @@ bottom: 80px;
 </div>
 
 <div class="leyenda-partidos">
-<div class="leyenda-item">
-<div class="leyenda-circulo victoria"></div>
-<span>Victoria</span>
-</div>
-<div class="leyenda-item">
-<div class="leyenda-circulo derrota"></div>
-<span>Derrota</span>
-</div>
-<div class="leyenda-item">
-<div class="leyenda-circulo pendiente"></div>
-<span>Por jugar</span>
-</div>
+<div class="leyenda-item"><div class="leyenda-circulo victoria"></div><span>Victoria</span></div>
+<div class="leyenda-item"><div class="leyenda-circulo derrota"></div><span>Derrota</span></div>
+<div class="leyenda-item"><div class="leyenda-circulo pendiente"></div><span>Por jugar</span></div>
 </div>
 
 <p class="scroll-instruction" style="text-align: center; margin-top: 10px; color: #888;">(Desliza la tabla para ver más)</p>
@@ -649,18 +545,20 @@ bottom: 80px;
 <img src="https://imgur.com/wmUvDno.jpg" alt="Imagen 12">
 <img src="https://imgur.com/9MTXi32.jpg" alt="Imagen 13">
 <img src="https://imgur.com/FBoXDWG.jpg" alt="Imagen 14">
-<img src="https://imgur.com/r7iUnGC.jpg"  alt="Imagen 15">
+<img src="https://imgur.com/r7iUnGC.jpg"  alt="Imagen 15">
 <img src="https://imgur.com/E8SQcdD.jpg" alt="Imagen 16">
 <img src="https://imgur.com/uJupOQB.jpg" alt="Imagen 17">
 <img src="https://imgur.com/SHvHn15.jpg" alt="Imagen 18">
 <img src="https://imgur.com/qL6GCDK.jpg" alt="Imagen 19">
-<img src="https://imgur.com/AvgCmuD.jpg"  alt="Imagen 20">
+<img src="https://imgur.com/AvgCmuD.jpg"  alt="Imagen 20">
 <img src="https://imgur.com/IpYFXar.jpg" alt="Imagen 21">
 <img src="https://imgur.com/r7HZJdw.jpg" alt="Imagen 22">
 <img src="https://imgur.com/NVFvUhQ.jpg" alt="Imagen 23">
 </div>
 <button class="nav-button prev" onclick="moveSlideSkills(-1)">❮</button>
 <button class="nav-button next" onclick="moveSlideSkills(1)">❯</button>
+</div>
+<p class="carousel-instruction">Da clic y desliza para ver más</p>
 </div>
 </div>
 </section>
@@ -683,415 +581,521 @@ bottom: 80px;
 <i class="fab fa-whatsapp"></i>
 </a>
 
+<div id="lightbox" class="hidden">
+<span id="lightbox-close">×</span>
+<button class="lightbox-nav lightbox-prev">❮</button>
+<img id="lightbox-img" src="" alt="Imagen Ampliada">
+<button class="lightbox-nav lightbox-next">❯</button>
+</div>
+
 <script>
 // Inicia el bloque de código JavaScript
 const playerData = {
-// Objeto de datos que almacena la información de los jugadores por categoría y género
-"2018-2019": { varonil: [], femenil: [] },
-"2016-2017": { varonil: [], femenil: [] },
-"2014-2015": { varonil: [], femenil: [] },
-"2012-2013": { varonil: [], femenil :[] },
-"2010-2011": { varonil: [], femenil: [{ img: 'https://imgur.com/OjjVHYK.jpg', name: 'SAMANTHA CASTILLA', position: '', number: '#9' },
-{ img: 'https://imgur.com/CTDTEQC.jpg', name: 'KAMILA HUEHPA', position: '', number: '#34' },
-{ img: 'https://imgur.com/qKcZV3W.jpg', name: 'AUDRY DALAVI', position: '', number: '#24' },
-{ img: 'https://imgur.com/qXhRaJ9.jpg', name: 'PILAR GRANADOS', position: '', number: '#88' },
-{ img: 'https://imgur.com/ledWMPr.jpg', name: 'SOFIA GONZALEZ', position: '', number: '#90' },
-{ img: 'https://imgur.com/yP1A1Uo.jpg', name: 'EVANGELINE GALICIA', position: '', number: '#99' },
-{ img: 'https://imgur.com/9RTdeLJ.jpg', name: 'JENNIFER GONZALEZ', position: '', number: '#8' },
-{ img: 'https://imgur.com/McQQDYe.jpg', name: 'VALENTINA BRAVO', position: '', number: '#80' }, 
-{ img: 'https://imgur.com/Nw0Dklt.jpg', name: 'MEREDICK GARCIA', position: '', number: '#37' }]
-},
-"2008-2009": { varonil: [], femenil: [] },
-"2006-2007": { varonil: [], femenil: [] },
-"2005 y más": { varonil: [], femenil: [] }
+    // =================================================================================
+    // CATEGORÍA 2018-2019
+    // =================================================================================
+    "2018-2019": {
+        varonil: [
+            // Para agregar un jugador, copia y pega un bloque como el de abajo y llena los datos.
+            // Ejemplo: { img: 'URL_DE_LA_IMAGEN', name: 'NOMBRE COMPLETO', position: 'Posición', number: '#Número' },
+        ],
+        femenil: [
+            // Agrega jugadoras aquí
+        ]
+    },
+
+    // =================================================================================
+    // CATEGORÍA 2016-2017
+    // =================================================================================
+    "2016-2017": {
+        varonil: [
+            // Agrega jugadores aquí
+        ],
+        femenil: [
+            // Agrega jugadoras aquí
+        ]
+    },
+
+    // =================================================================================
+    // CATEGORÍA 2014-2015
+    // =================================================================================
+    "2014-2015": {
+        varonil: [
+            // Agrega jugadores aquí
+        ],
+        femenil: [
+            // Agrega jugadoras aquí
+        ]
+    },
+
+    // =================================================================================
+    // CATEGORÍA 2012-2013
+    // =================================================================================
+    "2012-2013": {
+        varonil: [
+            // Agrega jugadores aquí
+        ],
+        femenil: [
+            // Agrega jugadoras aquí
+        ]
+    },
+
+    // =================================================================================
+    // CATEGORÍA 2010-2011
+    // =================================================================================
+    "2010-2011": {
+        varonil: [
+            // Agrega jugadores aquí
+        ],
+        femenil: [
+            // No olvides poner una coma (,) al final de cada línea de jugadora, excepto en la última.
+            { img: 'https://imgur.com/OjjVHYK.jpg', name: 'SAMANTHA CASTILLA', position: 'Posición', number: '#9' },
+            { img: 'https://imgur.com/CTDTEQC.jpg', name: 'KAMILA HUEHPA', position: 'Posición', number: '#34' },
+            { img: 'https://imgur.com/qKcZV3W.jpg', name: 'AUDRY DALAVI', position: 'Posición', number: '#24' },
+            { img: 'https://imgur.com/qXhRaJ9.jpg', name: 'PILAR GRANADOS', position: 'Posición', number: '#88' },
+            { img: 'https://imgur.com/ledWMPr.jpg', name: 'SOFIA GONZALEZ', position: 'Posición', number: '#90' },
+            { img: 'https://imgur.com/yP1A1Uo.jpg', name: 'EVANGELINE GALICIA', position: 'Posición', number: '#99' },
+            { img: 'https://imgur.com/9RTdeLJ.jpg', name: 'JENNIFER GONZALEZ', position: 'Posición', number: '#8' },
+            { img: 'https://imgur.com/McQQDYe.jpg', name: 'VALENTINA BRAVO', position: 'Posición', number: '#80' },
+            { img: 'https://imgur.com/Nw0Dklt.jpg', name: 'MEREDICK GARCIA', position: 'Posición', number: '#37' }
+            // Agrega la siguiente jugadora aquí
+        ]
+    },
+
+    // =================================================================================
+    // CATEGORÍA 2008-2009
+    // =================================================================================
+    "2008-2009": {
+        varonil: [
+            // Agrega jugadores aquí
+        ],
+        femenil: [
+            // Agrega jugadoras aquí
+        ]
+    },
+
+    // =================================================================================
+    // CATEGORÍA 2006-2007
+    // =================================================================================
+    "2006-2007": {
+        varonil: [
+            // Agrega jugadores aquí
+        ],
+        femenil: [
+            // Agrega jugadoras aquí
+        ]
+    },
+
+    // =================================================================================
+    // CATEGORÍA 2005 Y MÁS
+    // =================================================================================
+    "2005 y más": {
+        varonil: [
+            // Agrega jugadores aquí
+        ],
+        femenil: [
+            // Agrega jugadoras aquí
+        ]
+    }
 };
-
 const partidoData = {
-// Objeto de datos que almacena la información de los partidos por categoría y género
-"2018-2019": { varonil: [],  
-              
-                
-                femenil: [] },
+    // =================================================================================
+    // CATEGORÍA 2018-2019
+    // =================================================================================
+    "2018-2019": {
+        varonil: [
+            // Para agregar un nuevo partido, copia y pega un bloque como el de abajo.
+            // Ejemplo: { torneo: "Liga", fecha: "dd/mm/aaaa", hora: "00:00 am", lugar: "Cancha", resultado: "Pendiente", lugarLink: "" },
+        ],
+        femenil: [
+            // Agrega partidos aquí
+        ]
+    },
 
-    
-    
-    
-    
-"2016-2017": { varonil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: " Centro regional San Buenaventura (IXTAPALUCA)", 
-                          resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" }], 
-                
-                
-                femenil: [] },
+    // =================================================================================
+    // CATEGORÍA 2016-2017
+    // =================================================================================
+    "2016-2017": {
+        varonil: [
+            // No olvides poner una coma (,) al final de cada línea de partido, excepto en la última.
+            { torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: "Centro regional San Buenaventura (IXTAPALUCA)", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" }
+            // Agrega el siguiente partido aquí
+        ],
+        femenil: [
+            // Agrega partidos aquí
+        ]
+    },
 
-    
-    
-    
-    
-"2014-2015": { varonil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: " Centro regional San Buenaventura (IXTAPALUCA)", 
-                          resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" }],
-                
-                
-                femenil: [] },
+    // =================================================================================
+    // CATEGORÍA 2014-2015
+    // =================================================================================
+    "2014-2015": {
+        varonil: [
+            { torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: "Centro regional San Buenaventura (IXTAPALUCA)", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" }
+            // Agrega el siguiente partido aquí
+        ],
+        femenil: [
+            // Agrega partidos aquí
+        ]
+    },
 
-    
-    
-    
-    
-"2012-2013": { varonil: [], 
-                
-                
-                femenil :[] },
+    // =================================================================================
+    // CATEGORÍA 2012-2013
+    // =================================================================================
+    "2012-2013": {
+        varonil: [
+            // Agrega partidos aquí
+        ],
+        femenil: [
+            // Agrega partidos aquí
+        ]
+    },
 
-    
-    
-    
-    
-"2010-2011": { varonil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: " Gimnasio Gelipe Angeles (IXTAPALUCA)", 
-                          resultado: "Derrota", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" },
-                          { torneo: "x", fecha: "27/09/2025", hora: "x", lugar: "x", 
-                          resultado: "Pendiente", lugarLink: "" }], 
-                
-                
-                femenil: [{ torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: " Gimnasio Gelipe Angeles (IXTAPALUCA)", 
-                          resultado: "Victoria", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" }, 
-                          { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "9:00       am", lugar: "Deportivo Soraya Jiménez", 
-                          resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" }, { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "11:00 am", lugar: "Deportivo Soraya Jiménez", 
-                          resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" }] },
-                          
-    
-    
-    
-    
-"2008-2009": { varonil: [], 
-                
-                
-                femenil: [] },
+    // =================================================================================
+    // CATEGORÍA 2010-2011
+    // =================================================================================
+    "2010-2011": {
+        varonil: [
+            { torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: "Gimnasio Felipe Angeles (IXTAPALUCA)", resultado: "Derrota", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" },
+            { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "x", lugar: "x", resultado: "Derrota", lugarLink: "" }
+            // Agrega el siguiente partido aquí
+        ],
+        femenil: [
+            { torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: "Gimnasio Felipe Angeles (IXTAPALUCA)", resultado: "Victoria", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" },
+            { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "9:00 am", lugar: "Deportivo Soraya Jiménez", resultado: "Derrota", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" },
+            { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "11:00 am", lugar: "Deportivo Soraya Jiménez", resultado: "Derrota", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" }
+            // Agrega el siguiente partido aquí
+        ]
+    },
 
-    
-    
-    
-    
-"2006-2007": { varonil: [], 
-                
-                
-                femenil: [] },
+    // =================================================================================
+    // CATEGORÍA 2008-2009
+    // =================================================================================
+    "2008-2009": {
+        varonil: [
+            // Agrega partidos aquí
+        ],
+        femenil: [
+            // Agrega partidos aquí
+        ]
+    },
 
-    
-    
-    
-    
-"2005 y más":{ varonil: [], 
-                
-                
-                femenil: [] }
+    // =================================================================================
+    // CATEGORÍA 2006-2007
+    // =================================================================================
+    "2006-2007": {
+        varonil: [
+            // Agrega partidos aquí
+        ],
+        femenil: [
+            // Agrega partidos aquí
+        ]
+    },
+
+    // =================================================================================
+    // CATEGORÍA 2005 Y MÁS
+    // =================================================================================
+    "2005 y más": {
+        varonil: [
+            // Agrega partidos aquí
+        ],
+        femenil: [
+            // Agrega partidos aquí
+        ]
+    }
 };
 const convocadosData = {
-// Objeto de datos para los convocados por categoría y género
-"2018-2019": { varonil: [], 
-              
-              
-              femenil: [] },
+    // =================================================================================
+    // CATEGORÍA 2018-2019
+    // =================================================================================
+    "2018-2019": {
+        varonil: [
+            // Para agregar un convocado, escribe su nombre entre comillas simples ''
+            // y pon una coma al final de la línea.
+            // Ejemplo: 'Nombre Apellido',
+        ],
+        femenil: [
+            // Agrega convocadas aquí
+        ]
+    },
 
+    // =================================================================================
+    // CATEGORÍA 2016-2017
+    // =================================================================================
+    "2016-2017": {
+        varonil: [
+            // Agrega convocados aquí
+        ],
+        femenil: [
+            // Agrega convocadas aquí
+        ]
+    },
 
+    // =================================================================================
+    // CATEGORÍA 2014-2015
+    // =================================================================================
+    "2014-2015": {
+        varonil: [
+            // No olvides la coma (,) al final de cada nombre, excepto en el último.
+  
+            // Agrega el siguiente convocado aquí
+        ],
+        femenil: [
+            // Agrega convocadas aquí
+        ]
+    },
 
+    // =================================================================================
+    // CATEGORÍA 2012-2013
+    // =================================================================================
+    "2012-2013": {
+        varonil: [
+            // Agrega convocados aquí
+        ],
+        femenil: [
+            // Agrega convocadas aquí
+        ]
+    },
 
-    
-"2016-2017": { varonil: ['Yanara 2017', 'Melissa 2017', 'Iker 2017', 'Román 2017', 'Sara 2016', 'Haziel 2016', 'Liam 2017', 'Julieta 2017', 'Michelle 2017', 'Jesús 2017', 'Caleb 2016', 'Gael 2019', 'Sofía 2016', 'Jesús 2019'], 
-              
-              
-              femenil: [] },
+    // =================================================================================
+    // CATEGORÍA 2010-2011
+    // =================================================================================
+    "2010-2011": {
+        varonil: [
+            // Agrega convocados aquí
+        ],
+        femenil: [
+            // Agrega convocadas aquí
+        ]
+    },
 
+    // =================================================================================
+    // CATEGORÍA 2008-2009
+    // =================================================================================
+    "2008-2009": {
+        varonil: [
+            // Agrega convocados aquí
+        ],
+        femenil: [
+            // Agrega convocadas aquí
+        ]
+    },
 
+    // =================================================================================
+    // CATEGORÍA 2006-2007
+    // =================================================================================
+    "2006-2007": {
+        varonil: [
+            // Agrega convocados aquí
+        ],
+        femenil: [
+            // Agrega convocadas aquí
+        ]
+    },
 
-
-    
-"2014-2015": { varonil: ['Evan', 'Diego', 'Gerardo', 'Tonanci', 'Yarleni', 'Yoltik', 'Abdom 2014', 'Zahid15 (za', 'Janna15(za', 'Rodrigo15(za', 'Fernanda15(za'], 
-              
-              
-              femenil: [] },
-
-
-
-
-    
-"2012-2013": { varonil: [], 
-              
-              
-              femenil: [] },
-
-
-
-
-    
-"2010-2011": { varonil: ['Gonzalo', 'Donovan', 'Leonel', 'Diego Hernández', 'Cedrick', 'Mauricio', 'Manolo', 'Alan', 'Elías 11(za', 'Brayan 11(za', 'Noel(za', 'Santiago A.(za'], 
-              femenil: ['Selección copa telmex'] },
-
-
-
-
-    
-"2008-2009": { varonil: [], 
-              
-              
-              femenil: [] },
-
-
-
-
-    
-"2006-2007": { varonil: [], 
-              
-              
-              femenil: [] },
-
-
-
-
-    
-"2005 y más":{ varonil: [], 
-              
-              
-              femenil: [] }
+    // =================================================================================
+    // CATEGORÍA 2005 Y MÁS
+    // =================================================================================
+    "2005 y más": {
+        varonil: [
+            // Agrega convocados aquí
+        ],
+        femenil: [
+            // Agrega convocadas aquí
+        ]
+    }
 };
 
-// Función reutilizable para manejar el carrusel
+// --- LÓGICA DEL LIGHTBOX MODIFICADA ---
+let currentGalleryImages = [];
+let currentImageIndex = 0;
+
+// Abre el lightbox con una galería y el índice de la imagen clicada
+function openLightbox(imagesArray, index) {
+    currentGalleryImages = imagesArray;
+    currentImageIndex = index;
+    updateLightboxImage();
+    document.getElementById('lightbox').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+// Actualiza la imagen mostrada en el lightbox
+function updateLightboxImage() {
+    const lightboxImg = document.getElementById('lightbox-img');
+    if (currentGalleryImages.length > 0) {
+        lightboxImg.src = currentGalleryImages[currentImageIndex];
+    }
+}
+
+// Muestra la siguiente imagen
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length;
+    updateLightboxImage();
+}
+
+// Muestra la imagen anterior
+function showPrevImage() {
+    currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+    updateLightboxImage();
+}
+
+// Cierra el lightbox
+function closeLightbox() {
+    document.getElementById('lightbox').classList.add('hidden');
+    document.body.style.overflow = '';
+}
+// --- FIN DE LÓGICA DEL LIGHTBOX ---
+
 function setupCarousel(slideId, prevBtn, nextBtn) {
-const slide = document.getElementById(slideId);
-const prevButton = document.querySelector(prevBtn);
-const nextButton = document.querySelector(nextBtn);
-if (!slide || !prevButton || !nextButton) return;
-const images = slide.querySelectorAll("img");
-const totalSlides = images.length;
-let currentIndex = 0;
+    const slide = document.getElementById(slideId);
+    if (!slide) return;
+    const images = slide.querySelectorAll("img");
+    const gallerySrcs = Array.from(images).map(img => img.src);
 
-const updateSlide = () => {
-// Mueve el carrusel a la imagen actual
-slide.style.transform = `translateX(-${currentIndex * 100}%)`;
-};
+    images.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            openLightbox(gallerySrcs, index);
+        });
+    });
 
-prevButton.addEventListener('click', () => {
-// Al hacer clic en "anterior", actualiza el índice y la diapositiva
-currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-updateSlide();
-});
+    // La lógica de los botones del carrusel sigue igual
+    const prevButton = document.querySelector(prevBtn);
+    const nextButton = document.querySelector(nextBtn);
+    if (!prevButton || !nextButton) return;
+    const totalSlides = images.length;
+    let currentIndex = 0;
 
-nextButton.addEventListener('click', () => {
-// Al hacer clic en "siguiente", actualiza el índice y la diapositiva
-currentIndex = (currentIndex + 1) % totalSlides;
-updateSlide();
-});
+    const updateSlide = () => {
+        slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+    };
 
-// Swipe para dispositivos táctiles
-let startX = 0;
-slide.addEventListener("touchstart", (e) => {
-// Guarda la posición inicial del toque
-startX = e.touches[0].clientX;
-});
-slide.addEventListener("touchend", (e) => {
-// Calcula el desplazamiento y cambia de diapositiva si es necesario
-const endX = e.changedTouches[0].clientX;
-if (startX - endX > 50) {
-currentIndex = (currentIndex + 1) % totalSlides;
-} else if (endX - startX > 50) {
-currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    prevButton.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlide();
+    });
+
+    nextButton.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlide();
+    });
 }
-updateSlide();
-});
-}
-// Función para mostrar la vista principal o una específica
+
 function showView(viewToShow) {
-// Desplaza la ventana al inicio
-window.scrollTo(0, 0);
-const views = {
-// Objeto con las referencias a los contenedores de vista
-main: document.getElementById('main-view'),
-category: document.getElementById('category-view'),
-partidos: document.getElementById('partidos-view'),
-membresia: document.getElementById('membresia-view'),
-eventos: document.getElementById('eventos-view')
-};
-Object.values(views).forEach(view => {
-// Oculta todas las vistas
-if (view) view.classList.add('hidden');
-});
-if (views[viewToShow]) {
-// Muestra la vista deseada
-views[viewToShow].classList.remove('hidden');
+    window.scrollTo(0, 0);
+    const views = { main: document.getElementById('main-view'), category: document.getElementById('category-view'), partidos: document.getElementById('partidos-view'), membresia: document.getElementById('membresia-view'), eventos: document.getElementById('eventos-view') };
+    Object.values(views).forEach(view => { if (view) view.classList.add('hidden'); });
+    if (views[viewToShow]) { views[viewToShow].classList.remove('hidden'); }
 }
-}
-// Función para crear la tarjeta de un jugador
-function createPlayerCard(player) {
-// Retorna un string HTML para la tarjeta de un jugador, usando los datos del objeto 'player'
-return `
-<div class="jugador-card">
-<img src="${player.img}" alt="Foto de ${player.name}">
-<div class="info">
-<h4>${player.name}</h4>
-<p>${player.position}</p>
-<p><strong>${player.number}</strong></p>
-</div>
-</div>`;
-}
-// Función para poblar la vista de categorías con jugadores
-function populateCategoryView(category) {
-const varonilGrid = document.getElementById('varonil-grid');
-const femenilGrid = document.getElementById('femenil-grid');
-const categoryTitle = document.getElementById('category-title');
-if (!playerData[category] || !varonilGrid || !femenilGrid || !categoryTitle) return;
-// Actualiza el título de la página con la categoría seleccionada
-categoryTitle.textContent = `Categoría ${category}`;
-const data = playerData[category];
-// Renderiza las tarjetas de jugadores para la rama varonil
-varonilGrid.innerHTML = data.varonil.length > 0 ? data.varonil.map(createPlayerCard).join('') : '<p>No hay jugadores en esta rama.</p>';
-// Renderiza las tarjetas de jugadores para la rama femenil
-femenilGrid.innerHTML = data.femenil.length > 0 ? data.femenil.map(createPlayerCard).join('') : '<p>No hay jugadoras en esta rama.</p>';
-// Restablece los botones y el contenido de género a la vista varonil por defecto
-document.querySelectorAll('#category-view .gender-button').forEach(btn => btn.classList.remove('active'));
-document.querySelector('#category-view .gender-button[data-gender="varonil"]').classList.add('active');
-document.querySelectorAll('#category-view .gender-content').forEach(content => content.classList.remove('active'));
-document.getElementById('varonil').classList.add('active');
-}
-// Función para generar la tabla de partidos
-function renderPartidosTable(category, gender) {
-const partidos = partidoData[category]?.[gender] || [];
-const convocados = convocadosData[category]?.[gender] || [];
-// Contadores de victorias y derrotas
-let victorias = partidos.filter(p => p.resultado.toLowerCase().includes('victoria')).length;
-let derrotas = partidos.filter(p => p.resultado.toLowerCase().includes('derrota')).length;
-let totalPartidos = partidos.length;
-let htmlContent = '';
-if (totalPartidos > 0) {
-htmlContent = `
 
-`;
-htmlContent += `
-<div class="partidos-tabla-container">
-<table class="partidos-tabla">
-<thead>
-<tr>
-<th>Torneo</th>
-<th>Fecha</th>
-<th>Hora</th>
-<th>Lugar</th>
-<th>Resultado</th>
-</tr>
-</thead>
-<tbody>
-${partidos.map(p => {
-// Determina la clase CSS de la fila y el icono del resultado
-let rowClass = 'partido-pendiente';
-let resultadoIcon = '⏱️ Por jugar';
-if (p.resultado.toLowerCase().includes('victoria')) {
-rowClass = 'partido-victoria';
-resultadoIcon = '🏆 Victoria';
-} else if (p.resultado.toLowerCase().includes('derrota')) {
-rowClass = 'partido-derrota';
-resultadoIcon = '🔴 Derrota';
+function createPlayerCard(player) {
+    return `<div class="jugador-card"><img src="${player.img}" alt="Foto de ${player.name}"><div class="info"><h4>${player.name}</h4><p>${player.position}</p><p><strong>${player.number}</strong></p></div></div>`;
 }
-const lugarHtml = p.lugarLink
-? `${p.lugar}<br><a href="${p.lugarLink}" target="_blank">Ver en mapa</a>`
-: p.lugar;
-return `
-<tr class="${rowClass}">
-<td>${p.torneo || 'Liga Local'}</td>
-<td>${p.fecha}</td>
-<td>${p.hora}</td>
-<td>${lugarHtml}</td>
-<td>${resultadoIcon}</td>
-</tr>
-`;
-}).join('')}
-</tbody>
-</table>
-</div>
-`;
-} else {
-// Muestra un mensaje si no hay partidos
-htmlContent = '<p style="text-align:center;">No hay partidos programados para esta rama en esta categoría. ¡Mantente atento a las actualizaciones!</p>';
+
+function populateCategoryView(category) {
+    const varonilGrid = document.getElementById('varonil-grid');
+    const femenilGrid = document.getElementById('femenil-grid');
+    const categoryTitle = document.getElementById('category-title');
+    if (!playerData[category] || !varonilGrid || !femenilGrid || !categoryTitle) return;
+    categoryTitle.textContent = `Categoría ${category}`;
+    const data = playerData[category];
+    varonilGrid.innerHTML = data.varonil.length > 0 ? data.varonil.map(createPlayerCard).join('') : '<p>No hay jugadores en esta rama.</p>';
+    femenilGrid.innerHTML = data.femenil.length > 0 ? data.femenil.map(createPlayerCard).join('') : '<p>No hay jugadoras en esta rama.</p>';
+    document.querySelectorAll('#category-view .gender-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('#category-view .gender-button[data-gender="varonil"]').classList.add('active');
+    document.querySelectorAll('#category-view .gender-content').forEach(content => content.classList.remove('active'));
+    document.getElementById('varonil').classList.add('active');
 }
-if (convocados.length > 0) {
-// Agrega la lista de convocados si existen
-htmlContent += `
-<h3 style="text-align: center; margin-top: 40px;">Convocados</h3>
-<p style="text-align: center; color: #555;">(Próximo partido)</p>
-<ul style="list-style-type: none; padding: 0; text-align: center; margin-top: 20px;">
-${convocados.map(jugador => `
-<li style="background-color: #f9f9f9; padding: 8px; margin-bottom: 5px; border-radius: 4px; border: 1px solid #ddd; display: inline-block; width: 100%; max-width: 400px;">${jugador}</li>
-`).join('')}
-</ul>
-`;
+
+function renderPartidosTable(category, gender) {
+    const partidos = partidoData[category]?.[gender] || [];
+    const convocados = convocadosData[category]?.[gender] || [];
+    let htmlContent = '';
+    if (partidos.length > 0) {
+        htmlContent = `<div class="partidos-tabla-container"><table class="partidos-tabla"><thead><tr><th>Torneo</th><th>Fecha</th><th>Hora</th><th>Lugar</th><th>Resultado</th></tr></thead><tbody>
+        ${partidos.map(p => {
+            let rowClass = 'partido-pendiente';
+            let resultadoIcon = '⏱️ Por jugar';
+            if (p.resultado.toLowerCase().includes('victoria')) { rowClass = 'partido-victoria'; resultadoIcon = '🏆 Victoria'; }
+            else if (p.resultado.toLowerCase().includes('derrota')) { rowClass = 'partido-derrota'; resultadoIcon = '🔴 Derrota'; }
+            const lugarHtml = p.lugarLink ? `${p.lugar}<br><a href="${p.lugarLink}" target="_blank">Ver en mapa</a>` : p.lugar;
+            return `<tr class="${rowClass}"><td>${p.torneo || 'Liga Local'}</td><td>${p.fecha}</td><td>${p.hora}</td><td>${lugarHtml}</td><td>${resultadoIcon}</td></tr>`;
+        }).join('')}</tbody></table></div>`;
+    } else {
+        htmlContent = '<p style="text-align:center;">No hay partidos programados. ¡Mantente atento!</p>';
+    }
+    if (convocados.length > 0) {
+        htmlContent += `<h3 style="text-align: center; margin-top: 40px;">Convocados</h3><p style="text-align: center; color: #555;">(Próximo partido)</p><ul style="list-style-type: none; padding: 0; text-align: center; margin-top: 20px;">
+        ${convocados.map(jugador => `<li style="background-color: #f9f9f9; padding: 8px; margin-bottom: 5px; border-radius: 4px; border: 1px solid #ddd; display: inline-block; width: 100%; max-width: 400px;">${jugador}</li>`).join('')}</ul>`;
+    }
+    const container = document.getElementById(`partidos-${gender}`);
+    if (container) { container.innerHTML = htmlContent; }
 }
-const container = document.getElementById(`partidos-${gender}`);
-if (container) {
-// Inserta el contenido HTML generado en el contenedor correcto
-container.innerHTML = htmlContent;
-}
-}
+
 document.addEventListener('DOMContentLoaded', () => {
-// Se ejecuta cuando el DOM (la estructura de la página) está completamente cargado
-// Llama a la función de configuración para cada carrusel
-setupCarousel('slide-galeria', '#carousel-galeria .prev', '#carousel-galeria .next');
-setupCarousel('slide-skills', '#carousel-skills .prev', '#carousel-skills .next');
-// Manejadores de eventos de navegación
-document.getElementById('nav-partidos-link').addEventListener('click', () => {
-showView('partidos');
-const firstPartidoButton = document.querySelector('.partido-category-button.active');
-const firstGenderButton = document.querySelector('#partidos-view .gender-button.active');
-if (firstPartidoButton && firstGenderButton) {
-renderPartidosTable(firstPartidoButton.dataset.category, firstGenderButton.dataset.gender);
-}
-});
-document.getElementById('nav-membresia-link').addEventListener('click', () => showView('membresia'));
-document.getElementById('nav-eventos-link').addEventListener('click', () => showView('eventos'));
-document.querySelectorAll('.btn-back').forEach(button => {
-button.addEventListener('click', () => showView('main'));
-});
-// Lógica para los botones de categoría de equipo
-document.querySelectorAll('.btn-category').forEach(button => {
-button.addEventListener('click', () => {
-const category = button.dataset.category;
-populateCategoryView(category);
-showView('category');
-});
-});
-// Lógica para los botones de género en la vista de equipos
-document.querySelectorAll('#category-view .gender-button').forEach(button => {
-button.addEventListener('click', () => {
-document.querySelectorAll('#category-view .gender-button').forEach(btn => btn.classList.remove('active'));
-button.classList.add('active');
-document.querySelectorAll('#category-view .gender-content').forEach(content => content.classList.remove('active'));
-document.getElementById(button.dataset.gender).classList.add('active');
-});
-});
-// Lógica para los botones de categoría de partidos
-document.querySelectorAll('.partido-category-button').forEach(button => {
-button.addEventListener('click', () => {
-document.querySelectorAll('.partido-category-button').forEach(btn => btn.classList.remove('active'));
-button.classList.add('active');
-const category = button.dataset.category;
-const gender = document.querySelector('#partidos-view .gender-button.active').dataset.gender;
-document.getElementById('partidos-gender-tabs').style.display = 'flex';
-renderPartidosTable(category, gender);
-});
-});
-// Lógica para los botones de género en la vista de partidos
-document.querySelectorAll('#partidos-view .gender-button').forEach(button => {
-button.addEventListener('click', () => {
-document.querySelectorAll('#partidos-view .gender-button').forEach(btn => btn.classList.remove('active'));
-button.classList.add('active');
-const category = document.querySelector('.partido-category-button.active').dataset.category;
-const gender = button.dataset.gender;
-document.querySelectorAll('#partidos-view .gender-content').forEach(content => content.classList.remove('active'));
-document.getElementById(`partidos-${gender}`).classList.add('active');
-renderPartidosTable(category, gender);
-});
-});
-// Cargar la primera tabla de partidos al inicio
-const firstPartidoButton = document.querySelector('.partido-category-button.active');
-const firstGenderButton = document.querySelector('#partidos-view .gender-button.active');
-if (firstPartidoButton && firstGenderButton) {
-renderPartidosTable(firstPartidoButton.dataset.category, firstGenderButton.dataset.gender);
-}
+    setupCarousel('slide-galeria', '#carousel-galeria .prev', '#carousel-galeria .next');
+    setupCarousel('slide-skills', '#carousel-skills .prev', '#carousel-skills .next');
+    
+    document.getElementById('nav-partidos-link').addEventListener('click', () => {
+        showView('partidos');
+        renderPartidosTable(document.querySelector('.partido-category-button.active').dataset.category, document.querySelector('#partidos-view .gender-button.active').dataset.gender);
+    });
+    document.getElementById('nav-membresia-link').addEventListener('click', () => showView('membresia'));
+    document.getElementById('nav-eventos-link').addEventListener('click', () => showView('eventos'));
+    document.querySelectorAll('.btn-back').forEach(button => button.addEventListener('click', () => showView('main')));
+    
+    document.querySelectorAll('.btn-category').forEach(button => {
+        button.addEventListener('click', () => {
+            populateCategoryView(button.dataset.category);
+            showView('category');
+        });
+    });
+    
+    document.querySelectorAll('#category-view .gender-button').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('#category-view .gender-button').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            document.querySelectorAll('#category-view .gender-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(button.dataset.gender).classList.add('active');
+        });
+    });
+    
+    document.querySelectorAll('.partido-category-button').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('.partido-category-button').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            renderPartidosTable(button.dataset.category, document.querySelector('#partidos-view .gender-button.active').dataset.gender);
+        });
+    });
+    
+    document.querySelectorAll('#partidos-view .gender-button').forEach(button => {
+        button.addEventListener('click', () => {
+            document.querySelectorAll('#partidos-view .gender-button').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            document.querySelectorAll('#partidos-view .gender-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`partidos-${button.dataset.gender}`).classList.add('active');
+            renderPartidosTable(document.querySelector('.partido-category-button.active').dataset.category, button.dataset.gender);
+        });
+    });
+    
+    if (document.getElementById('partidos-view')) {
+        renderPartidosTable(document.querySelector('.partido-category-button.active').dataset.category, document.querySelector('#partidos-view .gender-button.active').dataset.gender);
+    }
+
+    // Eventos para el lightbox
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.querySelector('.lightbox-next').addEventListener('click', showNextImage);
+    document.querySelector('.lightbox-prev').addEventListener('click', showPrevImage);
+    document.getElementById('lightbox').addEventListener('click', e => { if (e.target.id === 'lightbox') closeLightbox(); });
+
+    // Lógica de swipe para el lightbox
+    let touchStartX = 0;
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+    lightboxImg.addEventListener('touchend', e => {
+        let touchEndX = e.changedTouches[0].clientX;
+        if (touchStartX - touchEndX > 50) { showNextImage(); } // Swipe izquierda
+        if (touchEndX - touchStartX > 50) { showPrevImage(); } // Swipe derecha
+    });
 });
 </script>
 </body>
