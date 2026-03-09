@@ -5,19 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halcones Basketball Club</title>
     
-    <!-- 1. Tailwind CSS (Diseño) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- 2. Fuentes Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- 3. React & ReactDOM (Motor de la app) -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- 4. Babel (Traductor de código) -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
@@ -41,7 +37,7 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // --- ICONOS SVG (Para no depender de librerías externas) ---
+        // --- ICONOS SVG ---
         const Icon = ({ path, size = 24, className = "" }) => (
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -79,7 +75,7 @@
         };
 
         // ==========================================
-        // DATOS (Tu información original)
+        // DATOS ESTÁTICOS (Jugadores y Convocados)
         // ==========================================
 
         const playerData = {
@@ -102,70 +98,6 @@
                 ]
             },
             "2008-2009": { varonil: [], femenil: [] },
-            "2006-2007": { varonil: [], femenil: [] },
-            "2005 y más": { varonil: [], femenil: [] }
-        };
-
-        const partidoData = {
-            "2018-2019": { varonil: [], femenil: [] },
-            "2016-2017": {
-                varonil: [
-                { torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: "Centro regional San Buenaventura (IXTAPALUCA)", resultado: "Victoria", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" },
-                { torneo: "Amistoso", fecha: "11/10/2025", hora: "04:00 pm", lugar: "Centro regional San Buenaventura (IXTAPALUCA)", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" }
-                ],
-                femenil: [
-                { torneo: "Amistoso", fecha: "11/10/2025", hora: "10:00 am", lugar: "Deportivo Solidaridad Cancha 1", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/rtvn38tWSCxxkeQVA"}
-                ]
-            },
-            "2014-2015": {
-                varonil: [
-                { torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: "Centro regional San Buenaventura (IXTAPALUCA)", resultado: "Victoria", lugarLink: "https://maps.app.goo.gl/354G6H7m2W89d9E87" },
-                { torneo: "Amistoso", fecha: "10/11/2025", hora: "10:00 am", lugar: "Felipe Ángeles (IXTAPALUCA)", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/gz3BLezhB8uwfLF97" }
-                ],
-                femenil: [
-                { torneo: "Amistoso", fecha: "11/10/2025", hora: "10:00 am", lugar: "Deportivo Solidaridad Cancha 1", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/rtvn38tWSCxxkeQVA"}
-                ]
-            },
-            "2012-2013": {
-                varonil: {
-                "Halcones Negro": [
-                    { torneo: "Amistoso", fecha: "11/10/2025", hora: "09:00 am", lugar: "Deportivo Solidaridad Cancha 2 ", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/gDK9xNcpkwLv4s866" }
-                ],
-                "Halcones Blanco": [
-                    { torneo: "Amistoso", fecha: "11/10/2025", hora: "11:00 am", lugar: "Felipe Angeles (IXTAPALUCA)", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/kUvDLVu6JS2oX2tq5" }
-                ]
-                },
-                femenil: [
-                { torneo: "Amistoso", fecha: "11/10/2025", hora: "09:00 am", lugar: "Deportivo Solidaridad Cancha 1 ", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/gDK9xNcpkwLv4s866" }
-                ]
-            },
-            "2010-2011": {
-                varonil: {
-                A: [
-                    { torneo: "Amistoso", fecha: "20/09/2025", hora: "08:00 am", lugar: "Gimnasio Felipe Angeles (IXTAPALUCA)", resultado: "Derrota", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" },
-                    { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "08:00 am", lugar: "x", resultado: "Derrota", lugarLink: "" },
-                    { torneo: "Amistoso", fecha: "11/10/2025", hora: "12:00 pm", lugar: "Felipe Ángeles (Ixtapaluca)", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/kUvDLVu6JS2oX2tq5" }
-                ],
-                B: [
-                    { torneo: "Amistoso", fecha: "11/10/2025", hora: "11:00 am", lugar: "Deportivo Solidaridad Cancha 2", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/rtvn38tWSCxxkeQVA"}
-                ],
-                PRO: [
-                    { torneo: "Amistoso", fecha: "11/10/2025", hora: "12:00 pm", lugar: "Deportivo Solidaridad Cancha 2", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/rtvn38tWSCxxkeQVA"}
-                ]
-                },
-                femenil: [
-                { torneo: "Amistoso", fecha: "20/09/2025", hora: "09:00 am", lugar: "Gimnasio Felipe Angeles (IXTAPALUCA)", resultado: "Victoria", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" },
-                { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "9:00 am", lugar: "Deportivo Soraya Jiménez", resultado: "Derrota", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" },
-                { torneo: "Copa Telmex", fecha: "27/09/2025", hora: "11:00 am", lugar: "Deportivo Soraya Jiménez", resultado: "Derrota", lugarLink: "https://maps.app.goo.gl/N3fic4JS9iPvHWxM7" },
-                { torneo: "Amistoso", fecha: "11/10/2025", hora: "14:00 pm", lugar: "Felipe Angeles (Ixtapaluca)", resultado: "Pendiente", lugarLink: "https://maps.app.goo.gl/kUvDLVu6JS2oX2tq5" }
-                ]
-            },
-            "2008-2009": {
-                varonil: [ 
-                { torneo: "Amistoso", fecha: "11/10/2025", hora: "09:00 am", lugar: "Felipe Angeles (IXTAPALUCA)", resultado: "Pendiente", lugarLink: "https://share.google/bzEfJWijrZlQq9trt" }
-                ],
-                femenil: []
-            },
             "2006-2007": { varonil: [], femenil: [] },
             "2005 y más": { varonil: [], femenil: [] }
         };
@@ -223,7 +155,7 @@
         ];
 
         // ==========================================
-        // APLICACIÓN
+        // APLICACIÓN PRINCIPAL (REACT)
         // ==========================================
 
         const App = () => {
@@ -233,6 +165,10 @@
             const [selectedGender, setSelectedGender] = useState('varonil');
             const [activeSubCategory, setActiveSubCategory] = useState(null);
             
+            // Estado para guardar los partidos descargados desde Google Sheets
+            const [partidoData, setPartidoData] = useState({});
+            const [isLoadingPartidos, setIsLoadingPartidos] = useState(true);
+
             // Lightbox States
             const [lightboxOpen, setLightboxOpen] = useState(false);
             const [lightboxImages, setLightboxImages] = useState([]);
@@ -242,6 +178,55 @@
             const [touchStart, setTouchStart] = useState(null);
             const [touchEnd, setTouchEnd] = useState(null);
             const minSwipeDistance = 50;
+
+            // --- Lógica para descargar desde Google Sheets ---
+            useEffect(() => {
+                const fetchPartidos = async () => {
+                    try {
+                        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTKi_8DOsLB-a-uIa4_FoAmfQvNb-eQ7C4yGLcvFJHKe3kwkh_xsMm3oNwhQ_NQfcd_bpsTkMSz85Kv/pub?gid=0&single=true&output=csv';
+                        const response = await fetch(SHEET_CSV_URL);
+                        const text = await response.text();
+
+                        const newPartidoData = {};
+                        // Inicializar las categorías vacías
+                        categories.forEach(cat => { newPartidoData[cat] = { varonil: [], femenil: [] }; });
+
+                        const filas = text.split('\n').slice(1); 
+                        
+                        filas.forEach(fila => {
+                            if (!fila || fila.trim() === '') return;
+                            const columnas = fila.split(',');
+                            if (columnas.length < 9) return;
+
+                            const [categoria, rama, subcategoria, torneo, fecha, hora, lugar, lugarLink, resultado] = columnas.map(c => c.trim().replace(/^"|"$/g, ''));
+
+                            if (!newPartidoData[categoria] || !newPartidoData[categoria][rama]) return; 
+
+                            const nuevoPartido = { torneo, fecha, hora, lugar, resultado, lugarLink };
+
+                            if (subcategoria && subcategoria !== "") {
+                                if (Array.isArray(newPartidoData[categoria][rama])) {
+                                    newPartidoData[categoria][rama] = {}; 
+                                }
+                                if (!newPartidoData[categoria][rama][subcategoria]) {
+                                    newPartidoData[categoria][rama][subcategoria] = [];
+                                }
+                                newPartidoData[categoria][rama][subcategoria].push(nuevoPartido);
+                            } else {
+                                newPartidoData[categoria][rama].push(nuevoPartido);
+                            }
+                        });
+                        
+                        setPartidoData(newPartidoData);
+                        setIsLoadingPartidos(false);
+                    } catch (error) {
+                        console.error("Error al conectar con Google Sheets:", error);
+                        setIsLoadingPartidos(false);
+                    }
+                };
+
+                fetchPartidos();
+            }, []);
 
             const openLightbox = (images, index = 0) => {
                 setLightboxImages(images);
@@ -390,6 +375,7 @@
 
             // GAMES
             const GamesView = () => {
+                // Ahora lee desde el estado partidoData que descargó el Excel
                 const genderData = partidoData[selectedCategory]?.[selectedGender];
                 const hasSubCategories = genderData && typeof genderData === 'object' && !Array.isArray(genderData);
                 
@@ -402,7 +388,7 @@
                     } else {
                         setActiveSubCategory(null);
                     }
-                }, [selectedCategory, selectedGender]);
+                }, [selectedCategory, selectedGender, genderData]);
 
                 let finalPartidos = [];
                 let finalConvocados = [];
@@ -423,7 +409,7 @@
 
                         <div className="text-center mb-8">
                             <h2 className="text-4xl font-bold text-[#0D47A1] font-oswald uppercase mb-2">Calendario y Resultados</h2>
-                            <p className="text-gray-600">Consulta la programación oficial.</p>
+                            <p className="text-gray-600">Consulta la programación oficial conectada en tiempo real.</p>
                         </div>
 
                         <div className="flex overflow-x-auto pb-4 gap-2 mb-6 no-scrollbar justify-start md:justify-center">
@@ -434,7 +420,13 @@
                             ))}
                         </div>
 
-                        {selectedCategory && (
+                        {isLoadingPartidos && (
+                            <div className="text-center py-10 text-gray-500">
+                                <p className="animate-pulse">Cargando partidos desde Google Sheets...</p>
+                            </div>
+                        )}
+
+                        {!isLoadingPartidos && selectedCategory && (
                             <div className="animate-fadeIn">
                                 <div className="flex justify-center gap-4 mb-6">
                                     <button onClick={() => setSelectedGender('varonil')} className={`px-8 py-2 rounded-lg font-bold uppercase transition-all border-b-4 ${selectedGender === 'varonil' ? 'bg-white border-[#0D47A1] text-[#0D47A1] shadow-md' : 'bg-gray-100 border-transparent text-gray-400'}`}>Varonil</button>
@@ -464,8 +456,8 @@
                                                     {finalPartidos.map((p, idx) => {
                                                         let statusColor = "bg-yellow-100 text-yellow-700";
                                                         let icon = "⏳";
-                                                        if (p.resultado.toLowerCase().includes('victoria')) { statusColor = "bg-green-100 text-green-700"; icon = "🏆"; }
-                                                        if (p.resultado.toLowerCase().includes('derrota')) { statusColor = "bg-red-100 text-red-700"; icon = "🔴"; }
+                                                        if (p.resultado && p.resultado.toLowerCase().includes('victoria')) { statusColor = "bg-green-100 text-green-700"; icon = "🏆"; }
+                                                        if (p.resultado && p.resultado.toLowerCase().includes('derrota')) { statusColor = "bg-red-100 text-red-700"; icon = "🔴"; }
                                                         return (
                                                             <tr key={idx} className="hover:bg-blue-50/50 transition-colors">
                                                                 <td className="p-4 font-bold text-gray-800">{p.torneo || 'Liga Local'}</td>
