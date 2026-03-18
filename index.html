@@ -136,11 +136,11 @@
             useEffect(() => {
                 const fetchAllData = async () => {
                     try {
-                        // 1. LINK DE PARTIDOS (Ya lo tenías)
+                        // 1. LINK DE PARTIDOS
                         const SHEET_PARTIDOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTKi_8DOsLB-a-uIa4_FoAmfQvNb-eQ7C4yGLcvFJHKe3kwkh_xsMm3oNwhQ_NQfcd_bpsTkMSz85Kv/pub?gid=0&single=true&output=csv';
                         
-                        // 2. LINK DE CONVOCADOS (¡PEGA TU NUEVO ENLACE AQUÍ!)
-                        const SHEET_CONVOCADOS_URL = 'PEGAR_AQUI_TU_NUEVO_LINK';
+                        // 2. LINK DE CONVOCADOS ACTUALIZADO
+                        const SHEET_CONVOCADOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTKi_8DOsLB-a-uIa4_FoAmfQvNb-eQ7C4yGLcvFJHKe3kwkh_xsMm3oNwhQ_NQfcd_bpsTkMSz85Kv/pub?gid=871508015&single=true&output=csv';
 
                         // --- Cargar Partidos ---
                         const resPartidos = await fetch(SHEET_PARTIDOS_URL);
@@ -167,30 +167,28 @@
                         setPartidoData(newPartidoData);
 
                         // --- Cargar Convocados ---
-                        if(SHEET_CONVOCADOS_URL !== 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTKi_8DOsLB-a-uIa4_FoAmfQvNb-eQ7C4yGLcvFJHKe3kwkh_xsMm3oNwhQ_NQfcd_bpsTkMSz85Kv/pub?gid=871508015&single=true&output=csv') {
-                            const resConvocados = await fetch(SHEET_CONVOCADOS_URL);
-                            const textConvocados = await resConvocados.text();
-                            const newConvocadosData = {};
-                            categories.forEach(cat => { newConvocadosData[cat] = { varonil: [], femenil: [] }; });
+                        const resConvocados = await fetch(SHEET_CONVOCADOS_URL);
+                        const textConvocados = await resConvocados.text();
+                        const newConvocadosData = {};
+                        categories.forEach(cat => { newConvocadosData[cat] = { varonil: [], femenil: [] }; });
 
-                            textConvocados.split('\n').slice(1).forEach(fila => {
-                                if (!fila || fila.trim() === '') return;
-                                const columnas = fila.split(',');
-                                if (columnas.length < 4) return;
-                                const [categoria, rama, subcategoria, nombre] = columnas.map(c => c.trim().replace(/^"|"$/g, ''));
-                                
-                                if (!newConvocadosData[categoria] || !newConvocadosData[categoria][rama] || !nombre) return; 
+                        textConvocados.split('\n').slice(1).forEach(fila => {
+                            if (!fila || fila.trim() === '') return;
+                            const columnas = fila.split(',');
+                            if (columnas.length < 4) return;
+                            const [categoria, rama, subcategoria, nombre] = columnas.map(c => c.trim().replace(/^"|"$/g, ''));
+                            
+                            if (!newConvocadosData[categoria] || !newConvocadosData[categoria][rama] || !nombre) return; 
 
-                                if (subcategoria && subcategoria !== "") {
-                                    if (Array.isArray(newConvocadosData[categoria][rama])) newConvocadosData[categoria][rama] = {}; 
-                                    if (!newConvocadosData[categoria][rama][subcategoria]) newConvocadosData[categoria][rama][subcategoria] = [];
-                                    newConvocadosData[categoria][rama][subcategoria].push(nombre);
-                                } else {
-                                    newConvocadosData[categoria][rama].push(nombre);
-                                }
-                            });
-                            setConvocadosData(newConvocadosData);
-                        }
+                            if (subcategoria && subcategoria !== "") {
+                                if (Array.isArray(newConvocadosData[categoria][rama])) newConvocadosData[categoria][rama] = {}; 
+                                if (!newConvocadosData[categoria][rama][subcategoria]) newConvocadosData[categoria][rama][subcategoria] = [];
+                                newConvocadosData[categoria][rama][subcategoria].push(nombre);
+                            } else {
+                                newConvocadosData[categoria][rama].push(nombre);
+                            }
+                        });
+                        setConvocadosData(newConvocadosData);
 
                         setIsLoadingData(false);
                     } catch (error) {
