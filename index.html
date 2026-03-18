@@ -6,11 +6,14 @@
     <title>Halcones Basketball Club</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
@@ -18,7 +21,10 @@
         .font-roboto { font-family: 'Roboto', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none;  scrollbar-width: none; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
         .animate-bounce-slow { animation: bounce 2s infinite; }
         .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -74,9 +80,12 @@
             "https://imgur.com/r7HZJdw.jpg", "https://imgur.com/NVFvUhQ.jpg"
         ];
 
-        // --- COMPONENTE INDIVIDUAL PARA EL JUGADOR CONVOCADO (CON TU LINK) ---
+        // --- COMPONENTE INDIVIDUAL PARA EL JUGADOR CONVOCADO ---
         const ConvocadoItem = ({ jugador, categoria, rama }) => {
-            const [confirmado, setConfirmado] = useState(jugador.asistencia && jugador.asistencia.includes('Voy'));
+            // Verifica si el jugador ya tiene en su Asistencia la palabra "Voy" o "Confirmado"
+            const [confirmado, setConfirmado] = useState(
+                jugador.asistencia && (jugador.asistencia.includes('Voy') || jugador.asistencia.includes('✅'))
+            );
             const [cargando, setCargando] = useState(false);
 
             const handleConfirmar = async () => {
@@ -87,19 +96,13 @@
                 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQb_Uip_wWaqhOABWoYpRN-TK2iw3yAq-Of-2udNuTT7Tmsm4BbKID2O2mDwSHWzGi/exec';
 
                 try {
-                    const formData = new URLSearchParams();
-                    formData.append('categoria', categoria);
-                    formData.append('rama', rama);
-                    formData.append('nombre', jugador.nombre);
+                    // Armamos el link con los datos exactos del niño
+                    const url = `${SCRIPT_URL}?categoria=${encodeURIComponent(categoria)}&rama=${encodeURIComponent(rama)}&nombre=${encodeURIComponent(jugador.nombre)}`;
 
-                    await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors', // Evita bloqueos de seguridad en el navegador
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: formData.toString()
-                    });
+                    // Hacemos el envío en modo silencioso (no-cors) usando GET
+                    await fetch(url, { method: 'GET', mode: 'no-cors' });
                     
-                    // Al terminar, actualizamos el botón a verde visualmente
+                    // Actualizamos el botón visualmente
                     setConfirmado(true);
                 } catch (error) {
                     console.error("Error confirmando", error);
@@ -117,7 +120,7 @@
                         onClick={handleConfirmar}
                         disabled={confirmado || cargando}
                         className={`text-xs font-bold px-4 py-2 rounded-full transition-all w-full sm:w-auto shadow-sm ${
-                            confirmado ? 'bg-green-100 text-green-700 border border-green-300' : 
+                            confirmado ? 'bg-green-100 text-green-700 border border-green-300 cursor-not-allowed' : 
                             cargando ? 'bg-gray-200 text-gray-500 cursor-wait' : 
                             'bg-gray-100 text-gray-600 hover:bg-[#0D47A1] hover:text-white border border-gray-300'
                         }`}
@@ -193,6 +196,7 @@
                         textConvocados.split('\n').slice(1).forEach(fila => {
                             if (!fila || fila.trim() === '') return;
                             const columnas = fila.split(',');
+                            // Necesitamos al menos 4 columnas, la 5ta (Asistencia) es opcional en Excel si está vacía
                             if (columnas.length < 4) return;
                             
                             const [categoria, rama, subcategoria, nombre, asistencia] = columnas.map(c => c.trim().replace(/^"|"$/g, ''));
