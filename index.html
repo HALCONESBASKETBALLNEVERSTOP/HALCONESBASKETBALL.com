@@ -1,605 +1,611 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halcones Basketball Club</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halcones Basketball Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root {
+  --color-azul: #1E4D94;
+  --color-negro: #151515; 
+  --color-blanco: #FFFFFF;
+  --color-gris-claro: #f4f4f4;
+  --font-titulos: 'Oswald', sans-serif;
+  --font-texto: 'Roboto', sans-serif;
+}
 
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  font-family: var(--font-texto); 
+  background-color: var(--color-blanco); 
+  color: var(--color-negro); 
+  padding-top: 80px; 
+}
 
-    <style>
-        .font-oswald { font-family: 'Oswald', sans-serif; }
-        .font-roboto { font-family: 'Roboto', sans-serif; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none;  scrollbar-width: none; }
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        .animate-bounce-slow { animation: bounce 2s infinite; }
-        .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+/* --- BARRA SUPERIOR FIJA --- */
+.top-navbar {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  z-index: 2000;
+  background-color: var(--color-negro);
+  height: 80px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 2px solid #222;
+}
+.header-left { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
+.logo-circle { width: 45px; height: 45px; border: 2px solid var(--color-blanco); border-radius: 50%; background-color: var(--color-azul); display: flex; justify-content: center; align-items: center; color: var(--color-blanco); font-family: var(--font-titulos); font-size: 24px; }
+.logo-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.1; }
+.logo-title { font-family: var(--font-titulos); color: var(--color-blanco); font-size: 22px; letter-spacing: 1px; }
+.logo-subtitle { font-family: var(--font-texto); color: #888; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+.menu-icon { color: var(--color-blanco); font-size: 30px; cursor: pointer; }
+
+/* Menú Desplegable */
+#mobile-menu {
+  position: fixed;
+  top: 80px; right: 0;
+  background-color: var(--color-negro);
+  width: 100%; max-width: 300px;
+  height: calc(100vh - 80px);
+  z-index: 1900;
+  display: flex; flex-direction: column;
+  padding: 20px 0;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  border-left: 2px solid var(--color-azul);
+}
+#mobile-menu.active { transform: translateX(0); }
+#mobile-menu a { color: var(--color-blanco); text-decoration: none; padding: 15px 30px; font-family: var(--font-titulos); font-size: 1.3rem; border-bottom: 1px solid #333; text-transform: uppercase; transition: color 0.3s; }
+#mobile-menu a:hover { color: var(--color-azul); }
+
+/* --- BOTONES FLOTANTES --- */
+.whatsapp-fixed { position: fixed; bottom: 25px; right: 25px; z-index: 9999; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.4); transition: transform 0.3s; }
+.whatsapp-fixed:hover { transform: scale(1.1); }
+#btn-back { position: fixed; top: 95px; left: 15px; z-index: 1800; background-color: var(--color-negro); color: var(--color-blanco); border: none; padding: 8px 12px; border-radius: 5px; font-family: var(--font-titulos); font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); transition: background-color 0.3s; }
+#btn-back:hover { background-color: var(--color-azul); }
+.hidden { display: none !important; }
+
+/* --- CONTENEDORES Y ANIMACIÓN --- */
+.view-section { display: none; animation: fadeIn 0.4s ease-out forwards; }
+.view-section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.container { width: 92%; max-width: 1200px; margin: auto; padding-bottom: 50px; }
+h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: center; color: var(--color-azul); font-size: 2.2rem; margin: 30px 0; }
+
+/* --- INICIO --- */
+.hero-banner { width: 100%; height: auto; display: block; background-color: var(--color-negro); border-bottom: 4px solid var(--color-azul); }
+.card { background-color: var(--color-blanco); border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); overflow: hidden; border-top: 5px solid var(--color-negro); margin-bottom: 30px; }
+.cumpleanos-card { text-align: center; max-width: 600px; margin: 0 auto 50px auto; padding: 20px; }
+.cumpleanos-card i { font-size: 3rem; color: var(--color-azul); margin-bottom: 10px; }
+.cumpleanos-card h3 { font-family: var(--font-titulos); font-size: 1.8rem; margin-bottom: 15px; }
+.cumpleanos-lista { list-style: none; padding: 0; }
+.cumpleanos-lista li { padding: 10px 0; border-bottom: 1px solid #eee; font-size: 1.1rem; }
+
+.category-title { font-family: var(--font-titulos); background-color: var(--color-azul); color: var(--color-blanco); padding: 10px 25px; border-radius: 5px; text-align: center; margin: 40px auto 25px auto; width: max-content; min-width: 300px; font-size: 1.5rem; text-transform: uppercase; box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
+.destacados-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
+.player-card { flex: 1 1 280px; max-width: 320px; text-align: center; display: flex; flex-direction: column; transition: transform 0.3s ease; border-top: 4px solid var(--color-negro); background-color: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); overflow: hidden; }
+.player-card:hover { transform: translateY(-5px); }
+.card-photo-wrapper { width: 100%; height: 250px; overflow: hidden; background-color: var(--color-gris-claro); }
+.player-card img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.player-card .info { padding: 15px; display: flex; flex-direction: column; gap: 5px; flex-grow: 1; justify-content: center; }
+.card-label { font-size: 0.85rem; color: #777; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 3px;}
+.player-name { font-family: var(--font-titulos); font-size: 1.4rem; color: var(--color-negro); text-transform: uppercase; line-height: 1.2; }
+.player-number { font-family: var(--font-titulos); font-size: 2rem; color: var(--color-azul); font-weight: bold; margin-top: 5px; }
+
+.hero-slider { width: 100%; height: 40vh; position: relative; overflow: hidden; background-color: var(--color-negro); border-top: 4px solid var(--color-azul); margin-top: 50px; }
+.slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; background-size: cover; background-position: center; }
+.slide.active { opacity: 1; }
+.hero-text { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(26, 26, 26, 0.85); color: var(--color-blanco); padding: 10px 25px; border-radius: 5px; font-family: var(--font-titulos); border-bottom: 3px solid var(--color-azul); white-space: nowrap; }
+
+/* --- EVENTOS --- */
+.evento-header { background-color: var(--color-azul); color: white; padding: 15px; text-align: center; font-family: var(--font-titulos); font-size: 1.6rem; text-transform: uppercase; }
+.evento-body { padding: 25px; text-align: center; }
+.evento-body img.poster-evento { width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin: 0 auto 20px auto; display: block; object-fit: contain; }
+.evento-body p { font-size: 1.1rem; line-height: 1.6; color: #444; margin-bottom: 15px; text-align: justify; }
+
+.galeria-instruccion { text-align: center; color: #666; font-style: italic; margin: 10px 0 20px 0; font-size: 0.9rem; }
+.carousel-container { width: 100%; max-width: 800px; margin: auto; position: relative; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); background-color: var(--color-negro); aspect-ratio: 16/9; cursor: pointer; overflow: hidden; }
+.carousel-slide { display: flex; height: 100%; transition: transform 0.4s ease-in-out; }
+.carousel-slide img { width: 100%; height: 100%; flex-shrink: 0; object-fit: contain; }
+.nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.6); color: white; border: none; font-size: 1.5rem; padding: 10px 15px; border-radius: 5px; cursor: pointer; z-index: 10; transition: background 0.3s; }
+.nav-btn:hover { background-color: rgba(0, 0, 0, 0.9); }
+.nav-btn.prev { left: 10px; }
+.nav-btn.next { right: 10px; }
+
+#lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 99999; display: flex; justify-content: center; align-items: center; }
+#lightbox-img { max-width: 95vw; max-height: 85vh; object-fit: contain; border-radius: 5px; user-select: none; }
+.lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; cursor: pointer; font-weight: bold; transition: color 0.3s; z-index: 100000; }
+.lightbox-close:hover { color: var(--color-azul); }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 40px; cursor: pointer; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 5px; border: none; z-index: 100000; }
+.lightbox-nav.prev { left: 15px; }
+.lightbox-nav.next { right: 15px; }
+
+/* --- EQUIPOS --- */
+.equipos-nav { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+.btn-categoria { background-color: var(--color-negro); color: white; border: none; padding: 20px 25px; font-family: var(--font-titulos); font-size: 1.3rem; border-radius: 8px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid var(--color-azul); box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s, background-color 0.2s; }
+.btn-categoria:hover { transform: translateX(5px); background-color: #222; }
+
+.info-equipo-card { background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; margin-bottom: 25px; }
+.info-header { color: white; padding: 15px; font-family: var(--font-titulos); text-align: center; font-size: 1.4rem; text-transform: uppercase; }
+.info-content { padding: 20px; }
+.info-item { margin-bottom: 15px; }
+.info-item strong { color: var(--color-azul); text-transform: uppercase; display: block; margin-bottom: 5px; font-size: 0.9rem; }
+.lista-jugadores { list-style: none; padding-left: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.lista-jugadores li { padding: 5px 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+
+/* --- REGLAMENTO Y DOCUMENTOS --- */
+.btn-descarga { display: inline-block; background-color: var(--color-azul); color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-family: var(--font-titulos); font-size: 1.2rem; text-transform: uppercase; transition: background-color 0.3s, transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 15px; }
+.btn-descarga:hover { background-color: #153669; transform: translateY(-3px); }
+
+/* --- TIENDA OFICIAL --- */
+.tienda-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-top: 20px; }
+.producto-card { background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden; max-width: 400px; width: 100%; display: flex; flex-direction: column; border-top: 5px solid var(--color-azul); }
+.producto-img-container { width: 100%; height: 300px; background-color: var(--color-gris-claro); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.producto-img-container img { width: 100%; height: 100%; object-fit: contain; }
+.producto-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.producto-sponsor { font-size: 0.8rem; color: #888; text-transform: uppercase; font-weight: bold; margin-bottom: 5px; }
+.producto-titulo { font-family: var(--font-titulos); font-size: 1.6rem; color: var(--color-negro); line-height: 1.2; margin-bottom: 10px; }
+.producto-desc { font-size: 1rem; color: #555; margin-bottom: 15px; }
+.producto-precio { font-family: var(--font-titulos); font-size: 2rem; color: var(--color-azul); margin-bottom: 20px; }
+.btn-tienda { background-color: var(--color-negro); color: white; border: none; padding: 12px; border-radius: 5px; font-family: var(--font-titulos); font-size: 1.1rem; cursor: pointer; text-transform: uppercase; width: 100%; }
+.producto-formulario { display: none; margin-top: 15px; background-color: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; }
+.producto-formulario.activo { display: block; animation: fadeIn 0.3s; }
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; color: var(--color-negro); }
+.form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: var(--font-texto); font-size: 1rem; }
+.btn-whatsapp { background-color: #25D366; color: white; border: none; padding: 12px; border-radius: 5px; font-family: var(--font-titulos); font-size: 1.1rem; cursor: pointer; text-transform: uppercase; width: 100%; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.3s; }
+
+/* --- PAGOS E INSCRIPCIONES --- */
+.pago-card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; margin-bottom: 30px; border-left: 6px solid var(--color-azul); display: flex; flex-direction: column; }
+.pago-header { background-color: var(--color-gris-claro); padding: 20px; text-align: center; border-bottom: 1px solid #eee; }
+.pago-header h3 { font-family: var(--font-titulos); font-size: 1.8rem; color: var(--color-negro); text-transform: uppercase; margin-bottom: 5px; }
+.pago-header .precio { font-family: var(--font-titulos); font-size: 2.2rem; color: var(--color-azul); }
+.pago-body { padding: 25px; }
+.pago-body p { margin-bottom: 15px; color: #444; line-height: 1.6; }
+.banco-info { background-color: #fdfdfd; border: 1px dashed #ccc; padding: 15px; border-radius: 5px; margin: 20px 0; font-family: monospace; font-size: 1.1rem; text-align: center; }
+.btn-form-pago { display: block; text-align: center; background-color: var(--color-negro); color: white; text-decoration: none; padding: 15px; border-radius: 5px; font-family: var(--font-titulos); font-size: 1.2rem; text-transform: uppercase; transition: background-color 0.3s; }
+.btn-form-pago:hover { background-color: var(--color-azul); }
+.recargo-nota { color: #E4405F; font-weight: bold; font-size: 0.9rem; margin-top: 10px; display: block; }
+
+/* Footer */
+.footer { background-color: var(--color-negro); color: var(--color-blanco); padding: 40px 20px; text-align: center; margin-top: 40px;}
+.footer h3 { font-family: var(--font-titulos); font-size: 1.5rem; text-transform: uppercase; margin-bottom: 20px;}
+.social-icons { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+.social-icons a { color: var(--color-blanco); font-size: 35px; transition: transform 0.3s; }
+.social-icons a:hover { transform: translateY(-5px); color: var(--color-azul); }
+
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800">
-    
-    <div id="root"></div>
+<body>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
+  <header class="top-navbar">
+    <div class="header-left" onclick="showView('inicio')">
+      <div class="logo-circle">H</div>
+      <div class="logo-text">
+        <span class="logo-title">HALCONES</span>
+        <span class="logo-subtitle">BASKETBALL CLUB</span>
+      </div>
+    </div>
+    <i class="fa-solid fa-bars menu-icon" onclick="toggleMenu()"></i>
+  </header>
 
-        // --- ICONOS SVG ---
-        const Icon = ({ path, size = 24, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>{path}</svg>
-        );
+  <nav id="mobile-menu">
+    <a href="#" onclick="showView('inicio')">Inicio</a>
+    <a href="#" onclick="showView('eventos')">Eventos y Participaciones</a>
+    <a href="#" onclick="showView('equipos')">Equipos, Horarios y Sedes</a>
+    <a href="#" onclick="showView('pagos')">Pagos y Mensualidades</a>
+    <a href="#" onclick="showView('documentos')">Reglamento y Responsivas</a>
+    <a href="#" onclick="showView('tienda')">Tienda Oficial</a>
+  </nav>
 
-        const Icons = {
-            Menu: (props) => <Icon {...props} path={<><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></>} />,
-            X: (props) => <Icon {...props} path={<><path d="M18 6 6 18"/><path d="m6 6 12 12"/></>} />,
-            Calendar: (props) => <Icon {...props} path={<><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></>} />,
-            Users: (props) => <Icon {...props} path={<><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>} />,
-            Trophy: (props) => <Icon {...props} path={<><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></>} />,
-            ChevronRight: (props) => <Icon {...props} path={<path d="m9 18 6-6-6-6"/>} />,
-            ChevronLeft: (props) => <Icon {...props} path={<path d="m15 18-6-6 6-6"/>} />,
-            MapPin: (props) => <Icon {...props} path={<><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></>} />,
-            Facebook: (props) => <Icon {...props} path={<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>} />,
-            Instagram: (props) => <Icon {...props} path={<><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></>} />,
-            Phone: (props) => <Icon {...props} path={<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>} />,
-            DollarSign: (props) => <Icon {...props} path={<><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>} />,
-            FileText: (props) => <Icon {...props} path={<><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></>} />,
-            Image: (props) => <Icon {...props} path={<><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></>} />,
-            Clock: (props) => <Icon {...props} path={<><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>} />,
-            TikTok: (props) => <Icon {...props} path={<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>} />
-        };
+  <button id="btn-back" class="hidden" onclick="goBack()">
+    <i class="fa-solid fa-arrow-left"></i> Regresar
+  </button>
+  <a href="https://wa.me/5635782679" class="whatsapp-fixed" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
-        const categories = ["2018-2019", "2016-2017", "2014-2015", "2012-2013", "2010-2011", "2008-2009", "2006-2007", "2005 y más"];
+  <main id="inicio-view" class="view-section active">
+    <img src="https://imgur.com/7vRA7g5.jpg" alt="Banner Halcones" class="hero-banner">
 
-        const galeriaImages = [
-            "https://imgur.com/Tj0afiB.jpg", "https://imgur.com/01ZFIqT.jpg", "https://imgur.com/A0jDfml.jpg",
-            "https://imgur.com/U1ZL4QN.jpg", "https://imgur.com/malNEdk.jpg", "https://imgur.com/VWxXwsP.jpg",
-            "https://imgur.com/cBRclgP.jpg", "https://imgur.com/Wk25F9R.jpg"
-        ];
+    <div class="container">
+      <h2>Lo Destacado del Mes</h2>
 
-        const skillsImages = [
-            "https://imgur.com/BQlw2fC.jpg", "https://imgur.com/RHsCnDb.jpg", "https://imgur.com/SzdsEan.jpg",
-            "https://imgur.com/YnUKiQk.jpg", "https://imgur.com/JjY5D7c.jpg", "https://imgur.com/WUAPnHb.jpg",
-            "https://imgur.com/EGPuHVb.jpg", "https://imgur.com/CjPy71F.jpg", "https://imgur.com/gq6ZHTL.jpg",
-            "https://imgur.com/d8PdqmG.jpg", "https://imgur.com/Ct0nWbF.jpg", "https://imgur.com/wmUvDno.jpg",
-            "https://imgur.com/9MTXi32.jpg", "https://imgur.com/FBoXDWG.jpg", "https://imgur.com/r7iUnGC.jpg",
-            "https://imgur.com/E8SQcdD.jpg", "https://imgur.com/uJupOQB.jpg", "https://imgur.com/SHvHn15.jpg",
-            "https://imgur.com/qL6GCDK.jpg", "https://imgur.com/AvgCmuD.jpg", "https://imgur.com/IpYFXar.jpg",
-            "https://imgur.com/r7HZJdw.jpg", "https://imgur.com/NVFvUhQ.jpg"
-        ];
+      <div class="card cumpleanos-card">
+        <i class="fa-solid fa-cake-candles"></i>
+        <h3>Cumpleañeros del Mes</h3>
+        <ul class="cumpleanos-lista">
+          <li><strong>Día 5:</strong> Carlos Gómez</li>
+          <li><strong>Día 12:</strong> Ana Torres</li>
+          <li><strong>Día 22:</strong> Coach Miguel</li>
+        </ul>
+      </div>
 
-        // --- COMPONENTE INDIVIDUAL PARA EL JUGADOR CONVOCADO ---
-        const ConvocadoItem = ({ jugador, categoria, rama }) => {
-            // Verifica si el jugador ya tiene en su Asistencia la palabra "Voy" o "Confirmado"
-            const [confirmado, setConfirmado] = useState(
-                jugador.asistencia && (jugador.asistencia.includes('Voy') || jugador.asistencia.includes('✅'))
-            );
-            const [cargando, setCargando] = useState(false);
+      <h3 class="category-title">Categoría 2020-2019</h3>
+      <div class="destacados-grid">
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Varonil"></div><div class="info"><span class="card-label">Varonil</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/E4405F/FFFFFF?text=FOTO" alt="Femenil"></div><div class="info"><span class="card-label">Femenil</span><p class="player-name">Nombre Jugadora</p><p class="player-number">#00</p></div></div>
+      </div>
 
-            const handleConfirmar = async () => {
-                if(confirmado) return;
-                setCargando(true);
-                
-                // TU ENLACE DE APPS SCRIPT
-                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQb_Uip_wWaqhOABWoYpRN-TK2iw3yAq-Of-2udNuTT7Tmsm4BbKID2O2mDwSHWzGi/exec';
+      <h3 class="category-title">Categoría 2018-2017</h3>
+      <div class="destacados-grid">
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Varonil"></div><div class="info"><span class="card-label">Varonil</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/E4405F/FFFFFF?text=FOTO" alt="Femenil"></div><div class="info"><span class="card-label">Femenil</span><p class="player-name">Nombre Jugadora</p><p class="player-number">#00</p></div></div>
+      </div>
 
-                try {
-                    // Armamos el link con los datos exactos del niño
-                    const url = `${SCRIPT_URL}?categoria=${encodeURIComponent(categoria)}&rama=${encodeURIComponent(rama)}&nombre=${encodeURIComponent(jugador.nombre)}`;
+      <h3 class="category-title">Categoría 2016-2015</h3>
+      <div class="destacados-grid">
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Varonil"></div><div class="info"><span class="card-label">Varonil</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/E4405F/FFFFFF?text=FOTO" alt="Femenil"></div><div class="info"><span class="card-label">Femenil</span><p class="player-name">Nombre Jugadora</p><p class="player-number">#00</p></div></div>
+      </div>
 
-                    // Hacemos el envío en modo silencioso (no-cors) usando GET
-                    await fetch(url, { method: 'GET', mode: 'no-cors' });
-                    
-                    // Actualizamos el botón visualmente
-                    setConfirmado(true);
-                } catch (error) {
-                    console.error("Error confirmando", error);
-                    alert("Hubo un error al confirmar. Intenta nuevamente.");
-                }
-                setCargando(false);
-            };
+      <h3 class="category-title">Categoría 2014-2013</h3>
+      <div class="destacados-grid">
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Varonil"></div><div class="info"><span class="card-label">Varonil</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/E4405F/FFFFFF?text=FOTO" alt="Femenil"></div><div class="info"><span class="card-label">Femenil</span><p class="player-name">Nombre Jugadora</p><p class="player-number">#00</p></div></div>
+      </div>
 
-            return (
-                <div className="bg-white border border-gray-200 px-4 py-3 rounded-lg shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3 w-full max-w-sm hover:border-[#0D47A1] transition-colors">
-                    <span className="text-gray-700 font-bold text-sm flex items-center gap-2">
-                        <Icons.Users size={16} className="text-[#0D47A1]" /> {jugador.nombre}
-                    </span>
-                    <button 
-                        onClick={handleConfirmar}
-                        disabled={confirmado || cargando}
-                        className={`text-xs font-bold px-4 py-2 rounded-full transition-all w-full sm:w-auto shadow-sm ${
-                            confirmado ? 'bg-green-100 text-green-700 border border-green-300 cursor-not-allowed' : 
-                            cargando ? 'bg-gray-200 text-gray-500 cursor-wait' : 
-                            'bg-gray-100 text-gray-600 hover:bg-[#0D47A1] hover:text-white border border-gray-300'
-                        }`}
-                    >
-                        {cargando ? 'Enviando...' : confirmado ? '✅ Confirmado' : 'Confirmar'}
-                    </button>
-                </div>
-            );
-        };
+      <h3 class="category-title">Categoría 2012-2011</h3>
+      <div class="destacados-grid">
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Div A"></div><div class="info"><span class="card-label">División A</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Div B"></div><div class="info"><span class="card-label">División B</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Div C"></div><div class="info"><span class="card-label">División C</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
+      </div>
 
-        // ==========================================
-        // APLICACIÓN PRINCIPAL (REACT)
-        // ==========================================
+      <h3 class="category-title">Categoría 2010-2009</h3>
+      <div class="destacados-grid">
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Varonil"></div><div class="info"><span class="card-label">Varonil</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/E4405F/FFFFFF?text=FOTO" alt="Femenil"></div><div class="info"><span class="card-label">Femenil</span><p class="player-name">Nombre Jugadora</p><p class="player-number">#00</p></div></div>
+      </div>
 
-        const App = () => {
-            const [view, setView] = useState('home');
-            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-            const [selectedCategory, setSelectedCategory] = useState(null);
-            const [selectedGender, setSelectedGender] = useState('varonil');
-            const [activeSubCategory, setActiveSubCategory] = useState(null);
-            
-            // Estados Datos
-            const [partidoData, setPartidoData] = useState({});
-            const [convocadosData, setConvocadosData] = useState({});
-            const [playerData, setPlayerData] = useState({});
-            const [isLoadingData, setIsLoadingData] = useState(true);
+      <h3 class="category-title">Categoría 2008 y más</h3>
+      <div class="destacados-grid">
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/1a1a1a/FFFFFF?text=FOTO" alt="Destacado"></div><div class="info"><span class="card-label">Destacado</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
+      </div>
 
-            // Lightbox & Swipe
-            const [lightboxOpen, setLightboxOpen] = useState(false);
-            const [lightboxImages, setLightboxImages] = useState([]);
-            const [currentImageIndex, setCurrentImageIndex] = useState(0);
-            const [touchStart, setTouchStart] = useState(null);
-            const [touchEnd, setTouchEnd] = useState(null);
-            const minSwipeDistance = 50;
+      <h3 class="category-title">Mamás y Papás</h3>
+      <div class="destacados-grid">
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/E4405F/FFFFFF?text=FOTO" alt="Mamás"></div><div class="info"><span class="card-label">Mamás</span><p class="player-name">Nombre Mamá</p><p class="player-number">M</p></div></div>
+        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Papás"></div><div class="info"><span class="card-label">Papás</span><p class="player-name">Nombre Papá</p><p class="player-number">P</p></div></div>
+      </div>
 
-            useEffect(() => {
-                const fetchAllData = async () => {
-                    try {
-                        const SHEET_PARTIDOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTKi_8DOsLB-a-uIa4_FoAmfQvNb-eQ7C4yGLcvFJHKe3kwkh_xsMm3oNwhQ_NQfcd_bpsTkMSz85Kv/pub?gid=0&single=true&output=csv';
-                        const SHEET_CONVOCADOS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTKi_8DOsLB-a-uIa4_FoAmfQvNb-eQ7C4yGLcvFJHKe3kwkh_xsMm3oNwhQ_NQfcd_bpsTkMSz85Kv/pub?gid=871508015&single=true&output=csv';
-                        const SHEET_JUGADORES_URL = 'PEGAR_AQUI_LINK_JUGADORES'; // <- Opcional si ya lo creaste
+    </div>
 
-                        // 1. Partidos
-                        const resPartidos = await fetch(SHEET_PARTIDOS_URL);
-                        const textPartidos = await resPartidos.text();
-                        const newPartidoData = {};
-                        categories.forEach(cat => { newPartidoData[cat] = { varonil: [], femenil: [] }; });
+    <div class="hero-slider">
+      <div class="slide active" style="background-image: url('https://imgur.com/Tj0afiB.jpg');"></div>
+      <div class="slide" style="background-image: url('https://imgur.com/01ZFIqT.jpg');"></div>
+      <div class="hero-text">FAMILIA HALCONES BASKETBALL</div>
+    </div>
+  </main>
 
-                        textPartidos.split('\n').slice(1).forEach(fila => {
-                            if (!fila || fila.trim() === '') return;
-                            const columnas = fila.split(',');
-                            if (columnas.length < 9) return;
-                            const [categoria, rama, subcategoria, torneo, fecha, hora, lugar, lugarLink, resultado] = columnas.map(c => c.trim().replace(/^"|"$/g, ''));
-                            if (!newPartidoData[categoria] || !newPartidoData[categoria][rama]) return; 
-                            
-                            const nuevoPartido = { torneo, fecha, hora, lugar, resultado, lugarLink };
-                            if (subcategoria && subcategoria !== "") {
-                                if (Array.isArray(newPartidoData[categoria][rama])) newPartidoData[categoria][rama] = {}; 
-                                if (!newPartidoData[categoria][rama][subcategoria]) newPartidoData[categoria][rama][subcategoria] = [];
-                                newPartidoData[categoria][rama][subcategoria].push(nuevoPartido);
-                            } else {
-                                newPartidoData[categoria][rama].push(nuevoPartido);
-                            }
-                        });
-                        setPartidoData(newPartidoData);
+  <main id="eventos-view" class="view-section">
+    <div class="container">
+      <h2>Eventos y Participaciones</h2>
 
-                        // 2. Convocados (Ahora lee la columna 5: Asistencia)
-                        const resConvocados = await fetch(SHEET_CONVOCADOS_URL);
-                        const textConvocados = await resConvocados.text();
-                        const newConvocadosData = {};
-                        categories.forEach(cat => { newConvocadosData[cat] = { varonil: [], femenil: [] }; });
+      <div class="card">
+        <div class="evento-header">Nacional 3x3 ADEMEBA</div>
+        <div class="evento-body">
+          <img src="https://via.placeholder.com/800x400/151515/FFFFFF?text=Banner+Nacional+3x3" alt="Nacional 3x3" class="poster-evento">
+          <p>Nuestros equipos representativos se dirigen al torneo Nacional 3x3 avalado por ADEMEBA.</p>
+        </div>
+      </div>
 
-                        textConvocados.split('\n').slice(1).forEach(fila => {
-                            if (!fila || fila.trim() === '') return;
-                            const columnas = fila.split(',');
-                            // Necesitamos al menos 4 columnas, la 5ta (Asistencia) es opcional en Excel si está vacía
-                            if (columnas.length < 4) return;
-                            
-                            const [categoria, rama, subcategoria, nombre, asistencia] = columnas.map(c => c.trim().replace(/^"|"$/g, ''));
-                            if (!newConvocadosData[categoria] || !newConvocadosData[categoria][rama] || !nombre) return; 
+      <div class="card">
+        <div class="evento-header">Skills Camp 2025</div>
+        <div class="evento-body">
+          <img src="https://imgur.com/iEO681y.jpg" alt="Skills Camp" class="poster-evento">
+          <p>Potencia tus habilidades en nuestro campamento técnico.</p>
+          <p style="font-style: italic; color: var(--color-azul); font-weight: bold; margin-top: 20px;">PRÓXIMAMENTE 2026...</p>
+          
+          <h3 style="font-family: var(--font-titulos); margin: 30px 0 10px 0; font-size: 1.5rem; color: var(--color-azul);">Galería Skills Camp</h3>
+          <p class="galeria-instruccion"><i class="fa-solid fa-hand-pointer"></i> Da clic para ver la galería o desliza para navegar</p>
+          
+          <div class="carousel-container" id="carousel-eventos">
+            <div class="carousel-slide" id="slide-eventos">
+              <img src="https://imgur.com/BQlw2fC.jpg" class="gallery-img">
+              <img src="https://imgur.com/RHsCnDb.jpg" class="gallery-img">
+              <img src="https://imgur.com/SzdsEan.jpg" class="gallery-img">
+            </div>
+            <button class="nav-btn prev" onclick="moveCarousel(-1, event)">❮</button>
+            <button class="nav-btn next" onclick="moveCarousel(1, event)">❯</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-                            const convocadoObj = { nombre, asistencia: asistencia || '' };
+  <div id="lightbox" class="hidden">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <button class="lightbox-nav prev" onclick="changeLightboxImg(-1)">❮</button>
+    <img id="lightbox-img" src="">
+    <button class="lightbox-nav next" onclick="changeLightboxImg(1)">❯</button>
+  </div>
 
-                            if (subcategoria && subcategoria !== "") {
-                                if (Array.isArray(newConvocadosData[categoria][rama])) newConvocadosData[categoria][rama] = {}; 
-                                if (!newConvocadosData[categoria][rama][subcategoria]) newConvocadosData[categoria][rama][subcategoria] = [];
-                                newConvocadosData[categoria][rama][subcategoria].push(convocadoObj);
-                            } else {
-                                newConvocadosData[categoria][rama].push(convocadoObj);
-                            }
-                        });
-                        setConvocadosData(newConvocadosData);
+  <main id="equipos-view" class="view-section">
+    <div class="container">
+      <h2>Equipos, Horarios y Sedes</h2>
+      <div class="equipos-nav">
+        <button class="btn-categoria" onclick="abrirDetalle('cat_2020')">Categoría 2020-2019 <i class="fa-solid fa-chevron-right"></i></button>
+        <button class="btn-categoria" onclick="abrirDetalle('cat_2018')">Categoría 2018-2017 <i class="fa-solid fa-chevron-right"></i></button>
+        <button class="btn-categoria" onclick="abrirDetalle('cat_2016')">Categoría 2016-2015 <i class="fa-solid fa-chevron-right"></i></button>
+        <button class="btn-categoria" onclick="abrirDetalle('cat_2014')">Categoría 2014-2013 <i class="fa-solid fa-chevron-right"></i></button>
+        <button class="btn-categoria" onclick="abrirDetalle('cat_2012')">Categoría 2012-2011 <i class="fa-solid fa-chevron-right"></i></button>
+        <button class="btn-categoria" onclick="abrirDetalle('cat_2010')">Categoría 2010-2009 <i class="fa-solid fa-chevron-right"></i></button>
+        <button class="btn-categoria" onclick="abrirDetalle('cat_2008')">Categoría 2008 y más <i class="fa-solid fa-chevron-right"></i></button>
+        <button class="btn-categoria" onclick="abrirDetalle('cat_papas')">Mamás y Papás <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </main>
 
-                        // 3. Jugadores
-                        const newPlayerData = {};
-                        categories.forEach(cat => { newPlayerData[cat] = { varonil: [], femenil: [] }; });
-                        if(SHEET_JUGADORES_URL !== 'PEGAR_AQUI_LINK_JUGADORES') {
-                            const resJugadores = await fetch(SHEET_JUGADORES_URL);
-                            const textJugadores = await resJugadores.text();
-                            textJugadores.split('\n').slice(1).forEach(fila => {
-                                if (!fila || fila.trim() === '') return;
-                                const columnas = fila.split(',');
-                                if (columnas.length < 6) return;
-                                const [categoria, rama, nombre, posicion, numero, fotoUrl, pago] = columnas.map(c => c.trim().replace(/^"|"$/g, ''));
-                                if (!newPlayerData[categoria] || !newPlayerData[categoria][rama] || !nombre) return; 
-                                newPlayerData[categoria][rama].push({
-                                    name: nombre, position: posicion, number: numero, img: fotoUrl || 'https://via.placeholder.com/300x400?text=Sin+Foto', pagoStatus: pago
-                                });
-                            });
-                        }
-                        setPlayerData(newPlayerData);
-                        setIsLoadingData(false);
-                    } catch (error) {
-                        console.error("Error al conectar con Google Sheets:", error);
-                        setIsLoadingData(false);
-                    }
-                };
-                fetchAllData();
-            }, []);
+  <main id="detalle-view" class="view-section">
+    <div class="container">
+      <h2 id="detalle-titulo" style="margin-top: 50px;">Nombre Categoría</h2>
+      <div id="detalle-contenido"></div>
+    </div>
+  </main>
 
-            // Utilidades UI
-            const openLightbox = (images, index = 0) => { setLightboxImages(images); setCurrentImageIndex(index); setLightboxOpen(true); };
-            const closeLightbox = () => setLightboxOpen(false);
-            const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % lightboxImages.length);
-            const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length);
-            const onTouchStart = (e) => { setTouchEnd(null); setTouchStart(e.targetTouches[0].clientX); };
-            const onTouchMove = (e) => { setTouchEnd(e.targetTouches[0].clientX); };
-            const onTouchEnd = () => {
-                if (!touchStart || !touchEnd) return;
-                const distance = touchStart - touchEnd;
-                if (distance > minSwipeDistance) nextImage();
-                if (distance < -minSwipeDistance) prevImage();
-            };
-            const navigateTo = (target) => { setView(target); setMobileMenuOpen(false); window.scrollTo(0, 0); };
+  <main id="pagos-view" class="view-section">
+    <div class="container">
+      <h2>Pagos y Mensualidades</h2>
+      
+      <div class="pago-card">
+        <div class="pago-header">
+          <h3>Inscripción de Nuevo Ingreso</h3>
+          <span class="precio">$400 MXN</span>
+        </div>
+        <div class="pago-body">
+          <p><strong><i class="fa-solid fa-gift" style="color:var(--color-azul);"></i> ¡Promoción!</strong> Tu pago de inscripción incluye el <strong>primer mes de entrenamiento totalmente GRATIS</strong>.</p>
+          <p>Para inscribirte, realiza el pago mediante transferencia bancaria a la siguiente cuenta:</p>
+          
+          <div class="banco-info">
+            <strong>Banco:</strong> NOMBRE_DEL_BANCO<br>
+            <strong>CLABE:</strong> 000000000000000000<br>
+            <strong>Titular:</strong> NOMBRE_DEL_TITULAR
+          </div>
 
-            // COMPONENTES
-            const Navbar = () => (
-                <nav className="sticky top-0 z-50 bg-[#1a1a1a] text-white shadow-xl border-b border-gray-800">
-                    <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-                        <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigateTo('home')}>
-                            <div className="w-10 h-10 bg-[#0D47A1] rounded-full flex items-center justify-center font-bold border-2 border-white text-lg shadow-[0_0_10px_rgba(13,71,161,0.8)]">H</div>
-                            <div className="leading-none">
-                                <h1 className="text-xl font-bold tracking-tighter font-oswald uppercase text-white">HALCONES</h1>
-                                <span className="text-[10px] text-gray-400 tracking-[0.2em] uppercase">Basketball Club</span>
-                            </div>
-                        </div>
-                        <div className="hidden md:flex items-center gap-2">
-                            {['home', 'team', 'games', 'membership', 'events', 'gallery'].map((item) => (
-                                <button key={item} onClick={() => navigateTo(item)} className={`px-4 py-2 rounded-md text-sm font-bold uppercase transition-all duration-300 font-roboto ${view === item ? 'bg-[#0D47A1] text-white shadow-md transform -translate-y-0.5' : 'text-gray-300 hover:bg-gray-800 hover:text-white'}`}>
-                                    {item === 'home' ? 'Inicio' : item === 'team' ? 'Equipo' : item === 'games' ? 'Partidos' : item === 'membership' ? 'Membresías' : item === 'events' ? 'Eventos' : 'Galería'}
-                                </button>
-                            ))}
-                        </div>
-                        <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                            {mobileMenuOpen ? <Icons.X size={28} /> : <Icons.Menu size={28} />}
-                        </button>
-                    </div>
-                    {mobileMenuOpen && (
-                        <div className="md:hidden bg-[#1a1a1a] border-t border-gray-700 absolute w-full left-0 animate-fadeIn">
-                            {['home', 'team', 'games', 'membership', 'events', 'gallery'].map((item) => (
-                                <button key={item} onClick={() => navigateTo(item)} className="block w-full text-left px-6 py-4 border-b border-gray-800 text-gray-200 font-bold uppercase active:bg-[#0D47A1]">
-                                    {item === 'home' ? 'Inicio' : item === 'team' ? 'Equipo' : item === 'games' ? 'Partidos' : item === 'membership' ? 'Membresías' : item === 'events' ? 'Eventos' : 'Galería'}
-                                </button>
-                            ))}
-                        </div>
-                    )}
-                </nav>
-            );
+          <p>Una vez realizado el pago, da clic en el siguiente botón para subir tu comprobante y llenar tus datos personales en nuestro sistema de registro oficial:</p>
+          
+          <a href="LINK_FORM_INSCRIPCION" target="_blank" class="btn-form-pago">
+            <i class="fa-solid fa-file-signature"></i> Llenar Registro y Subir Comprobante
+          </a>
+        </div>
+      </div>
 
-            const Hero = () => (
-                <div className="relative h-[60vh] flex items-center justify-center bg-black overflow-hidden">
-                    <div className="absolute inset-0 bg-cover bg-center opacity-60" style={{ backgroundImage: "url('https://imgur.com/7vRA7g5.jpg')" }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-black/50"></div>
-                    <div className="relative z-10 text-center px-4 animate-fadeIn flex flex-col items-center">
-                        <div className="bg-[#0D47A1]/90 backdrop-blur-sm p-8 md:p-12 rounded-sm border-b-8 border-[#1a1a1a] shadow-2xl max-w-3xl mx-auto mb-8">
-                            <h2 className="text-4xl md:text-6xl font-bold text-white font-oswald mb-2 drop-shadow-lg">HALCONES</h2>
-                            <p className="text-blue-100 text-lg md:text-xl tracking-widest font-oswald uppercase">Basketball Club</p>
-                        </div>
-                        <button onClick={() => navigateTo('membership')} className="bg-white text-[#0D47A1] px-10 py-4 rounded-full font-bold uppercase tracking-wide hover:bg-gray-200 transition-colors shadow-2xl border-2 border-[#0D47A1] transform hover:scale-105">Únete al Equipo</button>
-                    </div>
-                </div>
-            );
+      <div class="pago-card">
+        <div class="pago-header">
+          <h3>Pago de Mensualidad</h3>
+          <span class="precio">Alumnos Activos</span>
+        </div>
+        <div class="pago-body">
+          <p>Las mensualidades deben cubrirse puntualmente durante los <strong>primeros 5 días de cada mes</strong>. Puedes realizar tu pago mediante transferencia a la misma cuenta del club.</p>
+          
+          <span class="recargo-nota"><i class="fa-solid fa-circle-exclamation"></i> Importante: Pasados los primeros 5 días, se cobrará un recargo de $30 MXN por cada día de atraso.</span>
+          
+          <div class="banco-info">
+            <strong>CLABE:</strong> 000000000000000000
+          </div>
 
-            const TeamView = () => {
-                const data = playerData[selectedCategory];
-                return (
-                    <div className="container mx-auto px-4 py-10 animate-fadeIn min-h-screen">
-                        {!selectedCategory ? (
-                            <div className="text-center">
-                                <h2 className="text-4xl font-bold text-[#0D47A1] font-oswald mb-4 uppercase">Nuestros Equipos</h2>
-                                <p className="text-gray-600 mb-10">Selecciona una categoría para conocer a nuestros jugadores y jugadoras.</p>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-                                    {categories.map((cat) => (
-                                        <button key={cat} onClick={() => setSelectedCategory(cat)} className="bg-white border-l-4 border-[#0D47A1] p-6 rounded-r-lg shadow-md hover:shadow-xl hover:bg-[#0D47A1] hover:text-white transition-all group text-left">
-                                            <div className="flex justify-between items-center"><span className="font-oswald text-xl font-bold">{cat}</span><Icons.ChevronRight size={20} className="text-[#0D47A1] group-hover:text-white" /></div>
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        ) : (
-                            <div>
-                                <button onClick={() => setSelectedCategory(null)} className="mb-6 flex items-center text-gray-500 hover:text-[#0D47A1] font-bold transition-colors"><Icons.ChevronLeft size={20} /> REGRESAR</button>
-                                <div className="flex flex-col md:flex-row justify-between items-center mb-8 border-b-2 border-gray-200 pb-4">
-                                    <h2 className="text-3xl md:text-4xl font-oswald font-bold text-[#0D47A1]">CATEGORÍA {selectedCategory}</h2>
-                                    <div className="flex bg-gray-200 p-1 rounded-lg mt-4 md:mt-0">
-                                        <button onClick={() => setSelectedGender('varonil')} className={`px-6 py-2 rounded-md font-bold text-sm uppercase transition-all ${selectedGender === 'varonil' ? 'bg-[#0D47A1] text-white shadow' : 'text-gray-600'}`}>Varonil</button>
-                                        <button onClick={() => setSelectedGender('femenil')} className={`px-6 py-2 rounded-md font-bold text-sm uppercase transition-all ${selectedGender === 'femenil' ? 'bg-[#0D47A1] text-white shadow' : 'text-gray-600'}`}>Femenil</button>
-                                    </div>
-                                </div>
-                                
-                                {isLoadingData ? (
-                                    <div className="text-center py-10 text-gray-500"><p className="animate-pulse">Cargando jugadores...</p></div>
-                                ) : (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                        {data && data[selectedGender] && data[selectedGender].length > 0 ? (
-                                            data[selectedGender].map((player, idx) => (
-                                                <div key={idx} className="bg-white rounded-xl shadow-lg overflow-hidden hover:-translate-y-2 transition-transform duration-300 group relative">
-                                                    {player.pagoStatus && player.pagoStatus.toLowerCase() === 'pagado' && (
-                                                        <div className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-md flex items-center gap-1">★ Activo</div>
-                                                    )}
-                                                    <div className="h-72 overflow-hidden relative bg-gray-100">
-                                                        <img src={player.img} alt={player.name} className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500" />
-                                                        <div className="absolute top-0 right-0 bg-[#0D47A1] text-white font-oswald font-bold px-3 py-1 rounded-bl-lg shadow-md">{player.number}</div>
-                                                    </div>
-                                                    <div className="p-4 text-center border-t-4 border-[#0D47A1]">
-                                                        <h4 className="font-oswald text-xl font-bold text-gray-800">{player.name}</h4>
-                                                        <p className="text-sm text-gray-500 font-bold uppercase mt-1">{player.position}</p>
-                                                    </div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <div className="col-span-full py-12 text-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-300"><Icons.Users className="mx-auto text-gray-300 mb-2" size={48} /><p className="text-gray-500">No hay registros en esta rama.</p></div>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                        )}
-                    </div>
-                );
-            };
+          <p>Registra tu pago mensual aquí para mantener tu expediente actualizado:</p>
+          
+          <a href="LINK_FORM_MENSUALIDAD" target="_blank" class="btn-form-pago">
+            <i class="fa-solid fa-upload"></i> Registrar Pago de Mensualidad
+          </a>
+        </div>
+      </div>
 
-            const GamesView = () => {
-                const genderData = partidoData[selectedCategory]?.[selectedGender];
-                const hasSubCategories = genderData && typeof genderData === 'object' && !Array.isArray(genderData);
-                
-                useEffect(() => {
-                    if (hasSubCategories) {
-                        const subs = Object.keys(genderData);
-                        if (!activeSubCategory || !subs.includes(activeSubCategory)) setActiveSubCategory(subs[0]);
-                    } else {
-                        setActiveSubCategory(null);
-                    }
-                }, [selectedCategory, selectedGender, genderData]);
+    </div>
+  </main>
 
-                let finalPartidos = [];
-                let finalConvocados = [];
+  <main id="documentos-view" class="view-section">
+    <div class="container">
+      <h2>Reglamento y Responsivas</h2>
+      <div class="card" style="padding: 40px 20px; text-align: center;">
+        <i class="fa-solid fa-file-pdf" style="font-size: 5rem; color: #E4405F; margin-bottom: 20px;"></i>
+        <h3 style="font-family: var(--font-titulos); font-size: 1.8rem; margin-bottom: 15px; text-transform: uppercase;">Documentación Oficial del Club</h3>
+        <p style="margin-bottom: 25px; color: #555; line-height: 1.6; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Aquí puedes descargar nuestro reglamento interno y las cartas responsivas necesarias para la participación oficial en nuestros entrenamientos, ligas y torneos.
+        </p>
+        <a href="AQUI_PONES_TU_LINK_DEL_PDF" target="_blank" class="btn-descarga">
+          <i class="fa-solid fa-download" style="margin-right: 8px;"></i> Descargar Documentos (PDF)
+        </a>
+      </div>
+    </div>
+  </main>
 
-                if (hasSubCategories && activeSubCategory) {
-                    finalPartidos = genderData[activeSubCategory] || [];
-                    finalConvocados = convocadosData[selectedCategory]?.[selectedGender]?.[activeSubCategory] || [];
-                } else {
-                    finalPartidos = genderData || [];
-                    finalConvocados = convocadosData[selectedCategory]?.[selectedGender] || [];
-                }
+  <main id="tienda-view" class="view-section">
+    <div class="container">
+      <h2>Tienda Oficial</h2>
+      <p style="text-align: center; color: #666; margin-bottom: 30px;">Adquiere la indumentaria oficial del club. Selecciona tu producto y haz tu pedido directamente por WhatsApp.</p>
+      
+      <div class="tienda-grid">
+        <div class="producto-card">
+          <div class="producto-img-container">
+            <img src="https://via.placeholder.com/400x400/151515/FFFFFF?text=FOTO+UNIFORME+JUEGO" alt="Uniforme de Juego">
+          </div>
+          <div class="producto-info">
+            <span class="producto-sponsor">Por Olimpo Sports</span>
+            <h3 class="producto-titulo">Uniforme de Juego Oficial</h3>
+            <p class="producto-desc">Incluye playera negra, playera blanca y short.</p>
+            <p class="producto-precio">$700 MXN</p>
+            <button class="btn-tienda" onclick="toggleFormulario('form-juego')">Hacer Pedido</button>
+            <div id="form-juego" class="producto-formulario">
+              <div class="form-group"><label>Nombre en la playera (Espalda):</label><input type="text" id="nombre-juego" placeholder="Ej. PÉREZ"></div>
+              <div class="form-group"><label>Número:</label><input type="number" id="numero-juego" placeholder="Ej. 10" min="0" max="99"></div>
+              <div class="form-group">
+                <label>Talla:</label>
+                <select id="talla-juego">
+                  <option value="" disabled selected>Selecciona tu talla</option>
+                  <option value="YXS (Infantil)">YXS (Infantil)</option>
+                  <option value="YS (Infantil)">YS (Infantil)</option>
+                  <option value="YM (Infantil)">YM (Infantil)</option>
+                  <option value="YL (Infantil)">YL (Infantil)</option>
+                  <option value="S (Adulto)">S (Adulto)</option>
+                  <option value="M (Adulto)">M (Adulto)</option>
+                  <option value="L (Adulto)">L (Adulto)</option>
+                  <option value="XL (Adulto)">XL (Adulto)</option>
+                </select>
+              </div>
+              <button class="btn-whatsapp" onclick="enviarPedidoJuego()"><i class="fab fa-whatsapp"></i> Enviar por WhatsApp</button>
+            </div>
+          </div>
+        </div>
 
-                return (
-                    <div className="container mx-auto px-4 py-10 animate-fadeIn min-h-screen">
-                        <button onClick={() => navigateTo('home')} className="mb-6 flex items-center text-gray-500 hover:text-[#0D47A1] font-bold"><Icons.ChevronLeft size={20} /> REGRESAR</button>
-                        <div className="text-center mb-8">
-                            <h2 className="text-4xl font-bold text-[#0D47A1] font-oswald uppercase mb-2">Calendario y Resultados</h2>
-                            <p className="text-gray-600">Consulta la programación oficial y confirma asistencia.</p>
-                        </div>
+        <div class="producto-card">
+          <div class="producto-img-container">
+            <img src="https://via.placeholder.com/400x400/1E4D94/FFFFFF?text=FOTO+UNIFORME+ENTRENAMIENTO" alt="Uniforme de Entrenamiento">
+          </div>
+          <div class="producto-info">
+            <span class="producto-sponsor">Básico del Club</span>
+            <h3 class="producto-titulo">Uniforme de Entrenamiento</h3>
+            <p class="producto-desc">Playera reversible (Azul y Negra) y short deportivo solo con logo del club.</p>
+            <p class="producto-precio">$450 MXN</p>
+            <button class="btn-tienda" onclick="toggleFormulario('form-entrenamiento')">Hacer Pedido</button>
+            <div id="form-entrenamiento" class="producto-formulario">
+              <div class="form-group">
+                <label>Talla:</label>
+                <select id="talla-entrenamiento">
+                  <option value="" disabled selected>Selecciona tu talla</option>
+                  <option value="YXS (Infantil)">YXS (Infantil)</option>
+                  <option value="YS (Infantil)">YS (Infantil)</option>
+                  <option value="YM (Infantil)">YM (Infantil)</option>
+                  <option value="YL (Infantil)">YL (Infantil)</option>
+                  <option value="S (Adulto)">S (Adulto)</option>
+                  <option value="M (Adulto)">M (Adulto)</option>
+                  <option value="L (Adulto)">L (Adulto)</option>
+                  <option value="XL (Adulto)">XL (Adulto)</option>
+                </select>
+              </div>
+              <button class="btn-whatsapp" onclick="enviarPedidoEntrenamiento()"><i class="fab fa-whatsapp"></i> Enviar por WhatsApp</button>
+            </div>
+          </div>
+        </div>
 
-                        <div className="flex overflow-x-auto pb-4 gap-2 mb-6 no-scrollbar justify-start md:justify-center">
-                            {categories.map(cat => (
-                                <button key={cat} onClick={() => setSelectedCategory(cat)} className={`whitespace-nowrap px-5 py-2 rounded-full font-bold text-sm uppercase border-2 transition-all ${selectedCategory === cat ? 'bg-[#0D47A1] text-white border-[#0D47A1]' : 'bg-white text-gray-500 border-gray-200 hover:border-[#0D47A1]'}`}>{cat}</button>
-                            ))}
-                        </div>
+      </div>
+    </div>
+  </main>
 
-                        {isLoadingData ? (
-                            <div className="text-center py-10 text-gray-500"><p className="animate-pulse">Sincronizando con Google Sheets...</p></div>
-                        ) : selectedCategory ? (
-                            <div className="animate-fadeIn">
-                                <div className="flex justify-center gap-4 mb-6">
-                                    <button onClick={() => setSelectedGender('varonil')} className={`px-8 py-2 rounded-lg font-bold uppercase transition-all border-b-4 ${selectedGender === 'varonil' ? 'bg-white border-[#0D47A1] text-[#0D47A1] shadow-md' : 'bg-gray-100 border-transparent text-gray-400'}`}>Varonil</button>
-                                    <button onClick={() => setSelectedGender('femenil')} className={`px-8 py-2 rounded-lg font-bold uppercase transition-all border-b-4 ${selectedGender === 'femenil' ? 'bg-white border-[#0D47A1] text-[#0D47A1] shadow-md' : 'bg-gray-100 border-transparent text-gray-400'}`}>Femenil</button>
-                                </div>
-                                {hasSubCategories && (
-                                    <div className="flex justify-center gap-2 mb-8 flex-wrap">
-                                        {Object.keys(genderData).map(sub => (
-                                            <button key={sub} onClick={() => setActiveSubCategory(sub)} className={`px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${activeSubCategory === sub ? 'bg-black text-white' : 'bg-gray-200 text-gray-600'}`}>{sub}</button>
-                                        ))}
-                                    </div>
-                                )}
-                                <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 max-w-5xl mx-auto mb-12">
-                                    <div className="bg-[#1a1a1a] p-4 flex justify-between items-center text-white">
-                                        <span className="font-oswald font-bold text-lg tracking-wide">RESULTADOS {selectedCategory} {activeSubCategory ? `- ${activeSubCategory}` : ''}</span>
-                                        <Icons.Trophy size={18} className="text-yellow-500" />
-                                    </div>
-                                    {finalPartidos.length > 0 ? (
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full text-sm text-left">
-                                                <thead className="bg-gray-50 text-gray-500 font-oswald uppercase border-b">
-                                                    <tr><th className="p-4">Torneo</th><th className="p-4">Fecha/Hora</th><th className="p-4">Lugar</th><th className="p-4 text-center">Resultado</th></tr>
-                                                </thead>
-                                                <tbody className="divide-y divide-gray-100">
-                                                    {finalPartidos.map((p, idx) => {
-                                                        let statusColor = "bg-yellow-100 text-yellow-700", icon = "⏳";
-                                                        if (p.resultado && p.resultado.toLowerCase().includes('victoria')) { statusColor = "bg-green-100 text-green-700"; icon = "🏆"; }
-                                                        if (p.resultado && p.resultado.toLowerCase().includes('derrota')) { statusColor = "bg-red-100 text-red-700"; icon = "🔴"; }
-                                                        return (
-                                                            <tr key={idx} className="hover:bg-blue-50/50 transition-colors">
-                                                                <td className="p-4 font-bold text-gray-800">{p.torneo || 'Liga Local'}</td>
-                                                                <td className="p-4"><div className="flex flex-col"><span className="font-bold text-gray-700 flex items-center gap-1"><Icons.Calendar size={12}/> {p.fecha}</span><span className="text-xs text-gray-500 flex items-center gap-1"><Icons.Clock size={12}/> {p.hora}</span></div></td>
-                                                                <td className="p-4"><div className="max-w-[200px]"><span className="block text-gray-700 truncate">{p.lugar}</span>{p.lugarLink && <a href={p.lugarLink} target="_blank" rel="noopener noreferrer" className="text-[#0D47A1] text-xs font-bold hover:underline flex items-center gap-1 mt-1"><Icons.MapPin size={10} /> Ver mapa</a>}</div></td>
-                                                                <td className="p-4 text-center"><span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase ${statusColor}`}>{icon} {p.resultado}</span></td>
-                                                            </tr>
-                                                        )
-                                                    })}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    ) : (
-                                        <div className="p-12 text-center text-gray-400"><Icons.Calendar size={48} className="mx-auto mb-3 opacity-20" /><p>No hay partidos programados actualmente.</p></div>
-                                    )}
-                                </div>
+  <footer class="footer">
+    <h3>Síguenos en nuestras redes</h3>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/halcones.basketball/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@halcones.basketball" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p style="margin-top: 30px; font-size: 0.8rem; color: #666;">© 2026 Halcones Basketball Club</p>
+  </footer>
 
-                                {finalConvocados.length > 0 && (
-                                    <div className="max-w-4xl mx-auto text-center animate-fadeIn bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                                        <h3 className="text-2xl font-oswald font-bold text-[#0D47A1] mb-1">CONVOCADOS</h3>
-                                        <p className="text-gray-500 text-sm mb-6">Confirma tu asistencia para el próximo partido</p>
-                                        <div className="flex flex-col items-center gap-3">
-                                            {finalConvocados.map((jugador, idx) => (
-                                                <ConvocadoItem 
-                                                    key={idx} 
-                                                    jugador={jugador} 
-                                                    categoria={selectedCategory} 
-                                                    rama={selectedGender} 
-                                                />
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
+<script>
+  let currentView = 'inicio';
+  const SEDE_GENERAL = "Lunes: Agora | Miércoles y Viernes: Deportivo Solidaridad";
 
-                            </div>
-                        ) : null}
-                    </div>
-                );
-            };
+  function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('active'); }
 
-            const MembershipView = () => (
-                <div className="container mx-auto px-4 py-10 animate-fadeIn min-h-screen bg-gray-50">
-                    <button onClick={() => navigateTo('home')} className="mb-6 flex items-center text-gray-500 hover:text-[#0D47A1] font-bold"><Icons.ChevronLeft size={20} /> REGRESAR</button>
-                    <div className="text-center max-w-2xl mx-auto mb-12"><h2 className="text-4xl font-bold text-[#0D47A1] font-oswald uppercase mb-4">Membresías e Inscripciones</h2><p className="text-gray-600">Gestiona tus pagos de manera segura y rápida.</p></div>
-                    <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                        <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 border-t-8 border-[#0D47A1]">
-                            <div className="p-8 text-center">
-                                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-[#0D47A1]"><Icons.Trophy size={32} /></div>
-                                <h3 className="text-2xl font-oswald font-bold text-gray-900 mb-2">INSCRIPCIÓN</h3>
-                                <p className="text-gray-500 text-sm mb-6">Pago único por temporada</p>
-                                <p className="text-gray-600 mb-8 leading-relaxed">Realiza el pago único y completa el formulario. <span className="block mt-2 font-bold text-[#0D47A1]">Es vital subir tu comprobante.</span></p>
-                                <div className="space-y-3">
-                                    <a href="https://mpago.la/1ft2LCT" target="_blank" rel="noreferrer" className="block w-full py-3 bg-[#0D47A1] text-white rounded-lg font-bold shadow hover:bg-blue-800 transition-colors flex items-center justify-center gap-2"><Icons.DollarSign size={18} /> PAGAR INSCRIPCIÓN</a>
-                                    <a href="https://forms.gle/7hwcQE5wH1mpH4Vk7" target="_blank" rel="noreferrer" className="block w-full py-3 bg-gray-800 text-white rounded-lg font-bold shadow hover:bg-black transition-colors flex items-center justify-center gap-2"><Icons.FileText size={18} /> LLENAR FORMULARIO</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 border-t-8 border-gray-800">
-                            <div className="p-8 text-center">
-                                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-800"><Icons.Calendar size={32} /></div>
-                                <h3 className="text-2xl font-oswald font-bold text-gray-900 mb-2">MENSUALIDAD</h3>
-                                <p className="text-gray-500 text-sm mb-6">Pago recurrente</p>
-                                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6"><p className="text-xs font-bold text-yellow-700">⚠ Pagar del 1 al 5 de cada mes</p></div>
-                                <p className="text-gray-600 mb-6">Una vez completada la transacción, registra tu pago subiendo el comprobante.</p>
-                                <div className="space-y-3">
-                                    <a href="https://mpago.la/1ft2LCT" target="_blank" rel="noreferrer" className="block w-full py-3 bg-[#0D47A1] text-white rounded-lg font-bold shadow hover:bg-blue-800 transition-colors flex items-center justify-center gap-2"><Icons.DollarSign size={18} /> PAGAR MENSUALIDAD</a>
-                                    <a href="https://forms.gle/RqVsfkhBmVZ5YuE88" target="_blank" rel="noreferrer" className="block w-full py-3 bg-gray-800 text-white rounded-lg font-bold shadow hover:bg-black transition-colors flex items-center justify-center gap-2"><Icons.FileText size={18} /> REGISTRAR PAGO</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
+  function showView(viewId) {
+    document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
+    document.getElementById(viewId + '-view').classList.add('active');
+    document.getElementById('mobile-menu').classList.remove('active');
+    currentView = viewId;
+    const btnBack = document.getElementById('btn-back');
+    if (viewId === 'inicio') { btnBack.classList.add('hidden'); } else { btnBack.classList.remove('hidden'); }
+    window.scrollTo(0, 0);
+  }
 
-            const EventsView = () => (
-                <div className="container mx-auto px-4 py-10 animate-fadeIn min-h-screen">
-                    <button onClick={() => navigateTo('home')} className="mb-6 flex items-center text-gray-500 hover:text-[#0D47A1] font-bold"><Icons.ChevronLeft size={20} /> REGRESAR</button>
-                    <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-6xl mx-auto mb-16">
-                        <div className="grid md:grid-cols-2">
-                            <div className="bg-black relative h-80 md:h-auto group">
-                                <img src="https://imgur.com/iEO681y.jpg" className="w-full h-full object-cover opacity-80" alt="Skills Camp"/>
-                                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"><h3 className="text-5xl font-oswald font-bold text-white border-4 border-white p-4 -rotate-6 drop-shadow-lg">SKILLS CAMP</h3></div>
-                            </div>
-                            <div className="p-10 md:p-16 flex flex-col justify-center bg-gradient-to-br from-white to-gray-50">
-                                <h4 className="text-3xl font-bold text-gray-900 mb-6 font-oswald">POTENCIA TUS HABILIDADES</h4>
-                                <p className="text-gray-600 leading-relaxed mb-8 text-lg">Este campamento está diseñado para potenciar tus habilidades...</p>
-                                <div className="bg-gray-100 border-l-4 border-[#0D47A1] p-4 rounded-r-lg"><span className="block font-bold text-[#0D47A1] text-lg">PRÓXIMAMENTE 2026...</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="max-w-6xl mx-auto">
-                        <h3 className="text-2xl font-oswald font-bold text-[#0D47A1] text-center mb-6">GALERÍA DEL EVENTO</h3>
-                        <div className="flex overflow-x-auto gap-4 py-4 no-scrollbar snap-x">
-                            {skillsImages.map((img, idx) => (
-                                <div key={idx} onClick={() => openLightbox(skillsImages, idx)} className="h-64 w-auto shrink-0 snap-center rounded-lg overflow-hidden shadow-lg cursor-pointer hover:opacity-90 transition-opacity">
-                                    <img src={img} className="h-full w-auto object-cover" alt="Skills Camp Gallery"/>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            );
+  function goBack() { if (currentView === 'detalle') { showView('equipos'); } else { showView('inicio'); } }
 
-            const GalleryPreview = () => (
-                <section className="py-16 bg-white">
-                    <div className="container mx-auto px-4 text-center">
-                        <h2 className="text-4xl font-bold text-[#0D47A1] font-oswald uppercase mb-8">Galería Halcones</h2>
-                        <div className="relative max-w-4xl mx-auto aspect-video bg-black rounded-xl overflow-hidden shadow-2xl group cursor-pointer" onClick={() => openLightbox(galeriaImages)}>
-                            <img src={galeriaImages[0]} className="w-full h-full object-contain opacity-90 group-hover:opacity-100 transition-opacity" alt="Galería Cover"/>
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-transparent transition-colors"><Icons.Image size={64} className="text-white opacity-80 drop-shadow-lg" /></div>
-                            <div className="absolute bottom-4 right-4 bg-white/90 px-4 py-2 rounded-full font-bold text-sm text-black">Ver {galeriaImages.length} fotos</div>
-                        </div>
-                    </div>
-                </section>
-            );
+  const datosEquipos = {
+    'cat_2020': { titulo: 'Categoría 2020-2019', ramas: [{ nombre: 'Rama Mixta', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
+    'cat_2018': { titulo: 'Categoría 2018-2017', ramas: [{ nombre: 'Rama Varonil', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
+    'cat_2016': { titulo: 'Categoría 2016-2015', ramas: [{ nombre: 'Rama Varonil', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
+    'cat_2014': { titulo: 'Categoría 2014-2013', ramas: [{ nombre: 'Rama Varonil', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
+    'cat_2012': { titulo: 'Categoría 2012-2011', ramas: [{ nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'División A (Varonil)', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'División B (Varonil)', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'División C (Varonil)', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
+    'cat_2010': { titulo: 'Categoría 2010-2009', ramas: [{ nombre: 'Rama Varonil', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
+    'cat_2008': { titulo: 'Categoría 2008 y más', ramas: [{ nombre: 'Rama Varonil', color: '#151515', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
+    'cat_papas': { titulo: 'Mamás y Papás', ramas: [{ nombre: 'Equipo Mamás', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Equipo Papás', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] }
+  };
 
-            return (
-                <div className="font-roboto text-gray-800 bg-slate-50 min-h-screen flex flex-col">
-                    <Navbar />
-                    <main className="flex-grow">
-                        {view === 'home' && <><Hero /><TeamView /><GalleryPreview /></>}
-                        {view === 'team' && <TeamView />}
-                        {view === 'games' && <GamesView />}
-                        {view === 'membership' && <MembershipView />}
-                        {view === 'events' && <EventsView />}
-                        {view === 'gallery' && (
-                            <div className="container mx-auto px-4 py-10 min-h-screen animate-fadeIn">
-                                <h2 className="text-4xl font-bold text-[#0D47A1] font-oswald text-center mb-10">GALERÍA</h2>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    {galeriaImages.map((img, idx) => (
-                                        <div key={idx} onClick={() => openLightbox(galeriaImages, idx)} className="aspect-square bg-gray-200 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
-                                            <img src={img} className="w-full h-full object-cover" loading="lazy" alt="Galeria"/>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-                    </main>
-                    <footer className="bg-[#1a1a1a] text-white py-12 pb-24 md:pb-12 mt-auto border-t-4 border-[#0D47A1]">
-                        <div className="container mx-auto text-center">
-                            <h3 className="font-oswald text-2xl mb-6 font-bold">HALCONES BASKETBALL CLUB</h3>
-                            <div className="flex justify-center gap-8 mb-8">
-                                <a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank" rel="noreferrer" className="hover:text-[#1877f2] transition-colors transform hover:scale-125"><Icons.Facebook size={32} /></a>
-                                <a href="https://www.instagram.com/halcones.basketball/" target="_blank" rel="noreferrer" className="hover:text-[#e4405f] transition-colors transform hover:scale-125"><Icons.Instagram size={32} /></a>
-                                <a href="https://www.tiktok.com/@halcones.basketball" target="_blank" rel="noreferrer" className="hover:text-gray-400 transition-colors transform hover:scale-125"><Icons.TikTok size={32} /></a>
-                            </div>
-                            <p className="text-gray-500 text-sm">© 2025 Todos los derechos reservados.</p>
-                        </div>
-                    </footer>
-                    <a href="https://wa.me/5635782679" target="_blank" rel="noreferrer" className="fixed bottom-24 md:bottom-8 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-40 animate-bounce-slow flex items-center justify-center"><Icons.Phone fill="white" size={32} /></a>
-                    
-                    {lightboxOpen && (
-                        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center backdrop-blur-sm" onClick={closeLightbox} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
-                            <button onClick={closeLightbox} className="absolute top-4 right-4 text-white/70 hover:text-white p-2"><Icons.X size={40} /></button>
-                            <button onClick={(e) => { e.stopPropagation(); prevImage(); }} className="hidden md:block absolute left-4 text-white/70 hover:text-white p-4 bg-black/20 rounded-full hover:bg-black/50 transition-colors"><Icons.ChevronLeft size={40} /></button>
-                            <img src={lightboxImages[currentImageIndex]} alt="Lightbox" className="max-h-[85vh] max-w-[90vw] object-contain rounded shadow-2xl select-none" onClick={(e) => e.stopPropagation()} />
-                            <button onClick={(e) => { e.stopPropagation(); nextImage(); }} className="hidden md:block absolute right-4 text-white/70 hover:text-white p-4 bg-black/20 rounded-full hover:bg-black/50 transition-colors"><Icons.ChevronRight size={40} /></button>
-                            <div className="absolute bottom-4 text-white text-sm font-bold tracking-widest bg-black/50 px-3 py-1 rounded-full">
-                                {currentImageIndex + 1} / {lightboxImages.length}
-                                <span className="md:hidden ml-2 text-xs font-normal opacity-70">← Desliza →</span>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            );
-        };
+  function abrirDetalle(clave) {
+    const data = datosEquipos[clave];
+    document.getElementById('detalle-titulo').innerText = data.titulo;
+    const contenedor = document.getElementById('detalle-contenido');
+    contenedor.innerHTML = ''; 
+    data.ramas.forEach(rama => {
+      const card = document.createElement('div');
+      card.className = 'info-equipo-card';
+      let listaHTML = '';
+      rama.jugadores.forEach(j => { listaHTML += `<li>${j}</li>`; });
+      card.innerHTML = `
+        <div class="info-header" style="background-color: ${rama.color};">${rama.nombre}</div>
+        <div class="info-content">
+          <div class="info-item"><strong><i class="fa-solid fa-clock"></i> Horario:</strong> <span>${rama.horario}</span></div>
+          <div class="info-item"><strong><i class="fa-solid fa-location-dot"></i> Sede:</strong> <span>${rama.sede}</span></div>
+          <div class="info-item"><strong><i class="fa-solid fa-users"></i> Jugadores:</strong><ul class="lista-jugadores">${listaHTML}</ul></div>
+        </div>`;
+      contenedor.appendChild(card);
+    });
+    showView('detalle'); 
+  }
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+  function toggleFormulario(id) { document.getElementById(id).classList.toggle('activo'); }
+
+  function enviarPedidoJuego() {
+    const nombre = document.getElementById('nombre-juego').value;
+    const numero = document.getElementById('numero-juego').value;
+    const talla = document.getElementById('talla-juego').value;
+    if(!nombre || !numero || !talla) { alert("Por favor, llena todos los campos (Nombre, Número y Talla)."); return; }
+    const mensaje = `¡Hola! Quiero pedir un *Uniforme de Juego Oficial (Olimpo Sports)*.%0A%0A🏀 *Detalles del pedido:*%0A- Nombre en la playera: ${nombre.toUpperCase()}%0A- Número: ${numero}%0A- Talla: ${talla}%0A%0A¿Me podrían confirmar la cuenta para el pago? Gracias.`;
+    window.open(`https://wa.me/5635782679?text=${mensaje}`, '_blank');
+  }
+
+  function enviarPedidoEntrenamiento() {
+    const talla = document.getElementById('talla-entrenamiento').value;
+    if(!talla) { alert("Por favor, selecciona una talla."); return; }
+    const mensaje = `¡Hola! Quiero pedir un *Uniforme de Entrenamiento (Reversible)*.%0A%0A🏀 *Detalles del pedido:*%0A- Talla: ${talla}%0A%0A¿Me podrían confirmar la cuenta para el pago? Gracias.`;
+    window.open(`https://wa.me/5635782679?text=${mensaje}`, '_blank');
+  }
+
+  const autoSlides = document.querySelectorAll('.hero-slider .slide');
+  let autoSlideActual = 0;
+  setInterval(() => {
+    if(autoSlides.length === 0) return;
+    autoSlides[autoSlideActual].classList.remove('active');
+    autoSlideActual = (autoSlideActual + 1) % autoSlides.length;
+    autoSlides[autoSlideActual].classList.add('active');
+  }, 4000);
+
+  let currentSlide = 0;
+  function moveCarousel(direction, event) {
+    if(event) event.stopPropagation(); 
+    const slideContainer = document.getElementById('slide-eventos');
+    const images = slideContainer.querySelectorAll('img');
+    if(images.length === 0) return;
+    currentSlide = (currentSlide + direction + images.length) % images.length;
+    slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+
+  let lightboxImages = [];
+  let currentLightboxIndex = 0;
+  document.querySelectorAll('.gallery-img').forEach((img, index) => {
+    lightboxImages.push(img.src);
+    img.addEventListener('click', () => openLightbox(index));
+  });
+
+  function openLightbox(index) {
+    currentLightboxIndex = index;
+    document.getElementById('lightbox-img').src = lightboxImages[currentLightboxIndex];
+    document.getElementById('lightbox').classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; 
+  }
+  function closeLightbox() { document.getElementById('lightbox').classList.add('hidden'); document.body.style.overflow = ''; }
+  function changeLightboxImg(direction) {
+    currentLightboxIndex = (currentLightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
+    document.getElementById('lightbox-img').src = lightboxImages[currentLightboxIndex];
+  }
+</script>
 </body>
 </html>
