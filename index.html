@@ -110,8 +110,8 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 .destacados-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
 .player-card { flex: 1 1 280px; max-width: 320px; text-align: center; display: flex; flex-direction: column; transition: transform 0.3s ease; border-top: 4px solid var(--color-negro); background-color: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); overflow: hidden; }
 .player-card:hover { transform: translateY(-5px); }
-.card-photo-wrapper { width: 100%; height: 250px; overflow: hidden; background-color: var(--color-gris-claro); }
-.player-card img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.card-photo-wrapper { width: 100%; height: 250px; overflow: hidden; background-color: var(--color-gris-claro); border-radius: 50%; }
+.player-card img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .player-card .info { padding: 15px; display: flex; flex-direction: column; gap: 5px; flex-grow: 1; justify-content: center; }
 .card-label { font-size: 0.85rem; color: #777; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 3px;}
 .player-name { font-family: var(--font-titulos); font-size: 1.4rem; color: var(--color-negro); text-transform: uppercase; line-height: 1.2; }
@@ -195,7 +195,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 /* Footer */
 .footer { background-color: var(--color-negro); color: var(--color-blanco); padding: 40px 20px; text-align: center; margin-top: 40px;}
 .footer h3 { font-family: var(--font-titulos); font-size: 1.5rem; text-transform: uppercase; margin-bottom: 20px;}
-.social-icons { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+.social-icons { display: center; justify-content: center; gap: 30px; margin-top: 20px; }
 .social-icons a { color: var(--color-blanco); font-size: 35px; transition: transform 0.3s; }
 .social-icons a:hover { transform: translateY(-5px); color: var(--color-azul); }
 
@@ -240,22 +240,17 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
       <div class="card cumpleanos-card">
         <i class="fa-solid fa-cake-candles"></i>
         <h3>Cumpleañeros del Mes</h3>
-        <ul class="cumpleanos-lista">
-          <li><strong>Día 5:</strong> Carlos Gómez</li>
-        </ul>
+        <ul class="cumpleanos-lista" id="lista-cumpleanos">
+          </ul>
       </div>
 
       <h3 class="category-title">JUGADOR@S DESTACADOS</h3>
-         <div class="destacados-grid">
-           <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Varonil"></div><div class="info"><span class="card-label">Categoria:</span><p class="player-name">Nombre Jugador</p><p class="player-number">#00</p></div></div>
-           <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/E4405F/FFFFFF?text=FOTO" alt="Femenil"></div><div class="info"><span class="card-label">CATEGORIA: </span><p class="player-name">Nombre Jugadora</p><p class="player-number">#00</p></div></div>
-      </div>
+      <div class="destacados-grid" id="grid-jugadores">
+        </div>
 
       <h3 class="category-title">Mamás y Papás</h3>
-      <div class="destacados-grid">
-        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/E4405F/FFFFFF?text=FOTO" alt="Mamás"></div><div class="info"><span class="card-label">Mamá</span><p class="player-name">Nombre Mamá</p><p class="player-number">M</p></div></div>
-        <div class="player-card"><div class="card-photo-wrapper"><img src="https://via.placeholder.com/400x500/0D47A1/FFFFFF?text=FOTO" alt="Papás"></div><div class="info"><span class="card-label">Papá</span><p class="player-name">Nombre Papá</p><p class="player-number">P</p></div></div>
-      </div>
+      <div class="destacados-grid" id="grid-papas">
+        </div>
 
     </div>
 
@@ -269,7 +264,6 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
   <main id="eventos-view" class="view-section">
     <div class="container">
       <h2>Eventos y Participaciones</h2>
-
       <div class="card">
         <div class="evento-header">Nacional 3x3 ADEMEBA</div>
         <div class="evento-body">
@@ -277,17 +271,11 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
           <p>Nuestros equipos representativos se dirigen al torneo Nacional 3x3 avalado por ADEMEBA.</p>
         </div>
       </div>
-
       <div class="card">
         <div class="evento-header">Skills Camp 2025</div>
         <div class="evento-body">
           <img src="https://imgur.com/iEO681y.jpg" alt="Skills Camp" class="poster-evento">
           <p>Potencia tus habilidades en nuestro campamento técnico.</p>
-          <p style="font-style: italic; color: var(--color-azul); font-weight: bold; margin-top: 20px;">PRÓXIMAMENTE 2026...</p>
-          
-          <h3 style="font-family: var(--font-titulos); margin: 30px 0 10px 0; font-size: 1.5rem; color: var(--color-azul);">Galería Skills Camp</h3>
-          <p class="galeria-instruccion"><i class="fa-solid fa-hand-pointer"></i> Da clic para ver la galería o desliza para navegar</p>
-          
           <div class="carousel-container" id="carousel-eventos">
             <div class="carousel-slide" id="slide-eventos">
               <img src="https://imgur.com/BQlw2fC.jpg" class="gallery-img">
@@ -304,9 +292,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 
   <div id="lightbox" class="hidden">
     <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <button class="lightbox-nav prev" onclick="changeLightboxImg(-1)">❮</button>
     <img id="lightbox-img" src="">
-    <button class="lightbox-nav next" onclick="changeLightboxImg(1)">❯</button>
   </div>
 
   <main id="equipos-view" class="view-section">
@@ -372,12 +358,12 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
           <a href="https://forms.gle/i9FKuUHMDZoZkj9t7" target="_blank" class="btn-form-pago">
             <i class="fa-solid fa-file-signature"></i> Llenar Registro De Datos Personales
           </a>
-        </div>
-         <a href="https://forms.gle/jqxXJB1Gh1htiaGEA" target="_blank" class="btn-form-pago">
+          <br>
+          <a href="https://forms.gle/jqxXJB1Gh1htiaGEA" target="_blank" class="btn-form-pago">
             <i class="fa-solid fa-file-signature"></i> Subir Comprobante
           </a>
         </div>
-      </div>	
+      </div>  
 
       <div class="pago-card">
         <div class="pago-header">
@@ -386,12 +372,11 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
         </div>
         <div class="pago-body">
           <p>Recuerda que tenemos <strong>paquetes familiares</strong>, los cuales consisten en 2 Familiares: $530 y 3 Familiares: $700</p>
-                    <p>Las mensualidades deben cubrirse puntualmente durante los <strong>primeros 5 días de cada mes</strong>. Puedes realizar tu pago mediante transferencia a la cuenta del club o en efectivo en cancha. El pago en efectivo se registrara por el administrador dando tus datos</p>
-          
+          <p>Las mensualidades deben cubrirse puntualmente durante los <strong>primeros 5 días de cada mes</strong>. Puedes realizar tu pago mediante transferencia a la cuenta del club o en efectivo en cancha. El pago en efectivo se registrara por el administrador dando tus datos</p>
           
           <span class="recargo-nota"><i class="fa-solid fa-circle-exclamation"></i> Importante: Pasados los primeros 5 días, se cobrará un recargo de $10 MXN por cada día de atraso.</span>
           
-        <div class="banco-info">
+          <div class="banco-info">
             <strong>Banco:</strong> MERCADO PAGO<br>
             <strong>CLABE:</strong> 000000000000000000<br>
             <strong>Titular:</strong> YESENIA MOTA LOPEZ
@@ -508,6 +493,11 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 <script>
   let currentView = 'inicio';
   const SEDE_GENERAL = "Lunes: Agora | Miércoles y Viernes: Deportivo Solidaridad";
+  const NUMERO_WHATSAPP = "5635782679"; // Número centralizado para los envíos
+
+  // --- CONFIGURACIÓN DE LINKS DE GOOGLE SHEETS ---
+  const URL_INICIO = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRahNocAaYNXGeezEyPOIE3JJglBvwnICjbktPuDyaFHnoVXEPMRiUdTv2Xyda8qdkauIU7Obivt4ny/pub?output=csv";
+  const URL_PARTIDOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTJEpzeEGVx726-LJQJLlwR7hbGG5n0IymhShzwqdLpvy6VgCh0SsReJgXvK39fMU0HwkF752vZIkj2/pub?output=csv";
 
   function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('active'); }
 
@@ -517,7 +507,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     document.getElementById('mobile-menu').classList.remove('active');
     currentView = viewId;
     const btnBack = document.getElementById('btn-back');
-    if (viewId === 'inicio') { btnBack.classList.add('hidden'); } else { btnBack.classList.remove('hidden'); }
+    if (viewId === 'inicio') btnBack.classList.add('hidden'); else btnBack.classList.remove('hidden');
     window.scrollTo(0, 0);
   }
 
@@ -525,20 +515,19 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     if (currentView === 'detalle') { 
       const tit = document.getElementById('detalle-titulo').innerText;
       if(tit.includes("PARTIDOS")) showView('partidos'); else showView('equipos');
-    } else { 
-      showView('inicio'); 
-    } 
+    } else showView('inicio'); 
   }
 
+  // --- DATOS FIJOS DE EQUIPOS ---
   const datosEquipos = {
-    'cat_2020': { titulo: 'Categoría 2019-2020', ramas: [{ nombre: 'Rama Mixta', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
-    'cat_2018': { titulo: 'Categoría 2017-2018', ramas: [{ nombre: 'Rama Varonil', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
-    'cat_2016': { titulo: 'Categoría 2015-2016', ramas: [{ nombre: 'Rama Varonil', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
-    'cat_2014': { titulo: 'Categoría 2013-2014', ramas: [{ nombre: 'Rama Varonil', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
-    'cat_2012': { titulo: 'Categoría 2011-2012', ramas: [{ nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'División A (Varonil)', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'División B (Varonil)', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'División C (Varonil)', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
-    'cat_2010': { titulo: 'Categoría 2009-2010', ramas: [{ nombre: 'Rama Varonil', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Rama Femenil', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
-    'cat_2008': { titulo: 'Categoría 2008 y más', ramas: [{ nombre: 'Rama Varonil', color: '#151515', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] },
-    'cat_papas': { titulo: 'Mamás y Papás', ramas: [{ nombre: 'Equipo Mamás', color: '#E4405F', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }, { nombre: 'Equipo Papás', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Lista por definir...'] }] }
+    'cat_2020': { titulo: 'Categoría 2019-2020', ramas: [{ nombre: 'Rama Mixta', color: '#1E4D94', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Por definir'] }] },
+    'cat_2018': { titulo: 'Categoría 2017-2018', ramas: [{ nombre: 'Varonil', color: '#1E4D94', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2016': { titulo: 'Categoría 2015-2016', ramas: [{ nombre: 'Varonil', color: '#1E4D94', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2014': { titulo: 'Categoría 2013-2014', ramas: [{ nombre: 'Varonil', color: '#1E4D94', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2012': { titulo: 'Categoría 2011-2012', ramas: [{ nombre: 'Varonil', color: '#1E4D94', horario: '5:30 PM', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2010': { titulo: 'Categoría 2009-2010', ramas: [{ nombre: 'Varonil', color: '#1E4D94', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2008': { titulo: 'Categoría 2008 y más', ramas: [{ nombre: 'Varonil', color: '#151515', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_papas': { titulo: 'Mamás y Papás', ramas: [{ nombre: 'Papás', color: '#1E4D94', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] }
   };
 
   function abrirDetalle(clave) {
@@ -547,180 +536,134 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     const contenedor = document.getElementById('detalle-contenido');
     contenedor.innerHTML = ''; 
     data.ramas.forEach(rama => {
-      const card = document.createElement('div');
-      card.className = 'info-equipo-card';
-      let listaHTML = '';
-      rama.jugadores.forEach(j => { listaHTML += `<li>${j}</li>`; });
-      card.innerHTML = `
-        <div class="info-header" style="background-color: ${rama.color};">${rama.nombre}</div>
-        <div class="info-content">
-          <div class="info-item"><strong><i class="fa-solid fa-clock"></i> Horario:</strong> <span>${rama.horario}</span></div>
-          <div class="info-item"><strong><i class="fa-solid fa-location-dot"></i> Sede:</strong> <span>${rama.sede}</span></div>
-          <div class="info-item"><strong><i class="fa-solid fa-users"></i> Jugadores:</strong><ul class="lista-jugadores">${listaHTML}</ul></div>
+      let listaHTML = rama.jugadores.map(j => `<li>${j}</li>`).join('');
+      contenedor.innerHTML += `
+        <div class="info-equipo-card">
+          <div class="info-header" style="background-color: ${rama.color};">${rama.nombre}</div>
+          <div class="info-content">
+            <div class="info-item"><strong>Horario:</strong> <span>${rama.horario}</span></div>
+            <div class="info-item"><strong>Sede:</strong> <span>${rama.sede}</span></div>
+            <div class="info-item"><strong>Jugadores:</strong><ul class="lista-jugadores">${listaHTML}</ul></div>
+          </div>
         </div>`;
-      contenedor.appendChild(card);
     });
     showView('detalle'); 
   }
 
-  // =========================================================================
-  // --- INICIO DE AUTOMATIZACIÓN DE PARTIDOS CON GOOGLE SHEETS ---
-  // =========================================================================
+  // --- CARGAR INICIO DESDE EXCEL ---
+  function cargarInicioDesdeSheet() {
+    Papa.parse(URL_INICIO, {
+      download: true, header: true,
+      complete: function(results) {
+        let htmlCumple = '', htmlJugadores = '', htmlPapas = '';
+        results.data.forEach(fila => {
+          if(!fila.Tipo) return;
+          const tipo = fila.Tipo.trim().toLowerCase();
+          if(tipo === 'cumpleaños' || tipo === 'cumpleanos') {
+            htmlCumple += `<li><strong>Día ${fila.Dato}:</strong> ${fila.Nombre}</li>`;
+          } else if(tipo === 'jugador' || tipo === 'jugadora') {
+            const color = tipo === 'jugadora' ? 'E4405F' : '0D47A1';
+            htmlJugadores += `
+              <div class="player-card">
+                <div class="card-photo-wrapper"><img src="${fila.Foto || 'https://via.placeholder.com/400x500/'+color+'/FFFFFF?text=FOTO'}" alt="${fila.Nombre}"></div>
+                <div class="info"><span class="card-label">${fila.Categoria}</span><p class="player-name">${fila.Nombre}</p><p class="player-number">#${fila.Dato}</p></div>
+              </div>`;
+          } else if(['mama','mamá','papa','papá'].includes(tipo)) {
+            const color = ['mama','mamá'].includes(tipo) ? 'E4405F' : '0D47A1';
+            htmlPapas += `
+              <div class="player-card">
+                <div class="card-photo-wrapper"><img src="${fila.Foto || 'https://via.placeholder.com/400x500/'+color+'/FFFFFF?text=FOTO'}" alt="${fila.Nombre}"></div>
+                <div class="info"><span class="card-label">${tipo.toUpperCase()}</span><p class="player-name">${fila.Nombre}</p><p class="player-number">${fila.Dato}</p></div>
+              </div>`;
+          }
+        });
+        document.getElementById('lista-cumpleanos').innerHTML = htmlCumple || '<li>Sin cumpleaños este mes.</li>';
+        document.getElementById('grid-jugadores').innerHTML = htmlJugadores || '<p style="text-align:center;width:100%">Sin jugadores destacados.</p>';
+        document.getElementById('grid-papas').innerHTML = htmlPapas || '<p style="text-align:center;width:100%">Próximamente...</p>';
+      }
+    });
+  }
 
+  // --- CARGAR PARTIDOS DESDE EXCEL ---
   let datosPartidos = {};
-
-  const titulosPartidos = {
-    'cat_2020': 'PARTIDOS 2019-2020',
-    'cat_2018': 'PARTIDOS 2017-2018',
-    'cat_2016': 'PARTIDOS 2015-2016',
-    'cat_2014': 'PARTIDOS 2013-2014',
-    'cat_2012': 'PARTIDOS 2011-2012',
-    'cat_2010': 'PARTIDOS 2009-2010',
-    'cat_2008': 'PARTIDOS 2008 y más',
-    'cat_papas': 'PARTIDOS Mamás y Papás'
-  };
-
-  // Mapa inteligente: Si escribes 2009-2010 en el excel, lo traduce a cat_2010.
-  const mapeoClaves = {
-    '2019-2020': 'cat_2020',
-    '2017-2018': 'cat_2018',
-    '2015-2016': 'cat_2016',
-    '2013-2014': 'cat_2014',
-    '2011-2012': 'cat_2012',
-    '2009-2010': 'cat_2010',
-    '2008 y mas': 'cat_2008',
-    'Papas': 'cat_papas',
-    'cat_2020': 'cat_2020', 'cat_2018': 'cat_2018', 'cat_2016': 'cat_2016', 
-    'cat_2014': 'cat_2014', 'cat_2012': 'cat_2012', 'cat_2010': 'cat_2010', 
-    'cat_2008': 'cat_2008', 'cat_papas': 'cat_papas'
-  };
-
-  // TU ENLACE DEL ARCHIVO CSV DE GOOGLE SHEETS ACTUALIZADO:
-  const URL_GOOGLE_SHEET = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTJEpzeEGVx726-LJQJLlwR7hbGG5n0IymhShzwqdLpvy6VgCh0SsReJgXvK39fMU0HwkF752vZIkj2/pub?output=csv";
+  const mapeoClaves = { '2019-2020':'cat_2020','2017-2018':'cat_2018','2015-2016':'cat_2016','2013-2014':'cat_2014','2011-2012':'cat_2012','2009-2010':'cat_2010','2008 y mas':'cat_2008','Papas':'cat_papas' };
 
   function cargarPartidosDesdeSheet() {
-    for (const clave in titulosPartidos) {
-      datosPartidos[clave] = { titulo: titulosPartidos[clave], ramas: [] };
-    }
-
-    Papa.parse(URL_GOOGLE_SHEET, {
-      download: true,
-      header: true,
+    Object.values(mapeoClaves).forEach(c => datosPartidos[c] = { titulo: 'PARTIDOS', ramas: [] });
+    Papa.parse(URL_PARTIDOS, {
+      download: true, header: true,
       complete: function(results) {
-        const filas = results.data;
-        
-        filas.forEach(fila => {
-          if(!fila.ClaveCategoria) return; 
-
-          const rawClave = fila.ClaveCategoria.trim();
-          const clave = mapeoClaves[rawClave] || rawClave; // Traduce tu texto del excel a la clave del sistema
-          const nombreRama = fila.Rama.trim();
-
-          let colorBase = '#1E4D94'; 
-          if (nombreRama.includes('Femenil') || nombreRama.includes('Mamás') || nombreRama.includes('Mamas')) colorBase = '#E4405F';
-          if (clave === 'cat_2008') colorBase = '#151515';
-
-          let ramaActual = datosPartidos[clave] ? datosPartidos[clave].ramas.find(r => r.nombre === nombreRama) : null;
-          if (!ramaActual && datosPartidos[clave]) {
-            ramaActual = { nombre: nombreRama, color: colorBase, partidos: [] };
-            datosPartidos[clave].ramas.push(ramaActual);
+        results.data.forEach(fila => {
+          if(!fila.ClaveCategoria) return;
+          const clave = mapeoClaves[fila.ClaveCategoria.trim()] || fila.ClaveCategoria.trim();
+          if(!datosPartidos[clave]) return;
+          let rama = datosPartidos[clave].ramas.find(r => r.nombre === fila.Rama.trim());
+          if(!rama) {
+            rama = { nombre: fila.Rama.trim(), color: fila.Rama.includes('Femenil')?'#E4405F':'#1E4D94', partidos: [] };
+            datosPartidos[clave].ramas.push(rama);
           }
-
-          if(ramaActual) {
-            ramaActual.partidos.push({
-              torneo: fila.Torneo || 'Amistoso',
-              fecha: fila.Fecha || 'Por definir',
-              hora: fila.Hora || 'Por definir',
-              sede: fila.Sede || 'Por definir',
-              maps: fila.Maps || '#',
-              resultado: fila.Resultado ? fila.Resultado.trim().toLowerCase() : 'pendiente',
-              marcador: fila.Marcador || '',
-              jugadores: fila.Jugadores ? fila.Jugadores.split(',').map(j => j.trim()) : []
-            });
-          }
+          rama.partidos.push({ torneo:fila.Torneo, fecha:fila.Fecha, hora:fila.Hora, sede:fila.Sede, maps:fila.Maps||'#', resultado:fila.Resultado.toLowerCase(), marcador:fila.Marcador||'', jugadores:(fila.Jugadores||'').split(',') });
         });
       }
     });
   }
 
-  document.addEventListener('DOMContentLoaded', cargarPartidosDesdeSheet);
-
   function abrirDetallePartidos(clave) {
-    const data = datosPartidos[clave] || { titulo: 'PARTIDOS', ramas: [] };
-    document.getElementById('detalle-titulo').innerText = data.titulo;
+    const data = datosPartidos[clave];
+    document.getElementById('detalle-titulo').innerText = "PARTIDOS " + (clave.replace('cat_','').replace('_','-'));
     const contenedor = document.getElementById('detalle-contenido');
-    contenedor.innerHTML = '';
-
-    if(data.ramas.length === 0) {
-      contenedor.innerHTML = '<p style="text-align:center; color:#888;">No hay partidos cargados en el sistema todavía.</p>';
-    }
-
+    contenedor.innerHTML = data.ramas.length ? '' : '<p style="text-align:center;color:#888;">No hay partidos cargados.</p>';
     data.ramas.forEach((rama, rIdx) => {
-      const proximos = rama.partidos.filter(p => p.resultado === 'pendiente');
-      const pasados = rama.partidos.filter(p => p.resultado !== 'pendiente');
-
-      let proxHTML = proximos.map(p => `
-        <div class="partido-proximo">
-          <strong>${p.torneo}</strong><br>
-          <small>📅 ${p.fecha} - ⏰ ${p.hora}</small><br>
-          <small>📍 ${p.sede}</small><br>
-          <a href="${p.maps}" target="_blank" class="btn-maps-partido"><i class="fa-solid fa-map-location-dot"></i> Ver Ubicación</a>
-          <div class="lista-convocados">Convocados: ${p.jugadores.join(', ')}</div>
-        </div>`).join('') || '<p style="color:#888; font-style:italic;">No hay partidos próximos programados.</p>';
-
-      let histHTML = pasados.map(p => `
-        <div class="partido-pasado">
-          <div><small>${p.fecha}</small><br><strong>${p.torneo}</strong><br><span class="badge-resultado ${p.resultado}">${p.resultado}</span></div>
-          <div class="marcador-badge">${p.marcador}</div>
-        </div>`).join('') || '<p style="color:#888; font-style:italic;">Sin juegos registrados en el historial.</p>';
-
+      const prox = rama.partidos.filter(p => p.resultado === 'pendiente').map(p => `
+        <div class="partido-proximo"><strong>${p.torneo}</strong><br><small>📅 ${p.fecha} - ⏰ ${p.hora}</small><br><small>📍 ${p.sede}</small><br>
+        <a href="${p.maps}" target="_blank" class="btn-maps-partido"><i class="fa-solid fa-map-location-dot"></i> Ver Ubicación</a>
+        <div class="lista-convocados">Convocados: ${p.jugadores.join(', ')}</div></div>`).join('') || '<p>No hay partidos próximos.</p>';
+      const hist = rama.partidos.filter(p => p.resultado !== 'pendiente').map(p => `
+        <div class="partido-pasado"><div><small>${p.fecha}</small><br><strong>${p.torneo}</strong><br><span class="badge-resultado ${p.resultado}">${p.resultado}</span></div>
+        <div class="marcador-badge">${p.marcador}</div></div>`).join('') || '<p>Sin historial.</p>';
       contenedor.innerHTML += `
-        <div class="info-equipo-card">
-          <div class="info-header" style="background:${rama.color}">${rama.nombre}</div>
-          <div class="info-content">
-            <h4 style="margin-bottom:15px; color:var(--color-azul); text-transform:uppercase;"><i class="fa-solid fa-basketball"></i> Próximos Encuentros</h4>
-            ${proxHTML}
-            
-            <button class="btn-historial" onclick="toggleHistorial('hist-${rIdx}')">
-              <i class="fa-solid fa-clock-rotate-left"></i> Historial de Resultados
-            </button>
-            
-            <div id="hist-${rIdx}" class="historial-container">
-              <h4 style="margin-bottom:15px; text-transform:uppercase; color:#555;">Resultados Pasados</h4>
-              ${histHTML}
-            </div>
-          </div>
-        </div>`;
+        <div class="info-equipo-card"><div class="info-header" style="background:${rama.color}">${rama.nombre}</div>
+        <div class="info-content"><h4 style="margin-bottom:10px; color:var(--color-azul)">PRÓXIMOS ENCUENTROS</h4>${prox}
+        <button class="btn-historial" onclick="toggleHistorial('hist-${rIdx}')"><i class="fa-solid fa-clock-rotate-left"></i> Historial</button>
+        <div id="hist-${rIdx}" class="historial-container"><h4 style="margin-bottom:10px">RESULTADOS</h4>${hist}</div></div></div>`;
     });
     showView('detalle');
   }
 
-  function toggleHistorial(id) { 
-    document.getElementById(id).classList.toggle('active'); 
-  }
-
-
-  // =========================================================================
-  // --- SCRIPTS ORIGINALES DE FORMULARIOS Y CAROUSEL (INTACTOS) ---
-  // =========================================================================
-
+  function toggleHistorial(id) { document.getElementById(id).classList.toggle('active'); }
   function toggleFormulario(id) { document.getElementById(id).classList.toggle('activo'); }
 
+  // --- FUNCIONES PARA PEDIDOS DE TIENDA (NUEVAS) ---
   function enviarPedidoJuego() {
     const nombre = document.getElementById('nombre-juego').value;
     const numero = document.getElementById('numero-juego').value;
     const talla = document.getElementById('talla-juego').value;
-    if(!nombre || !numero || !talla) { alert("Por favor, llena todos los campos (Nombre, Número y Talla)."); return; }
-    const mensaje = `¡Hola! Quiero pedir un *Uniforme de Juego Oficial (Olimpo Sports)*.%0A%0A🏀 *Detalles del pedido:*%0A- Nombre en la playera: ${nombre.toUpperCase()}%0A- Número: ${numero}%0A- Talla: ${talla}%0A%0A¿Me podrían confirmar la cuenta para el pago? Gracias.`;
-    window.open(`https://wa.me/5635782679?text=${mensaje}`, '_blank');
+
+    if (!talla) {
+      alert("Por favor selecciona una talla para tu uniforme.");
+      return;
+    }
+
+    const textoMensaje = `Hola, me gustaría hacer un pedido del *Uniforme de Juego Oficial* (Playera negra, blanca y short).%0A%0A*Detalles del pedido:*%0A- Nombre en la espalda: ${nombre || 'Sin nombre'}%0A- Número: ${numero || 'Sin número'}%0A- Talla: ${talla}`;
+    window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${textoMensaje}`, '_blank');
   }
 
   function enviarPedidoEntrenamiento() {
     const talla = document.getElementById('talla-entrenamiento').value;
-    if(!talla) { alert("Por favor, selecciona una talla."); return; }
-    const mensaje = `¡Hola! Quiero pedir un *Uniforme de Entrenamiento (Reversible)*.%0A%0A🏀 *Detalles del pedido:*%0A- Talla: ${talla}%0A%0A¿Me podrían confirmar la cuenta para el pago? Gracias.`;
-    window.open(`https://wa.me/5635782679?text=${mensaje}`, '_blank');
+
+    if (!talla) {
+      alert("Por favor selecciona una talla para tu uniforme.");
+      return;
+    }
+
+    const textoMensaje = `Hola, me gustaría hacer un pedido del *Uniforme de Entrenamiento* (Playera reversible y short).%0A%0A*Detalles del pedido:*%0A- Talla: ${talla}`;
+    window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${textoMensaje}`, '_blank');
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    cargarInicioDesdeSheet();
+    cargarPartidosDesdeSheet();
+  });
 
   const autoSlides = document.querySelectorAll('.hero-slider .slide');
   let autoSlideActual = 0;
@@ -736,28 +679,8 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     if(event) event.stopPropagation(); 
     const slideContainer = document.getElementById('slide-eventos');
     const images = slideContainer.querySelectorAll('img');
-    if(images.length === 0) return;
     currentSlide = (currentSlide + direction + images.length) % images.length;
     slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
-  }
-
-  let lightboxImages = [];
-  let currentLightboxIndex = 0;
-  document.querySelectorAll('.gallery-img').forEach((img, index) => {
-    lightboxImages.push(img.src);
-    img.addEventListener('click', () => openLightbox(index));
-  });
-
-  function openLightbox(index) {
-    currentLightboxIndex = index;
-    document.getElementById('lightbox-img').src = lightboxImages[currentLightboxIndex];
-    document.getElementById('lightbox').classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; 
-  }
-  function closeLightbox() { document.getElementById('lightbox').classList.add('hidden'); document.body.style.overflow = ''; }
-  function changeLightboxImg(direction) {
-    currentLightboxIndex = (currentLightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
-    document.getElementById('lightbox-img').src = lightboxImages[currentLightboxIndex];
   }
 </script>
 </body>
