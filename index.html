@@ -6,116 +6,167 @@
 <title>Halcones Basketball Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <style>
+/* ==========================================================================
+   1. VARIABLES GLOBALES
+   ========================================================================== */
 :root {
-  --color-azul: #1E4D94;
-  --color-negro: #151515; 
+  --color-azul-primario: #153669; 
+  --color-azul-brillante: #1E4D94;
+  --color-negro: #111111; 
   --color-blanco: #FFFFFF;
-  --color-gris-claro: #f4f4f4;
+  --color-fondo: #F8FAFC; 
+  --color-gris-texto: #64748B;
   --font-titulos: 'Oswald', sans-serif;
   --font-texto: 'Roboto', sans-serif;
-  --color-victoria: #28a745;
-  --color-derrota: #dc3545;
-  --color-pendiente: #ffc107;
+  --color-victoria: #10B981;
+  --color-derrota: #EF4444;
+  --color-pendiente: #F59E0B;
+  --sombra-suave: 0 10px 25px rgba(0, 0, 0, 0.05);
+  --sombra-fuerte: 0 20px 40px rgba(30, 77, 148, 0.1);
+  --transicion: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ==========================================================================
+   2. RESETEO Y ESTILOS BASE
+   ========================================================================== */
 * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 body { 
   font-family: var(--font-texto); 
-  background-color: var(--color-blanco); 
+  background-color: var(--color-fondo); 
   color: var(--color-negro); 
   padding-top: 80px; 
+  line-height: 1.6;
 }
-
-/* --- PANTALLA DE CARGA --- */
-#loader {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: var(--color-negro); z-index: 99999;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  transition: opacity 0.5s ease;
+h2 { 
+  font-family: var(--font-titulos); text-transform: uppercase; text-align: center; 
+  color: var(--color-azul-primario); font-size: 2.5rem; margin: 40px 0; letter-spacing: -0.5px;
 }
-.spinner {
-  width: 60px; height: 60px; border: 5px solid #333;
-  border-top: 5px solid var(--color-azul); border-radius: 50%;
-  animation: spin 1s linear infinite; margin-bottom: 20px;
-}
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-.loader-text {
-  color: white; 
-  font-family: var(--font-titulos); 
-  letter-spacing: 2px; 
-  font-size: 1.2rem;
-}
-
-/* --- BARRA SUPERIOR FIJA --- */
-.top-navbar {
-  position: fixed;
-  top: 0; left: 0; width: 100%;
-  z-index: 2000;
-  background-color: var(--color-negro);
-  height: 80px; 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  border-bottom: 2px solid #222;
-}
-.header-right { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
-.logo-circle { width: 45px; height: 45px; border: 2px solid var(--color-blanco); border-radius: 50%; background-color: var(--color-azul); display: flex; justify-content: center; align-items: center; color: var(--color-blanco); font-family: var(--font-titulos); font-size: 24px; }
-.logo-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.1; text-align: right; }
-.logo-title { font-family: var(--font-titulos); color: var(--color-blanco); font-size: 22px; letter-spacing: 1px; }
-.logo-subtitle { font-family: var(--font-texto); color: #888; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
-.menu-icon { color: var(--color-blanco); font-size: 30px; cursor: pointer; order: -1; } 
-
-/* Menú Desplegable */
-#mobile-menu {
-  position: fixed;
-  top: 80px; left: 0; 
-  background-color: var(--color-negro);
-  width: 100%; max-width: 300px;
-  height: calc(100vh - 80px);
-  z-index: 1900;
-  display: flex; flex-direction: column;
-  padding: 20px 0;
-  transform: translateX(-100%); 
-  transition: transform 0.3s ease;
-  border-right: 2px solid var(--color-azul); 
-}
-#mobile-menu.active { transform: translateX(0); }
-#mobile-menu a { color: var(--color-blanco); text-decoration: none; padding: 15px 30px; font-family: var(--font-titulos); font-size: 1.3rem; border-bottom: 1px solid #333; text-transform: uppercase; transition: color 0.3s; }
-#mobile-menu a:hover { color: var(--color-azul); }
-
-/* --- BOTONES FLOTANTES --- */
-.whatsapp-fixed { position: fixed; bottom: 25px; right: 25px; z-index: 9998; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.4); transition: transform 0.3s; }
-.whatsapp-fixed:hover { transform: scale(1.1); }
-
-/* Botón Volver Arriba */
-#btn-top {
-  position: fixed; bottom: 95px; right: 25px; z-index: 9997;
-  background-color: var(--color-azul); color: white;
-  width: 45px; height: 45px; border-radius: 50%;
-  border: none; cursor: pointer; display: none;
-  align-items: center; justify-content: center; font-size: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s;
-}
-#btn-top:hover { background-color: var(--color-negro); }
-
-#btn-back { position: fixed; top: 95px; left: 15px; z-index: 1800; background-color: var(--color-negro); color: var(--color-blanco); border: none; padding: 8px 12px; border-radius: 5px; font-family: var(--font-titulos); font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); transition: background-color 0.3s; }
-#btn-back:hover { background-color: var(--color-azul); }
+.container { width: 92%; max-width: 1200px; margin: auto; padding-bottom: 60px; }
 .hidden { display: none !important; }
 
-/* --- CONTENEDORES Y ANIMACIÓN --- */
-.view-section { display: none; animation: fadeIn 0.4s ease-out forwards; }
-.view-section.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.container { width: 92%; max-width: 1200px; margin: auto; padding-bottom: 50px; }
-h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: center; color: var(--color-azul); font-size: 2.2rem; margin: 30px 0; }
+/* ==========================================================================
+   3. PANTALLA DE CARGA
+   ========================================================================== */
+#loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--color-negro); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
+.spinner { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid var(--color-azul-brillante); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.loader-text { color: white; font-family: var(--font-titulos); letter-spacing: 3px; font-size: 1.2rem; }
 
-/* --- DISEÑO DE PARTIDOS --- */
+/* ==========================================================================
+   4. NAVEGACIÓN Y HEADER
+   ========================================================================== */
+.top-navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 2000; background-color: rgba(17, 17, 17, 0.95); backdrop-filter: blur(10px); height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.header-right { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+.logo-circle { width: 48px; height: 48px; border: 2px solid var(--color-blanco); border-radius: 50%; background: linear-gradient(135deg, var(--color-azul-brillante), var(--color-azul-primario)); display: flex; justify-content: center; align-items: center; color: var(--color-blanco); font-family: var(--font-titulos); font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+.logo-text { display: flex; flex-direction: column; justify-content: center; line-height: 1.2; text-align: right; }
+.logo-title { font-family: var(--font-titulos); color: var(--color-blanco); font-size: 22px; letter-spacing: 1px; }
+.logo-subtitle { font-family: var(--font-texto); color: #A0AEC0; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+.menu-icon { color: var(--color-blanco); font-size: 28px; cursor: pointer; order: -1; transition: var(--transicion); } 
+.menu-icon:hover { color: var(--color-azul-brillante); }
+
+#mobile-menu { position: fixed; top: 80px; left: 0; background-color: var(--color-negro); width: 100%; max-width: 320px; height: calc(100vh - 80px); z-index: 1900; display: flex; flex-direction: column; padding: 20px 0; transform: translateX(-100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-right: 3px solid var(--color-azul-brillante); }
+#mobile-menu.active { transform: translateX(0); }
+#mobile-menu a { color: var(--color-blanco); text-decoration: none; padding: 18px 30px; font-family: var(--font-titulos); font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); text-transform: uppercase; transition: var(--transicion); letter-spacing: 1px; }
+#mobile-menu a:hover { color: var(--color-azul-brillante); padding-left: 40px; background: rgba(30, 77, 148, 0.1); }
+
+/* ==========================================================================
+   5. BOTONES Y PANELES
+   ========================================================================== */
+.whatsapp-fixed { position: fixed; bottom: 30px; right: 30px; z-index: 9998; background-color: #25D366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4); text-decoration: none; transition: var(--transicion); }
+.whatsapp-fixed:hover { transform: scale(1.1) rotate(-10deg); }
+#btn-top { position: fixed; bottom: 105px; right: 35px; z-index: 9997; background-color: var(--color-azul-brillante); color: white; width: 45px; height: 45px; border-radius: 50%; border: none; cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s; }
+#btn-top:hover { background-color: var(--color-negro); }
+#btn-back { position: fixed; top: 95px; left: 15px; z-index: 1800; background-color: var(--color-negro); color: var(--color-blanco); border: none; padding: 8px 12px; border-radius: 5px; font-family: var(--font-titulos); font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); transition: background-color 0.3s; }
+#btn-back:hover { background-color: var(--color-azul-brillante); }
+
+.panel-acciones { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; padding: 30px; background-color: var(--color-blanco); border-bottom: 1px solid #E2E8F0; }
+.btn-accion { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 20px; border: none; border-radius: 12px; font-family: var(--font-titulos); font-size: 1.1rem; letter-spacing: 0.5px; cursor: pointer; transition: var(--transicion); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.btn-accion.oscuro { background-color: var(--color-negro); color: var(--color-blanco); }
+.btn-accion.azul { background-color: var(--color-azul-brillante); color: var(--color-blanco); }
+.btn-accion:hover { transform: translateY(-3px); box-shadow: var(--sombra-fuerte); }
+
+/* ==========================================================================
+   6. TARJETAS Y CONTENEDORES
+   ========================================================================== */
+.card { background-color: var(--color-blanco); border-radius: 20px; box-shadow: var(--sombra-suave); overflow: hidden; border: 1px solid rgba(0,0,0,0.02); margin-bottom: 30px; transition: var(--transicion); }
+.card:hover { transform: translateY(-5px); box-shadow: var(--sombra-fuerte); }
+.cumpleanos-card { text-align: center; max-width: 600px; margin: 0 auto 50px auto; padding: 20px; }
+.cumpleanos-card i { font-size: 3rem; color: var(--color-azul-brillante); margin-bottom: 10px; }
+.cumpleanos-card h3 { font-family: var(--font-titulos); font-size: 1.8rem; margin-bottom: 15px; }
+.cumpleanos-lista { list-style: none; padding: 0; }
+.cumpleanos-lista li { padding: 10px 0; border-bottom: 1px solid #eee; font-size: 1.1rem; }
+
+.category-title { font-family: var(--font-titulos); background: linear-gradient(135deg, var(--color-azul-brillante), var(--color-azul-primario)); color: var(--color-blanco); padding: 12px 30px; border-radius: 8px; text-align: center; margin: 50px auto 30px auto; width: max-content; font-size: 1.5rem; letter-spacing: 1px; box-shadow: 0 10px 20px rgba(30, 77, 148, 0.2); text-transform: uppercase;}
+.destacados-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+
+.player-card { background-color: var(--color-blanco); border-radius: 20px; box-shadow: var(--sombra-suave); overflow: hidden; transition: var(--transicion); display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.03); }
+.player-card:hover { transform: translateY(-10px); box-shadow: var(--sombra-fuerte); }
+.card-photo-wrapper { width: 100%; height: 300px; overflow: hidden; background-color: #E2E8F0; position: relative;}
+.player-card img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.5s ease; }
+.player-card:hover img { transform: scale(1.05); }
+.player-card .info { padding: 20px; text-align: center; background: linear-gradient(to top, #ffffff, #fafafa); }
+.card-label { font-size: 0.8rem; color: var(--color-gris-texto); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;}
+.player-name { font-family: var(--font-titulos); font-size: 1.6rem; color: var(--color-negro); margin-top: 5px; text-transform: uppercase;}
+.player-number { font-family: var(--font-titulos); font-size: 2.2rem; color: var(--color-azul-brillante); font-weight: 700; line-height: 1; }
+
+.mission-section { background: var(--color-blanco); padding: 50px 20px; text-align: center; border-radius: 15px; margin-top: 40px; box-shadow: var(--sombra-suave);}
+.mission-section h3 { font-family: var(--font-titulos); font-size: 2rem; color: var(--color-azul-brillante); margin-bottom: 15px; }
+.mission-section p { max-width: 800px; margin: auto; font-size: 1.1rem; line-height: 1.6; color: #444; }
+
+.hero-slider { width: 100%; height: 40vh; position: relative; overflow: hidden; background-color: var(--color-negro); border-top: 4px solid var(--color-azul-brillante); margin-top: 50px; }
+.slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; background-size: cover; background-position: center; }
+.slide.active { opacity: 1; }
+.hero-text { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(17, 17, 17, 0.85); color: var(--color-blanco); padding: 10px 25px; border-radius: 5px; font-family: var(--font-titulos); border-bottom: 3px solid var(--color-azul-brillante); white-space: nowrap; }
+
+/* ==========================================================================
+   7. VISTAS Y ANIMACIONES
+   ========================================================================== */
+.view-section { display: none; animation: slideUp 0.5s ease-out forwards; }
+.view-section.active { display: block; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.hero-banner { width: 100%; height: auto; display: block; border-bottom: 5px solid var(--color-azul-brillante); }
+
+/* --- EVENTOS --- */
+.evento-header { background-color: var(--color-azul-brillante); color: white; padding: 15px; text-align: center; font-family: var(--font-titulos); font-size: 1.6rem; text-transform: uppercase; }
+.evento-body { padding: 25px; text-align: center; }
+.evento-body img.poster-evento { width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin: 0 auto 20px auto; display: block; object-fit: contain; }
+.evento-body p { font-size: 1.1rem; line-height: 1.6; color: #444; margin-bottom: 15px; text-align: justify; }
+.galeria-instruccion { text-align: center; color: #666; font-style: italic; margin: 10px 0 20px 0; font-size: 0.9rem; }
+.carousel-container { width: 100%; max-width: 800px; margin: auto; position: relative; border-radius: 10px; box-shadow: var(--sombra-suave); background-color: var(--color-negro); aspect-ratio: 16/9; cursor: pointer; overflow: hidden; }
+.carousel-slide { display: flex; height: 100%; transition: transform 0.4s ease-in-out; }
+.carousel-slide img { width: 100%; height: 100%; flex-shrink: 0; object-fit: contain; }
+.nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.6); color: white; border: none; font-size: 1.5rem; padding: 10px 15px; border-radius: 5px; cursor: pointer; z-index: 10; transition: background 0.3s; }
+.nav-btn:hover { background-color: rgba(0, 0, 0, 0.9); }
+.nav-btn.prev { left: 10px; }
+.nav-btn.next { right: 10px; }
+
+#lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 99999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+#lightbox.active { opacity: 1; pointer-events: auto; }
+#lightbox-img { max-width: 95vw; max-height: 85vh; object-fit: contain; border-radius: 5px; user-select: none; }
+.lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; cursor: pointer; font-weight: bold; transition: color 0.3s; z-index: 100000; }
+.lightbox-close:hover { color: var(--color-azul-brillante); }
+.lightbox-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.6); color: white; border: none; font-size: 2rem; padding: 15px 20px; border-radius: 5px; cursor: pointer; z-index: 100000; transition: background 0.3s; }
+.lightbox-nav-btn:hover { background-color: rgba(0, 0, 0, 0.9); }
+.lightbox-nav-btn.prev { left: 20px; }
+.lightbox-nav-btn.next { right: 20px; }
+
+/* --- EQUIPOS Y PARTIDOS --- */
+.equipos-nav { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+.btn-categoria { background-color: var(--color-blanco); color: var(--color-negro); border: 1px solid #E2E8F0; padding: 22px 30px; font-family: var(--font-titulos); font-size: 1.4rem; border-radius: 12px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--color-azul-brillante); box-shadow: var(--sombra-suave); transition: var(--transicion); }
+.btn-categoria:hover { transform: translateX(8px); background-color: #F8FAFC; border-color: var(--color-azul-brillante); }
+
+.info-equipo-card { background: white; border-radius: 16px; box-shadow: var(--sombra-suave); overflow: hidden; margin-bottom: 25px; border: none; transition: var(--transicion); }
+.info-header { color: white; padding: 15px; font-family: var(--font-titulos); text-align: center; font-size: 1.4rem; text-transform: uppercase; }
+.info-content { padding: 20px; }
+.info-item { margin-bottom: 15px; }
+.info-item strong { color: var(--color-azul-brillante); text-transform: uppercase; display: block; margin-bottom: 5px; font-size: 0.9rem; }
+.lista-jugadores { list-style: none; padding-left: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.lista-jugadores li { padding: 5px 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+
 .partido-proximo { background: #fffdf0; border: 1px solid #ffeeba; border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 5px solid var(--color-pendiente); }
 .btn-maps-partido { display: inline-flex; align-items: center; gap: 8px; background: #4285F4; color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-size: 0.8rem; margin-top: 10px; font-weight: bold; }
 .btn-historial { width: 100%; background: var(--color-negro); color: white; border: none; padding: 15px; font-family: var(--font-titulos); border-radius: 5px; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1.1rem; display: flex; justify-content: center; align-items: center; gap: 10px; transition: background-color 0.3s; }
@@ -130,135 +181,55 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 .pendiente { background-color: var(--color-pendiente); color: #000; }
 .lista-convocados { font-size: 0.85rem; color: #666; font-style: italic; margin-top: 8px; line-height: 1.4; background: #f9f9f9; padding: 8px; border-radius: 5px; }
 
-/* --- INICIO --- */
-.hero-banner { width: 100%; height: auto; display: block; background-color: var(--color-negro); border-bottom: 4px solid var(--color-azul); }
-
-/* TARJETAS OPTIMIZADAS (Clean Design) */
-.card { background-color: var(--color-blanco); border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); overflow: hidden; border: none; margin-bottom: 30px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.cumpleanos-card { text-align: center; max-width: 600px; margin: 0 auto 50px auto; padding: 20px; }
-.cumpleanos-card i { font-size: 3rem; color: var(--color-azul); margin-bottom: 10px; }
-.cumpleanos-card h3 { font-family: var(--font-titulos); font-size: 1.8rem; margin-bottom: 15px; }
-.cumpleanos-lista { list-style: none; padding: 0; }
-.cumpleanos-lista li { padding: 10px 0; border-bottom: 1px solid #eee; font-size: 1.1rem; }
-
-.category-title { font-family: var(--font-titulos); background-color: var(--color-azul); color: var(--color-blanco); padding: 10px 25px; border-radius: 5px; text-align: center; margin: 40px auto 25px auto; width: max-content; min-width: 300px; font-size: 1.5rem; text-transform: uppercase; box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
-.destacados-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
-
-/* Tarjetas Pro con object-fit: cover y sombras suaves */
-.player-card { flex: 1 1 280px; max-width: 320px; text-align: center; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; background-color: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); overflow: hidden; border: none; }
-.player-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(30, 77, 148, 0.15); }
-.card-photo-wrapper { width: 100%; height: 250px; overflow: hidden; background-color: var(--color-gris-claro); border-radius: 50%; }
-.player-card img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.player-card .info { padding: 15px; display: flex; flex-direction: column; gap: 5px; flex-grow: 1; justify-content: center; }
-.card-label { font-size: 0.85rem; color: #777; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 3px;}
-.player-name { font-family: var(--font-titulos); font-size: 1.4rem; color: var(--color-negro); text-transform: uppercase; line-height: 1.2; }
-.player-number { font-family: var(--font-titulos); font-size: 2rem; color: var(--color-azul); font-weight: bold; margin-top: 5px; }
-
-/* Sección Misión */
-.mission-section { background: var(--color-gris-claro); padding: 50px 20px; text-align: center; border-radius: 15px; margin-top: 40px; }
-.mission-section h3 { font-family: var(--font-titulos); font-size: 2rem; color: var(--color-azul); margin-bottom: 15px; }
-.mission-section p { max-width: 800px; margin: auto; font-size: 1.1rem; line-height: 1.6; color: #444; }
-
-.hero-slider { width: 100%; height: 40vh; position: relative; overflow: hidden; background-color: var(--color-negro); border-top: 4px solid var(--color-azul); margin-top: 50px; }
-.slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; background-size: cover; background-position: center; }
-.slide.active { opacity: 1; }
-.hero-text { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(26, 26, 26, 0.85); color: var(--color-blanco); padding: 10px 25px; border-radius: 5px; font-family: var(--font-titulos); border-bottom: 3px solid var(--color-azul); white-space: nowrap; }
-
-/* --- EVENTOS --- */
-.evento-header { background-color: var(--color-azul); color: white; padding: 15px; text-align: center; font-family: var(--font-titulos); font-size: 1.6rem; text-transform: uppercase; }
-.evento-body { padding: 25px; text-align: center; }
-.evento-body img.poster-evento { width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin: 0 auto 20px auto; display: block; object-fit: contain; }
-.evento-body p { font-size: 1.1rem; line-height: 1.6; color: #444; margin-bottom: 15px; text-align: justify; }
-
-.galeria-instruccion { text-align: center; color: #666; font-style: italic; margin: 10px 0 20px 0; font-size: 0.9rem; }
-.carousel-container { width: 100%; max-width: 800px; margin: auto; position: relative; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); background-color: var(--color-negro); aspect-ratio: 16/9; cursor: pointer; overflow: hidden; }
-.carousel-slide { display: flex; height: 100%; transition: transform 0.4s ease-in-out; }
-.carousel-slide img { width: 100%; height: 100%; flex-shrink: 0; object-fit: contain; }
-.nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.6); color: white; border: none; font-size: 1.5rem; padding: 10px 15px; border-radius: 5px; cursor: pointer; z-index: 10; transition: background 0.3s; }
-.nav-btn:hover { background-color: rgba(0, 0, 0, 0.9); }
-.nav-btn.prev { left: 10px; }
-.nav-btn.next { right: 10px; }
-
-#lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); z-index: 99999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-#lightbox.active { opacity: 1; pointer-events: auto; }
-#lightbox-img { max-width: 95vw; max-height: 85vh; object-fit: contain; border-radius: 5px; user-select: none; }
-.lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; cursor: pointer; font-weight: bold; transition: color 0.3s; z-index: 100000; }
-.lightbox-close:hover { color: var(--color-azul); }
-
-/* Controles de Lightbox */
-.lightbox-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.6); color: white; border: none; font-size: 2rem; padding: 15px 20px; border-radius: 5px; cursor: pointer; z-index: 100000; transition: background 0.3s; }
-.lightbox-nav-btn:hover { background-color: rgba(0, 0, 0, 0.9); }
-.lightbox-nav-btn.prev { left: 20px; }
-.lightbox-nav-btn.next { right: 20px; }
-
-/* --- EQUIPOS --- */
-.equipos-nav { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-.btn-categoria { background-color: var(--color-negro); color: white; border: none; padding: 20px 25px; font-family: var(--font-titulos); font-size: 1.3rem; border-radius: 8px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid var(--color-azul); box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s, background-color 0.2s; }
-.btn-categoria:hover { transform: translateX(5px); background-color: #222; }
-
-.info-equipo-card { background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); overflow: hidden; margin-bottom: 25px; border: none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.info-header { color: white; padding: 15px; font-family: var(--font-titulos); text-align: center; font-size: 1.4rem; text-transform: uppercase; }
-.info-content { padding: 20px; }
-.info-item { margin-bottom: 15px; }
-.info-item strong { color: var(--color-azul); text-transform: uppercase; display: block; margin-bottom: 5px; font-size: 0.9rem; }
-.lista-jugadores { list-style: none; padding-left: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-.lista-jugadores li { padding: 5px 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
-
-/* --- REGLAMENTO Y DOCUMENTOS --- */
-.btn-descarga { display: inline-block; background-color: var(--color-azul); color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-family: var(--font-titulos); font-size: 1.2rem; text-transform: uppercase; transition: background-color 0.3s, transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 15px; }
-.btn-descarga:hover { background-color: #153669; transform: translateY(-3px); }
+/* --- REGLAMENTO --- */
+.btn-descarga { display: inline-block; background-color: var(--color-azul-brillante); color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-family: var(--font-titulos); font-size: 1.2rem; text-transform: uppercase; transition: background-color 0.3s, transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 15px; }
+.btn-descarga:hover { background-color: var(--color-azul-primario); transform: translateY(-3px); }
 
 /* --- TIENDA OFICIAL --- */
 .tienda-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-top: 20px; }
-.producto-card { background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); overflow: hidden; max-width: 400px; width: 100%; display: flex; flex-direction: column; border: none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.producto-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(30, 77, 148, 0.15); }
-.producto-img-container { width: 100%; height: 300px; background-color: var(--color-gris-claro); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.producto-card { background: white; border-radius: 16px; box-shadow: var(--sombra-suave); overflow: hidden; max-width: 400px; width: 100%; display: flex; flex-direction: column; border: none; transition: var(--transicion); }
+.producto-card:hover { transform: translateY(-8px); box-shadow: var(--sombra-fuerte); }
+.producto-img-container { width: 100%; height: 300px; background-color: #E2E8F0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .producto-img-container img { width: 100%; height: 100%; object-fit: contain; }
 .producto-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
 .producto-sponsor { font-size: 0.8rem; color: #888; text-transform: uppercase; font-weight: bold; margin-bottom: 5px; }
 .producto-titulo { font-family: var(--font-titulos); font-size: 1.6rem; color: var(--color-negro); line-height: 1.2; margin-bottom: 10px; }
 .producto-desc { font-size: 1rem; color: #555; margin-bottom: 15px; }
-.producto-precio { font-family: var(--font-titulos); font-size: 2rem; color: var(--color-azul); margin-bottom: 20px; }
+.producto-precio { font-family: var(--font-titulos); font-size: 2rem; color: var(--color-azul-brillante); margin-bottom: 20px; }
 .btn-tienda { background-color: var(--color-negro); color: white; border: none; padding: 12px; border-radius: 5px; font-family: var(--font-titulos); font-size: 1.1rem; cursor: pointer; text-transform: uppercase; width: 100%; transition: background-color 0.3s; }
-.btn-tienda:hover { background-color: var(--color-azul); }
+.btn-tienda:hover { background-color: var(--color-azul-brillante); }
 
-/* ESTILOS PARA LOS MODALES FLOTANTES DE LA TIENDA */
 .modal-tienda { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10000; justify-content: center; align-items: center; padding: 20px; }
 .modal-tienda.activo { display: flex; animation: fadeIn 0.3s; }
 .modal-tienda-content { background: white; padding: 25px; border-radius: 16px; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
 .close-modal { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #333; line-height: 1; }
-
 .form-group { margin-bottom: 12px; text-align: left; }
 .form-group label { display: block; font-size: 0.9rem; font-weight: bold; margin-bottom: 5px; color: var(--color-negro); }
 .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: var(--font-texto); font-size: 1rem; }
 .btn-whatsapp { background-color: #25D366; color: white; border: none; padding: 12px; border-radius: 5px; font-family: var(--font-titulos); font-size: 1.1rem; cursor: pointer; text-transform: uppercase; width: 100%; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.3s; }
-
-/* Botones selectores Infantil/Juvenil */
 .btn-cat-selector { flex: 1; padding: 10px; background-color: var(--color-blanco); border: 2px solid #ccc; border-radius: 5px; cursor: pointer; font-family: var(--font-titulos); text-transform: uppercase; transition: 0.3s; color: var(--color-negro); }
-.btn-cat-selector.active { background-color: var(--color-azul); color: white; border-color: var(--color-azul); }
+.btn-cat-selector.active { background-color: var(--color-azul-brillante); color: white; border-color: var(--color-azul-brillante); }
 
 /* --- PAGOS E INSCRIPCIONES --- */
-.pago-card { background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); overflow: hidden; margin-bottom: 30px; border: none; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.pago-header { background-color: var(--color-gris-claro); padding: 20px; text-align: center; border-bottom: 1px solid #eee; }
-.pago-header h3 { font-family: var(--font-titulos); font-size: 1.8rem; color: var(--color-negro); text-transform: uppercase; margin-bottom: 5px; }
-.pago-header .precio { font-family: var(--font-titulos); font-size: 2.2rem; color: var(--color-azul); }
-.pago-body { padding: 25px; }
+.pago-card { background: white; border-radius: 16px; box-shadow: var(--sombra-suave); overflow: hidden; margin-bottom: 30px; border: none; display: flex; flex-direction: column; transition: var(--transicion); }
+.pago-header { background: linear-gradient(135deg, #1a1a1a, #000000); padding: 30px; text-align: center; color: white; border-bottom: 1px solid #eee; }
+.pago-header h3 { font-family: var(--font-titulos); font-size: 1.8rem; letter-spacing: 1px; color: #A0AEC0; text-transform: uppercase; margin-bottom: 5px; }
+.pago-header .precio { font-family: var(--font-titulos); font-size: 2.5rem; color: var(--color-blanco); display: block;}
+.pago-body { padding: 30px; }
 .pago-body p { margin-bottom: 15px; color: #444; line-height: 1.6; }
-.banco-info { background-color: #fdfdfd; border: 1px dashed #ccc; padding: 15px; border-radius: 5px; margin: 20px 0; font-family: monospace; font-size: 1.1rem; text-align: center; }
+.banco-info { background-color: #F1F5F9; border-left: 4px solid var(--color-azul-brillante); padding: 20px; border-radius: 0 8px 8px 0; margin: 25px 0; font-family: monospace; font-size: 1.15rem; }
 .btn-form-pago { display: block; text-align: center; background-color: var(--color-negro); color: white; text-decoration: none; padding: 15px; border-radius: 5px; font-family: var(--font-titulos); font-size: 1.2rem; text-transform: uppercase; transition: background-color 0.3s; }
-.btn-form-pago:hover { background-color: var(--color-azul); }
+.btn-form-pago:hover { background-color: var(--color-azul-brillante); }
 .recargo-nota { color: #E4405F; font-weight: bold; font-size: 0.9rem; margin-top: 10px; display: block; }
 
-/* Footer Mejorado */
-.footer { background-color: var(--color-negro); color: var(--color-blanco); padding: 50px 20px; text-align: center; margin-top: 40px; border-top: 4px solid var(--color-azul);}
-.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 30px auto; text-align: left; }
-.footer-info h3 { font-family: var(--font-titulos); margin-bottom: 15px; color: var(--color-azul); font-size: 1.5rem; text-transform: uppercase;}
+/* --- FOOTER --- */
+.footer { background-color: var(--color-negro); color: var(--color-blanco); padding: 60px 20px 40px; border-top: 5px solid var(--color-azul-brillante);}
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 30px auto; }
+.footer-info h3 { font-family: var(--font-titulos); margin-bottom: 20px; color: var(--color-azul-brillante); font-size: 1.5rem; letter-spacing: 1px;}
 .footer-info p { font-size: 0.95rem; line-height: 1.6; color: #bbb; margin-bottom: 8px;}
-.payment-icons { display: flex; gap: 15px; margin-top: 15px; font-size: 1.8rem; color: #888; }
-.social-icons { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
-.social-icons a { color: var(--color-blanco); font-size: 35px; transition: transform 0.3s; }
-.social-icons a:hover { transform: translateY(-5px); color: var(--color-azul); }
-
+.social-icons { display: flex; gap: 15px; margin-top: 20px; }
+.social-icons a { color: var(--color-blanco); font-size: 30px; transition: var(--transicion); background: rgba(255,255,255,0.1); width: 60px; height: 60px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; }
+.social-icons a:hover { background: var(--color-azul-brillante); transform: translateY(-5px); }
 </style>
 </head>
 <body>
@@ -303,17 +274,17 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
   <main id="inicio-view" class="view-section active">
     <img src="https://imgur.com/7vRA7g5.jpg" alt="Banner Halcones" class="hero-banner">
 
-    <div style="display: flex; justify-content: center; gap: 15px; padding: 20px; background-color: var(--color-gris-claro); border-bottom: 2px solid #ddd; flex-wrap: wrap;">
-      <button onclick="showView('partidos')" style="background-color: var(--color-negro); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-family: var(--font-titulos); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s;">
-        <i class="fa-solid fa-calendar-days"></i> Rol de Proximos Juegos
+    <div class="panel-acciones">
+      <button class="btn-accion oscuro" onclick="showView('partidos')">
+        <i class="fa-solid fa-calendar-days"></i> Rol de Juegos
       </button>
-      <button onclick="showView('equipos')" style="background-color: var(--color-azul); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-family: var(--font-titulos); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s;">
-        <i class="fa-solid fa-users"></i> Equipos Y Horarios de Entrenamiento
+      <button class="btn-accion azul" onclick="showView('equipos')">
+        <i class="fa-solid fa-users"></i> Horarios
       </button>
-      <button onclick="showView('tienda')" style="background-color: var(--color-negro); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-family: var(--font-titulos); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s;">
+      <button class="btn-accion oscuro" onclick="showView('tienda')">
         <i class="fa-solid fa-shop"></i> Tienda Oficial
       </button>
-       <button onclick="showView('pagos')" style="background-color: var(--color-azul); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-family: var(--font-titulos); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s;">
+       <button class="btn-accion azul" onclick="showView('pagos')">
         <i class="fa-solid fa-money-check-dollar"></i> Pagar Mensualidad
       </button>
     </div>
@@ -457,7 +428,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 
   <main id="detalle-view" class="view-section">
     <div class="container">
-      <h2 id="detalle-titulo" style="margin-top: 50px;">Nombre Categoría</h2>
+      <h2 id="detalle-titulo">Nombre Categoría</h2>
       <div id="detalle-contenido"></div>
     </div>
   </main>
@@ -475,8 +446,8 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
           <p>Recuerda que tenemos <strong>paquetes familiares</strong>, los cuales consisten en 2 Familiares: $530 MXN y 3 Familiares: $700 MXN, SI NO CUBRES TODOS LOS ENTRENAMIENTOS DEL MES DEBERAS PAGAR TU CLASE EN $40 MXN</p>
           <p>Las mensualidades deben cubrirse puntualmente durante los <strong>primeros 5 días de cada mes</strong>. Puedes realizar tu pago mediante transferencia a la cuenta del club o en efectivo en cancha.</p>
           
-          <div style="background-color: #e8f0fe; border-left: 5px solid var(--color-azul); padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-            <h4 style="color: var(--color-azul); margin-bottom: 5px; font-family: var(--font-titulos);"><i class="fa-solid fa-bolt"></i> Sistema de Registro Automático</h4>
+          <div style="background-color: #e8f0fe; border-left: 5px solid var(--color-azul-brillante); padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <h4 style="color: var(--color-azul-brillante); margin-bottom: 5px; font-family: var(--font-titulos);"><i class="fa-solid fa-bolt"></i> Sistema de Registro Automático</h4>
             <p style="margin: 0; font-size: 0.95rem;">Para agilizar el proceso de registro y llevar un mejor control, <strong>a cada jugador se le ha asignado un ID único</strong>. Al subir tu comprobante junto con tu ID, nuestro sistema validará tu pago y recibirás un recibo digital con folio oficial directamente en tu correo en cuestión de segundos.</p>
           </div>
           
@@ -503,8 +474,8 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
           <span class="precio">$400 MXN</span>
         </div>
         <div class="pago-body">
-          <p><strong><i class="fa-solid fa-gift" style="color:var(--color-azul);"></i> ¡Promoción!</strong> Tu pago de inscripción incluye el <strong>primer mes de entrenamiento totalmente GRATIS</strong>.</p>
-          <p>Para inscribirte,  Puedes realizar tu pago mediante transferencia a la cuenta del club o en efectivo en cancha. El pago por transferencia deberas registrarlo llenando el formulario dando click en el botón de abajo (SUBIR COMPROBANTE). El pago en efectivo se registrara por el administrador dando tus datos</p>
+          <p><strong><i class="fa-solid fa-gift" style="color:var(--color-azul-brillante);"></i> ¡Promoción!</strong> Tu pago de inscripción incluye el <strong>primer mes de entrenamiento totalmente GRATIS</strong>.</p>
+          <p>Para inscribirte, puedes realizar tu pago mediante transferencia a la cuenta del club o en efectivo en cancha. El pago por transferencia deberás registrarlo llenando el formulario dando click en el botón de abajo (SUBIR COMPROBANTE). El pago en efectivo se registrará por el administrador dando tus datos</p>
           
           <div class="banco-info">
             <strong>Banco:</strong> MERCADO PAGO<br>
@@ -514,12 +485,11 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 
           <p>Una vez realizado el pago, da clic en los siguientes botónes para subir tu comprobante y llenar tus datos personales en nuestro sistema de registro oficial:</p>
           
-          <a href="https://forms.gle/i9FKuUHMDZoZkj9t7" target="_blank" class="btn-form-pago">
+          <a href="https://forms.gle/i9FKuUHMDZoZkj9t7" target="_blank" class="btn-form-pago" style="margin-bottom: 10px;">
             <i class="fa-solid fa-file-signature"></i> Llenar Registro De Datos Personales
           </a>
-          <br>
           <a href="https://forms.gle/jqxXJB1Gh1htiaGEA" target="_blank" class="btn-form-pago">
-            <i class="fa-solid fa-file-signature"></i> Subir Comprobante
+            <i class="fa-solid fa-file-upload"></i> Subir Comprobante
           </a>
         </div>
       </div>  
@@ -599,32 +569,30 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
         <h3>CONTÁCTANOS</h3>
         <p><i class="fa-solid fa-location-dot"></i> Agora & Deportivo Solidaridad</p>
         <p><i class="fa-solid fa-phone"></i> 55 3261 4194 COACH YES</p>
-         <p><i class="fa-solid fa-phone"></i> 56 3578 2679 COACH EMER</p>
+        <p><i class="fa-solid fa-phone"></i> 56 3578 2679 COACH EMER</p>
         <p><i class="fa-solid fa-phone"></i> 55 1933 0285 COACH VANE</p>
-         <p><i class="fa-solid fa-phone"></i> 56 6102 2575 NUMERO OFICIAL DEL CLUB</p>
+        <p><i class="fa-solid fa-phone"></i> 56 6102 2575 NUMERO OFICIAL DEL CLUB</p>
         <p><i class="fa-solid fa-envelope"></i> contacto: halconesbasketball2025@gmail.com</p>
       </div>
-      <div class="footer-info">
-        <h3>PAGOS SEGUROS</h3>
-        <p>Aceptamos transferencias, da click en pagos y mensualidades.</p>
-        
+      <div class="footer-info" style="text-align: center;">
+        <h3>REDES SOCIALES</h3>
+        <div class="social-icons" style="justify-content: center;">
+          <a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="https://www.instagram.com/halcones.basketball/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@halcones.basketball" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
       </div>
     </div>
-    <div class="social-icons">
-      <a href="https://www.facebook.com/profile.php?id=100088847336794" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.instagram.com/halcones.basketball/" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@halcones.basketball" target="_blank"><i class="fab fa-tiktok"></i></a>
-    </div>
-    <p style="margin-top: 30px; font-size: 0.9rem; color: #888;">
+    <p style="margin-top: 30px; font-size: 0.9rem; color: #888; text-align: center;">
       © 2026 Halcones Basketball Club <br>
-      <span style="color: var(--color-azul); font-weight: bold;">Formando el mejor talento de Chalco y sus alrededores.</span>
+      <span style="color: var(--color-azul-brillante); font-weight: bold;">Formando el mejor talento de Chalco y sus alrededores.</span>
     </p>
   </footer>
 
   <div id="modal-juego" class="modal-tienda">
     <div class="modal-tienda-content">
       <span class="close-modal" onclick="toggleFormulario('modal-juego')">&times;</span>
-      <h3 style="font-family: var(--font-titulos); text-align: center; color: var(--color-azul); margin-bottom: 20px; font-size: 1.6rem; text-transform: uppercase;">Pedido: Uniforme de Juego</h3>
+      <h3 style="font-family: var(--font-titulos); text-align: center; color: var(--color-azul-brillante); margin-bottom: 20px; font-size: 1.6rem; text-transform: uppercase;">Pedido: Uniforme de Juego</h3>
       <div class="form-group">
         <label>Rama:</label>
         <select id="rama-juego">
@@ -642,11 +610,11 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
         <input type="hidden" id="categoria-juego" value="Juvenil">
       </div>
       <div class="form-group"><label>Nombre en la playera (Espalda):</label><input type="text" id="nombre-juego" placeholder="Ej. PÉREZ"></div>
-      <div class="form-group"><label>Número (SI YA LO TIENE), si no tiene solo ponga 0 y le asignaremos uno</label><input type="number" id="numero-juego" placeholder="Ej. 10" min="0" max="99"></div>
+      <div class="form-group"><label>Número (SI YA LO TIENE), si no tiene ponga 0</label><input type="number" id="numero-juego" placeholder="Ej. 10" min="0" max="99"></div>
       <div class="form-group">
         <label style="display: flex; justify-content: space-between;">
           Talla:
-          <a href="#" onclick="abrirGuiaTallas(event)" style="color: var(--color-azul); text-decoration: underline; font-weight: normal;">Guía de tallas</a>
+          <a href="#" onclick="abrirGuiaTallas(event)" style="color: var(--color-azul-brillante); text-decoration: underline; font-weight: normal;">Guía de tallas</a>
         </label>
         <select id="talla-juego">
           <option value="" disabled selected>Selecciona tu talla</option>
@@ -665,7 +633,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
   <div id="modal-entrenamiento" class="modal-tienda">
     <div class="modal-tienda-content">
       <span class="close-modal" onclick="toggleFormulario('modal-entrenamiento')">&times;</span>
-      <h3 style="font-family: var(--font-titulos); text-align: center; color: var(--color-azul); margin-bottom: 20px; font-size: 1.6rem; text-transform: uppercase;">Pedido: Entrenamiento</h3>
+      <h3 style="font-family: var(--font-titulos); text-align: center; color: var(--color-azul-brillante); margin-bottom: 20px; font-size: 1.6rem; text-transform: uppercase;">Pedido: Entrenamiento</h3>
       <div class="form-group">
         <label>Rama:</label>
         <select id="rama-entrenamiento">
@@ -685,7 +653,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
       <div class="form-group">
         <label style="display: flex; justify-content: space-between;">
           Talla:
-          <a href="#" onclick="abrirGuiaTallas(event)" style="color: var(--color-azul); text-decoration: underline; font-weight: normal;">Guía de tallas</a>
+          <a href="#" onclick="abrirGuiaTallas(event)" style="color: var(--color-azul-brillante); text-decoration: underline; font-weight: normal;">Guía de tallas</a>
         </label>
         <select id="talla-entrenamiento">
           <option value="" disabled selected>Selecciona tu talla</option>
@@ -704,7 +672,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
   <div id="modal-porra" class="modal-tienda">
     <div class="modal-tienda-content">
       <span class="close-modal" onclick="toggleFormulario('modal-porra')">&times;</span>
-      <h3 style="font-family: var(--font-titulos); text-align: center; color: var(--color-azul); margin-bottom: 20px; font-size: 1.6rem; text-transform: uppercase;">Pedido: Playera de Porra</h3>
+      <h3 style="font-family: var(--font-titulos); text-align: center; color: var(--color-azul-brillante); margin-bottom: 20px; font-size: 1.6rem; text-transform: uppercase;">Pedido: Playera de Porra</h3>
       <div class="form-group">
         <label>Nombre enfrente (Ej. Mamá, Papá, Hermana):</label>
         <input type="text" id="parentesco-porra" placeholder="Ej. Papá">
@@ -722,7 +690,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
       <div class="form-group">
         <label style="display: flex; justify-content: space-between;">
           Talla:
-          <a href="#" onclick="abrirGuiaTallas(event)" style="color: var(--color-azul); text-decoration: underline; font-weight: normal;">Guía de tallas</a>
+          <a href="#" onclick="abrirGuiaTallas(event)" style="color: var(--color-azul-brillante); text-decoration: underline; font-weight: normal;">Guía de tallas</a>
         </label>
         <select id="talla-porra">
           <option value="" disabled selected>Selecciona tu talla</option>
@@ -741,7 +709,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
   <div id="modal-guia-tallas" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 10001; justify-content: center; align-items: center; padding: 20px;">
     <div style="background: white; padding: 25px; border-radius: 16px; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 5px 20px rgba(0,0,0,0.3);">
       <span onclick="cerrarGuiaTallas()" style="position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #333; line-height: 1;">&times;</span>
-      <h3 style="font-family: var(--font-titulos); text-align: center; color: var(--color-azul); margin-bottom: 20px; font-size: 1.6rem; text-transform: uppercase;">Guía de Tallas</h3>
+      <h3 style="font-family: var(--font-titulos); text-align: center; color: var(--color-azul-brillante); margin-bottom: 20px; font-size: 1.6rem; text-transform: uppercase;">Guía de Tallas</h3>
       <div style="display: flex; flex-direction: column; gap: 20px;">
         <div style="width: 100%; height: 250px; background-color: #f4f4f4; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: #888;">
           <img src="https://imgur.com/K45p6Up.jpg" loading="lazy" alt="Imagen Guía 1" style="max-width:100%; max-height:100%;">
@@ -751,21 +719,35 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
         </div>
         <div style="width: 100%; height: 250px; background-color: #f4f4f4; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: #888;">
           <img src="https://imgur.com/F9HPdKD.jpg" loading="lazy" alt="Imagen Guía 3" style="max-width:100%; max-height:100%;">
-          
         </div>
       </div>
     </div>
   </div>
 
 <script>
+  // ==========================================================================
+  // JAVASCRIPT PRINCIPAL
+  // ==========================================================================
+
+  // --- LÓGICA DE LA PANTALLA DE CARGA (CORREGIDA) ---
+  document.addEventListener('DOMContentLoaded', () => {
+    // Forzamos que la pantalla de carga desaparezca a los 1.2 segundos como máximo
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 500);
+      }
+    }, 1200); 
+  });
+
   // --- SISTEMA DE HISTORIAL DE NAVEGACIÓN ---
   let currentView = 'inicio';
   let viewHistory = []; 
 
   const SEDE_GENERAL = "Lunes: Agora | Miércoles y Viernes: Deportivo Solidaridad";
-  const NUMERO_WHATSAPP = "5661022575"; // Número centralizado para los envíos
+  const NUMERO_WHATSAPP = "5661022575";
 
-  // --- CONFIGURACIÓN DE LINKS DE GOOGLE SHEETS ---
   const URL_INICIO = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRahNocAaYNXGeezEyPOIE3JJglBvwnICjbktPuDyaFHnoVXEPMRiUdTv2Xyda8qdkauIU7Obivt4ny/pub?output=csv";
   const URL_PARTIDOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTJEpzeEGVx726-LJQJLlwR7hbGG5n0IymhShzwqdLpvy6VgCh0SsReJgXvK39fMU0HwkF752vZIkj2/pub?output=csv";
 
@@ -786,11 +768,13 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     currentView = viewId;
     
     const btnBack = document.getElementById('btn-back');
-    if (currentView === 'inicio') { 
-      btnBack.classList.add('hidden'); 
-      viewHistory = []; 
-    } else { 
-      btnBack.classList.remove('hidden'); 
+    if(btnBack) {
+        if (currentView === 'inicio') { 
+          btnBack.classList.add('hidden'); 
+          viewHistory = []; 
+        } else { 
+          btnBack.classList.remove('hidden'); 
+        }
     }
     window.scrollTo(0, 0);
   }
@@ -818,14 +802,14 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 
   // --- DATOS FIJOS DE EQUIPOS ---
   const datosEquipos = {
-    'cat_2020': { titulo: 'Categoría 2019-2020', ramas: [{ nombre: 'Entrenamiento General', color: '#151515', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Por definir'] }] },
-    'cat_2018': { titulo: 'Categoría 2017-2018', ramas: [{ nombre: 'Entrenamiento General', color: '#151515', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2016': { titulo: 'Categoría 2015-2016', ramas: [{ nombre: 'Entrenamiento General', color: '#151515', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2014': { titulo: 'Categoría 2013-2014', ramas: [{ nombre: 'Entrenamiento General', color: '#151515', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2012': { titulo: 'Categoría 2011-2012', ramas: [{ nombre: 'Entrenamiento General', color: '#151515', horario: '5:30 PM', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2010': { titulo: 'Categoría 2009-2010', ramas: [{ nombre: 'Entrenamiento General', color: '#151515', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2008': { titulo: 'Categoría 2008 y más', ramas: [{ nombre: 'Entrenamiento General', color: '#151515', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_papas': { titulo: 'Mamás y Papás', ramas: [{ nombre: 'Entrenamiento General', color: '#151515', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] }
+    'cat_2020': { titulo: 'Categoría 2019-2020', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Por definir'] }] },
+    'cat_2018': { titulo: 'Categoría 2017-2018', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2016': { titulo: 'Categoría 2015-2016', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2014': { titulo: 'Categoría 2013-2014', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2012': { titulo: 'Categoría 2011-2012', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: '5:30 PM', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2010': { titulo: 'Categoría 2009-2010', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_2008': { titulo: 'Categoría 2008 y más', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
+    'cat_papas': { titulo: 'Mamás y Papás', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] }
   };
 
   function abrirDetalle(clave) {
@@ -921,7 +905,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
         <div class="marcador-badge">${p.marcador}</div></div>`).join('') || '<p>Sin historial.</p>';
       contenedor.innerHTML += `
         <div class="info-equipo-card"><div class="info-header" style="background:${rama.color}">${rama.nombre}</div>
-        <div class="info-content"><h4 style="margin-bottom:10px; color:var(--color-azul)">PRÓXIMOS ENCUENTROS</h4>${prox}
+        <div class="info-content"><h4 style="margin-bottom:10px; color:var(--color-azul-brillante)">PRÓXIMOS ENCUENTROS</h4>${prox}
         <button class="btn-historial" onclick="toggleHistorial('hist-${rIdx}')"><i class="fa-solid fa-clock-rotate-left"></i> Historial</button>
         <div id="hist-${rIdx}" class="historial-container"><h4 style="margin-bottom:10px">RESULTADOS</h4>${hist}</div></div></div>`;
     });
@@ -930,7 +914,6 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 
   function toggleHistorial(id) { document.getElementById(id).classList.toggle('active'); }
   
-  // AHORA ESTA FUNCIÓN ABRE EL MODAL FLOTANTE DE LA TIENDA
   function toggleFormulario(id) { document.getElementById(id).classList.toggle('activo'); }
 
   // --- LÓGICA DE BOTONES INFANTIL/JUVENIL DINÁMICA ---
@@ -953,7 +936,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     }
   }
 
-  // --- FUNCIONES PARA ABRIR Y CERRAR GUÍA DE TALLAS ---
+  // --- GUÍA DE TALLAS ---
   function abrirGuiaTallas(e) {
     e.preventDefault();
     document.getElementById('modal-guia-tallas').style.display = 'flex';
@@ -1004,15 +987,6 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${textoMensaje}`, '_blank');
   }
 
-  // --- LÓGICA DE LA PANTALLA DE CARGA ---
-  window.addEventListener('load', () => {
-    // Simulamos un pequeño retraso visual para que carguen bien los datos
-    setTimeout(() => {
-      document.getElementById('loader').style.opacity = '0';
-      setTimeout(() => document.getElementById('loader').style.display = 'none', 500);
-    }, 1000);
-  });
-
   // --- SCROLL PARA EL BOTÓN "VOLVER ARRIBA" ---
   window.onscroll = function() {
     if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
@@ -1022,7 +996,7 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     }
   };
 
-  // --- LÓGICA DEL LIGHTBOX (AHORA CON SLIDER) ---
+  // --- LÓGICA DEL LIGHTBOX ---
   let lightboxImages = [];
   let currentLightboxIndex = 0;
 
@@ -1072,7 +1046,6 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     }, {passive: true});
   }
 
-  // --- NAVEGACIÓN TÁCTIL (SWIPE) PARA CARRUSELES ---
   function setupSwipe(sliderId, moveCallback) {
     const slider = document.getElementById(sliderId);
     if (!slider) return;
@@ -1085,12 +1058,12 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
 
     slider.addEventListener('touchend', e => {
       touchendX = e.changedTouches[0].screenX;
-      if (touchendX < touchstartX - 50) moveCallback(1); // Deslizó a la izquierda
-      if (touchendX > touchstartX + 50) moveCallback(-1); // Deslizó a la derecha
+      if (touchendX < touchstartX - 50) moveCallback(1); 
+      if (touchendX > touchstartX + 50) moveCallback(-1); 
     }, {passive: true});
   }
 
-  // --- ARRANQUE E INICIALIZACIÓN ---
+  // --- ARRANQUE DE FUNCIONES AL CARGAR LA PÁGINA ---
   document.addEventListener('DOMContentLoaded', () => {
     cargarInicioDesdeSheet();
     cargarPartidosDesdeSheet();
@@ -1117,7 +1090,6 @@ h2 { font-family: var(--font-titulos); text-transform: uppercase; text-align: ce
     slideContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
   }
 
-  // --- LÓGICA PARA GALERÍA NACIONAL 3X3 ---
   let currentSlideNacional = 0;
   function moveCarouselNacional(direction, event) {
     if(event) event.stopPropagation(); 
