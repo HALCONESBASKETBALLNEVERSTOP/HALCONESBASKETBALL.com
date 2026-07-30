@@ -154,37 +154,6 @@ h2 {
 .lightbox-nav-btn.prev { left: 20px; }
 .lightbox-nav-btn.next { right: 20px; }
 
-/* --- EQUIPOS Y PARTIDOS --- */
-.equipos-nav { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-.btn-categoria { background-color: var(--color-blanco); color: var(--color-negro); border: 1px solid #E2E8F0; padding: 22px 30px; font-family: var(--font-titulos); font-size: 1.4rem; border-radius: 12px; cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--color-azul-brillante); box-shadow: var(--sombra-suave); transition: var(--transicion); }
-.btn-categoria:hover { transform: translateX(8px); background-color: #F8FAFC; border-color: var(--color-azul-brillante); }
-
-.info-equipo-card { background: white; border-radius: 16px; box-shadow: var(--sombra-suave); overflow: hidden; margin-bottom: 25px; border: none; transition: var(--transicion); }
-.info-header { color: white; padding: 15px; font-family: var(--font-titulos); text-align: center; font-size: 1.4rem; text-transform: uppercase; }
-.info-content { padding: 20px; }
-.info-item { margin-bottom: 15px; }
-.info-item strong { color: var(--color-azul-brillante); text-transform: uppercase; display: block; margin-bottom: 5px; font-size: 0.9rem; }
-.lista-jugadores { list-style: none; padding-left: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-.lista-jugadores li { padding: 5px 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
-
-.partido-proximo { background: #fffdf0; border: 1px solid #ffeeba; border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 5px solid var(--color-pendiente); }
-.btn-maps-partido { display: inline-flex; align-items: center; gap: 8px; background: #4285F4; color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-size: 0.8rem; margin-top: 10px; font-weight: bold; }
-.btn-historial { width: 100%; background: var(--color-negro); color: white; border: none; padding: 15px; font-family: var(--font-titulos); border-radius: 5px; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1.1rem; display: flex; justify-content: center; align-items: center; gap: 10px; transition: background-color 0.3s; }
-.btn-historial:hover { background-color: #333; }
-.historial-container { display: none; margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee; }
-.historial-container.active { display: block; animation: fadeIn 0.3s; }
-.partido-pasado { background: #f8f9fa; border: 1px solid #eee; border-radius: 8px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-.marcador-badge { font-family: var(--font-titulos); font-size: 1.3rem; background: #eee; padding: 5px 12px; border-radius: 5px; min-width: 80px; text-align: center; border: 1px solid #ccc; font-weight: bold; }
-.badge-resultado { padding: 4px 10px; border-radius: 4px; color: white; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; margin-top: 5px; display: inline-block; }
-.victoria { background-color: var(--color-victoria); }
-.derrota { background-color: var(--color-derrota); }
-.pendiente { background-color: var(--color-pendiente); color: #000; }
-.lista-convocados { font-size: 0.85rem; color: #666; font-style: italic; margin-top: 8px; line-height: 1.4; background: #f9f9f9; padding: 8px; border-radius: 5px; }
-
-/* --- REGLAMENTO --- */
-.btn-descarga { display: inline-block; background-color: var(--color-azul-brillante); color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-family: var(--font-titulos); font-size: 1.2rem; text-transform: uppercase; transition: background-color 0.3s, transform 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 15px; }
-.btn-descarga:hover { background-color: var(--color-azul-primario); transform: translateY(-3px); }
-
 /* --- TIENDA OFICIAL --- */
 .tienda-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-top: 20px; }
 .producto-card { background: white; border-radius: 16px; box-shadow: var(--sombra-suave); overflow: hidden; max-width: 400px; width: 100%; display: flex; flex-direction: column; border: none; transition: var(--transicion); }
@@ -254,10 +223,7 @@ h2 {
   <nav id="mobile-menu">
     <a href="#" onclick="showView('inicio')">Inicio</a>
     <a href="#" onclick="showView('eventos')">Eventos y Participaciones</a>
-    <a href="#" onclick="showView('equipos')">Equipos, Horarios y Sedes</a>
-    <a href="#" onclick="showView('partidos')">Próximos Partidos</a>
     <a href="#" onclick="showView('pagos')">Pagos y Mensualidades</a>
-    <a href="#" onclick="showView('documentos')">Reglamento y Responsivas</a>
     <a href="#" onclick="showView('tienda')">Tienda Oficial</a>
   </nav>
 
@@ -274,59 +240,6 @@ h2 {
   <main id="inicio-view" class="view-section active">
     <img src="https://imgur.com/7vRA7g5.jpg" alt="Banner Halcones" class="hero-banner">
 
-   
-
-  
-      
-<div class="container" style="margin-top: 20px;">
-  <div class="pago-card" style="border: 3px solid var(--color-azul-brillante); border-radius: 15px; padding: 30px; text-align: center; background-color: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-    
-    <h3 style="color: #002244; font-size: 1.5rem; margin-bottom: 20px;">💰 LIQUIDACIÓN DE SALDO</h3>
-    
-    <p style="color: #555555; font-size: 1rem; margin-bottom: 25px; line-height: 1.5;">
-      Si ya tienes tu ID asignado, ingresa aquí para completar tu pago restante. 
-      <br><strong>Solo necesitas tu número de Jersey/ID y el monto a liquidar.</strong>
-    </p>
-
-    <a href="https://forms.gle/pxe8UUwLRgp5VHrG8" 
-       style="background-color: #002244; color: #ffffff; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1rem; display: inline-block; transition: background 0.3s;">
-       IR A LIQUIDACIÓN
-    </a>
-    
-  </div>
-
-    <div class="container" style="margin-top: 20px;">
-  <div class="pago-card" style="border: 4px solid var(--color-azul-brillante); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
-    
-    <!-- ENCABEZADO CON EL ANUNCIO -->
-    <div style="background: linear-gradient(135deg, var(--color-azul-primario), #0a1f3d); padding: 40px 20px; text-align: center; color: white;">
-      <h3 style="color: #4da6ff; font-size: 1.2rem; margin: 0; text-transform: uppercase; letter-spacing: 2px;">¡Cuenta regresiva!</h3>
-      <h1 style="font-size: 2.5rem; margin: 15px 0; line-height: 1.1; text-transform: uppercase; font-weight: 800;">
-        Nos vemos este 20 de julio
-      </h1>
-      <div style="font-size: 1.8rem; font-weight: bold; color: #ffffff; background-color: #cc0000; display: inline-block; padding: 5px 20px; border-radius: 50px;">
-        SKILLS CAMP 2026
-      </div>
-    </div>
-    
-  </div>
-</div>
-     <div class="card">
-        <div class="evento-header">Skills Camp 2025</div>
-        <div class="evento-body">
-          <img src="https://imgur.com/iEO681y.jpg" loading="lazy" alt="Skills Camp" class="poster-evento">
-          <p>Potencia tus habilidades en nuestro campamento técnico.</p>
-          <div class="carousel-container" id="carousel-eventos">
-            <div class="carousel-slide" id="slide-eventos">
-              <img src="https://imgur.com/BQlw2fC.jpg" loading="lazy" class="gallery-img" onclick="openLightbox(this.src)">
-              <img src="https://imgur.com/RHsCnDb.jpg" loading="lazy" class="gallery-img" onclick="openLightbox(this.src)">
-              <img src="https://imgur.com/SzdsEan.jpg" loading="lazy" class="gallery-img" onclick="openLightbox(this.src)">
-            </div>
-            <button class="nav-btn prev" onclick="moveCarousel(-1, event)">❮</button>
-            <button class="nav-btn next" onclick="moveCarousel(1, event)">❯</button>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="container">
       <h2>Lo Destacado del Mes</h2>
@@ -433,45 +346,6 @@ h2 {
     <button class="lightbox-nav-btn next" onclick="navigateLightbox(1, event)">❯</button>
   </div>
 
-  <main id="equipos-view" class="view-section">
-    <div class="container">
-      <h2>Equipos, Horarios y Sedes</h2>
-      <div class="equipos-nav">
-        <button class="btn-categoria" onclick="abrirDetalle('cat_2020')">Categoría 2019-2020 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetalle('cat_2018')">Categoría 2017-2018 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetalle('cat_2016')">Categoría 2015-2016 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetalle('cat_2014')">Categoría 2013-2014 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetalle('cat_2012')">Categoría 2011-2012 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetalle('cat_2010')">Categoría 2009-2010 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetalle('cat_2008')">Categoría 2008 y más <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetalle('cat_papas')">Mamás y Papás <i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-    </div>
-  </main>
-
-  <main id="partidos-view" class="view-section">
-    <div class="container">
-      <h2>Próximos Partidos</h2>
-      <div class="equipos-nav">
-        <button class="btn-categoria" onclick="abrirDetallePartidos('cat_2020')">Partidos 2019-2020 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetallePartidos('cat_2018')">Partidos 2017-2018 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetallePartidos('cat_2016')">Partidos 2015-2016 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetallePartidos('cat_2014')">Partidos 2013-2014 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetallePartidos('cat_2012')">Partidos 2011-2012 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetallePartidos('cat_2010')">Partidos 2009-2010 <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetallePartidos('cat_2008')">Partidos 2008 y más <i class="fa-solid fa-chevron-right"></i></button>
-        <button class="btn-categoria" onclick="abrirDetallePartidos('cat_papas')">Partidos Mamás y Papás <i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-    </div>
-  </main>
-
-  <main id="detalle-view" class="view-section">
-    <div class="container">
-      <h2 id="detalle-titulo">Nombre Categoría</h2>
-      <div id="detalle-contenido"></div>
-    </div>
-  </main>
-
   <main id="pagos-view" class="view-section">
     <div class="container">
       <h2>Pagos y Mensualidades</h2>
@@ -533,22 +407,6 @@ h2 {
         </div>
       </div>  
 
-    </div>
-  </main>
-
-  <main id="documentos-view" class="view-section">
-    <div class="container">
-      <h2>Reglamento y Responsivas</h2>
-      <div class="card" style="padding: 40px 20px; text-align: center;">
-        <i class="fa-solid fa-file-pdf" style="font-size: 5rem; color: #E4405F; margin-bottom: 20px;"></i>
-        <h3 style="font-family: var(--font-titulos); font-size: 1.8rem; margin-bottom: 15px; text-transform: uppercase;">Documentación Oficial del Club</h3>
-        <p style="margin-bottom: 25px; color: #555; line-height: 1.6; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-          Aquí puedes descargar nuestro reglamento interno y las cartas responsivas necesarias para la participación oficial en nuestros entrenamientos, ligas y torneos.
-        </p>
-        <a href="AQUI_PONES_TU_LINK_DEL_PDF" target="_blank" class="btn-descarga">
-          <i class="fa-solid fa-download" style="margin-right: 8px;"></i> Descargar Documentos (PDF)
-        </a>
-      </div>
     </div>
   </main>
 
@@ -649,7 +507,8 @@ h2 {
         <input type="hidden" id="categoria-juego" value="Juvenil">
       </div>
       <div class="form-group"><label>Nombre en la playera (Espalda):</label><input type="text" id="nombre-juego" placeholder="Ej. PÉREZ"></div>
-      <div class="form-group"><label>Número (SI YA LO TIENE), si no tiene ponga 0</label><input type="number" id="numero-juego" placeholder="Ej. 10" min="0" max="99"></div>
+      <div class="form-group"><label>Número (SI YA LO TIENE), si no tiene proponga uno</label><input type="number" id="numero-juego" placeholder="Ej. 10" min="0" max="99"></div>
+      <div class="form-group"><label>Categoria</label><input type="number" id="numero-juego" placeholder="Ej. 2008" min="0" max="99"></div>
       <div class="form-group">
         <label style="display: flex; justify-content: space-between;">
           Talla:
@@ -689,6 +548,7 @@ h2 {
         </div>
         <input type="hidden" id="categoria-entrenamiento" value="Juvenil">
       </div>
+      <div class="form-group"><label>Categoria</label><input type="number" id="numero-juego" placeholder="Ej. 2008" min="0" max="99"></div>
       <div class="form-group">
         <label style="display: flex; justify-content: space-between;">
           Talla:
@@ -784,11 +644,9 @@ h2 {
   let currentView = 'inicio';
   let viewHistory = []; 
 
-  const SEDE_GENERAL = "Lunes: Agora | Miércoles y Viernes: Deportivo Solidaridad";
   const NUMERO_WHATSAPP = "5661022575";
 
   const URL_INICIO = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRahNocAaYNXGeezEyPOIE3JJglBvwnICjbktPuDyaFHnoVXEPMRiUdTv2Xyda8qdkauIU7Obivt4ny/pub?output=csv";
-  const URL_PARTIDOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTJEpzeEGVx726-LJQJLlwR7hbGG5n0IymhShzwqdLpvy6VgCh0SsReJgXvK39fMU0HwkF752vZIkj2/pub?output=csv";
 
   function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('active'); }
 
@@ -839,38 +697,6 @@ h2 {
     }
   }
 
-  // --- DATOS FIJOS DE EQUIPOS ---
-  const datosEquipos = {
-    'cat_2020': { titulo: 'Categoría 2019-2020', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'Por definir', sede: SEDE_GENERAL, jugadores: ['Por definir'] }] },
-    'cat_2018': { titulo: 'Categoría 2017-2018', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2016': { titulo: 'Categoría 2015-2016', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2014': { titulo: 'Categoría 2013-2014', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2012': { titulo: 'Categoría 2011-2012', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: '5:30 PM', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2010': { titulo: 'Categoría 2009-2010', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_2008': { titulo: 'Categoría 2008 y más', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] },
-    'cat_papas': { titulo: 'Mamás y Papás', ramas: [{ nombre: 'Entrenamiento General', color: '#111111', horario: 'TBD', sede: SEDE_GENERAL, jugadores: ['TBD'] }] }
-  };
-
-  function abrirDetalle(clave) {
-    const data = datosEquipos[clave];
-    document.getElementById('detalle-titulo').innerText = data.titulo;
-    const contenedor = document.getElementById('detalle-contenido');
-    contenedor.innerHTML = ''; 
-    data.ramas.forEach(rama => {
-      let listaHTML = rama.jugadores.map(j => `<li>${j}</li>`).join('');
-      contenedor.innerHTML += `
-        <div class="info-equipo-card">
-          <div class="info-header" style="background-color: ${rama.color};">${rama.nombre}</div>
-          <div class="info-content">
-            <div class="info-item"><strong>Horario:</strong> <span>${rama.horario}</span></div>
-            <div class="info-item"><strong>Sede:</strong> <span>${rama.sede}</span></div>
-            <div class="info-item"><strong>Jugadores:</strong><ul class="lista-jugadores">${listaHTML}</ul></div>
-          </div>
-        </div>`;
-    });
-    showView('detalle'); 
-  }
-
   // --- CARGAR INICIO DESDE EXCEL ---
   function cargarInicioDesdeSheet() {
     Papa.parse(URL_INICIO, {
@@ -904,54 +730,6 @@ h2 {
       }
     });
   }
-
-  // --- CARGAR PARTIDOS DESDE EXCEL ---
-  let datosPartidos = {};
-  const mapeoClaves = { '2019-2020':'cat_2020','2017-2018':'cat_2018','2015-2016':'cat_2016','2013-2014':'cat_2014','2011-2012':'cat_2012','2009-2010':'cat_2010','2008 y mas':'cat_2008','Papas':'cat_papas' };
-
-  function cargarPartidosDesdeSheet() {
-    Object.values(mapeoClaves).forEach(c => datosPartidos[c] = { titulo: 'PARTIDOS', ramas: [] });
-    Papa.parse(URL_PARTIDOS, {
-      download: true, header: true,
-      complete: function(results) {
-        results.data.forEach(fila => {
-          if(!fila.ClaveCategoria) return;
-          const clave = mapeoClaves[fila.ClaveCategoria.trim()] || fila.ClaveCategoria.trim();
-          if(!datosPartidos[clave]) return;
-          let rama = datosPartidos[clave].ramas.find(r => r.nombre === fila.Rama.trim());
-          if(!rama) {
-            rama = { nombre: fila.Rama.trim(), color: fila.Rama.includes('Femenil')?'#E4405F':'#1E4D94', partidos: [] };
-            datosPartidos[clave].ramas.push(rama);
-          }
-          rama.partidos.push({ torneo:fila.Torneo, fecha:fila.Fecha, hora:fila.Hora, sede:fila.Sede, maps:fila.Maps||'#', resultado:fila.Resultado.toLowerCase(), marcador:fila.Marcador||'', jugadores:(fila.Jugadores||'').split(',') });
-        });
-      }
-    });
-  }
-
-  function abrirDetallePartidos(clave) {
-    const data = datosPartidos[clave];
-    document.getElementById('detalle-titulo').innerText = "PARTIDOS " + (clave.replace('cat_','').replace('_','-'));
-    const contenedor = document.getElementById('detalle-contenido');
-    contenedor.innerHTML = data.ramas.length ? '' : '<p style="text-align:center;color:#888;">No hay partidos cargados.</p>';
-    data.ramas.forEach((rama, rIdx) => {
-      const prox = rama.partidos.filter(p => p.resultado === 'pendiente').map(p => `
-        <div class="partido-proximo"><strong>${p.torneo}</strong><br><small>📅 ${p.fecha} - ⏰ ${p.hora}</small><br><small>📍 ${p.sede}</small><br>
-        <a href="${p.maps}" target="_blank" class="btn-maps-partido"><i class="fa-solid fa-map-location-dot"></i> Ver Ubicación</a>
-        <div class="lista-convocados">Convocados: ${p.jugadores.join(', ')}</div></div>`).join('') || '<p>No hay partidos próximos.</p>';
-      const hist = rama.partidos.filter(p => p.resultado !== 'pendiente').map(p => `
-        <div class="partido-pasado"><div><small>${p.fecha}</small><br><strong>${p.torneo}</strong><br><span class="badge-resultado ${p.resultado}">${p.resultado}</span></div>
-        <div class="marcador-badge">${p.marcador}</div></div>`).join('') || '<p>Sin historial.</p>';
-      contenedor.innerHTML += `
-        <div class="info-equipo-card"><div class="info-header" style="background:${rama.color}">${rama.nombre}</div>
-        <div class="info-content"><h4 style="margin-bottom:10px; color:var(--color-azul-brillante)">PRÓXIMOS ENCUENTROS</h4>${prox}
-        <button class="btn-historial" onclick="toggleHistorial('hist-${rIdx}')"><i class="fa-solid fa-clock-rotate-left"></i> Historial</button>
-        <div id="hist-${rIdx}" class="historial-container"><h4 style="margin-bottom:10px">RESULTADOS</h4>${hist}</div></div></div>`;
-    });
-    showView('detalle');
-  }
-
-  function toggleHistorial(id) { document.getElementById(id).classList.toggle('active'); }
   
   function toggleFormulario(id) { document.getElementById(id).classList.toggle('activo'); }
 
@@ -1105,7 +883,6 @@ h2 {
   // --- ARRANQUE DE FUNCIONES AL CARGAR LA PÁGINA ---
   document.addEventListener('DOMContentLoaded', () => {
     cargarInicioDesdeSheet();
-    cargarPartidosDesdeSheet();
     setupSwipe('slide-eventos', moveCarousel);
     setupSwipe('slide-nacional', moveCarouselNacional);
     setupLightboxSwipe();
